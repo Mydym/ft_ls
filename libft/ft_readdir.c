@@ -1,13 +1,19 @@
-#include <dirent.h>
-#include <string.h>
+#include "libft.h"
+#include <stdlib.h>
 
-char	*ft_readdir(DIR *dirp)
+char	**ft_readdir(const char *file)
 {
-	char			*filename;
-	struct dirent	*file;
+	DIR		*doc;
+	char	**list;
+	int		i;
 
-	filename = NULL;
-	if ((file = readdir(dirp)))
-		filename = file->d_name;
-	return (filename);
+	i = 0;
+	if ((list = (char **)malloc(512 * sizeof(char *))) != NULL)
+		if ((doc = ft_opendir(file)) != NULL)
+		{
+			while ((list[i] = ft_readfile(doc)) != NULL)
+				i++;
+			closedir(doc);
+		}
+	return (list);
 }

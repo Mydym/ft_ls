@@ -21,7 +21,8 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-char				*ft_readdir(DIR *dirp);
+char				**ft_readdir(const char *file);
+char				*ft_readfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
