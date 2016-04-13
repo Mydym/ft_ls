@@ -1,17 +1,18 @@
 NAME = ft_ls
 
-SRC =
+SRC = main.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): lib
-	gcc -Wall -Wextra -Werror -o $(OBJ) -c $(SRC);
-	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ);
+	clang -Wall -Wextra -Werror -I libft/ -o $(OBJ) -c $(SRC);
+	clang -Wall -Wextra -Werror -o $(NAME) $(OBJ) -I libft/ -L libft/ -lft;
+	rm -f $(OBJ);
 
 lib:
-	make -C libft/ && make -C libft/ clean
+	make -C libft/ re && make -C libft/ clean;
 
 clean:
 	rm -f $(OBJ)

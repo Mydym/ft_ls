@@ -1,7 +1,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char	**ft_readdir(const char *file)
+char	**ft_strreaddir(const char *file)
 {
 	DIR		*doc;
 	char	**list;
@@ -11,7 +11,7 @@ char	**ft_readdir(const char *file)
 	if ((list = (char **)malloc(512 * sizeof(char *))) != NULL)
 		if ((doc = ft_opendir(file)) != NULL)
 		{
-			while ((list[i] = ft_readfile(doc)) != NULL)
+			while ((list[i] = ft_strreadfile(doc)) != NULL)
 				i++;
 			closedir(doc);
 		}

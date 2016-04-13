@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:37:31 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/01/26 16:51:55 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/13 12:00:07 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-char				**ft_readdir(const char *file);
-char				*ft_readfile(DIR *dirp);
+void				ft_straffichdos(char *path);
+char				**ft_strreaddir(const char *file);
+char				*ft_strreadfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
