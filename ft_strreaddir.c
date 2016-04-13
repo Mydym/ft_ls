@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strreaddir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:16:10 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 13:32:34 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/13 15:17:24 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+char	**ft_strreaddir(const char *file)
 {
-	if (argc == 2)
-		ft_straffichdos(argv[1]);
-	else if (argc == 1)
-		ft_straffichdos(".");
-	return (0);
+	DIR		*doc;
+	char	**list;
+	int		i;
+
+	i = 0;
+	if ((list = (char **)malloc(512 * sizeof(char *))) != NULL)
+		if ((doc = ft_opendir(file)) != NULL)
+		{
+			while ((list[i] = ft_strreadfile(doc)) != NULL)
+				i++;
+			closedir(doc);
+		}
+	return (list);
 }

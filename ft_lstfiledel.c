@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstfiledel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:16:10 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 16:38:35 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/13 16:55:27 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+void	ft_lstfiledel(t_file **plst)
 {
-	if (argc == 2)
-		ft_straffichdos(argv[1]);
-	else if (argc == 1)
-		ft_straffichdos(".");
-	return (0);
+	if ((*plst)->next)
+		ft_lstfiledel(&((*plst)->next));
+	if (*plst)
+	{
+		ft_lstfiledelone(plst);
+	}
 }

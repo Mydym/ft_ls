@@ -6,14 +6,13 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:37:31 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 12:00:07 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/13 15:15:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
-# include <dirent.h>
 
 typedef struct		s_list
 {
@@ -21,10 +20,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-void				ft_straffichdos(char *path);
-char				**ft_strreaddir(const char *file);
-char				*ft_strreadfile(DIR *dirp);
-DIR					*ft_opendir(const char *file);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_opendir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:16:10 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 13:32:50 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/13 13:32:52 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include <dirent.h>
 
-int		main(int argc, char **argv)
+DIR	*ft_opendir(const char *file)
 {
-	if (argc == 2)
-		ft_straffichdos(argv[1]);
-	else if (argc == 1)
-		ft_straffichdos(".");
-	return (0);
+	DIR *repo;
+
+	repo = opendir(file);
+	if (repo)
+		return (repo);
+	else
+		return (repo);
 }

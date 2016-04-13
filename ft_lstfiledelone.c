@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstfiledelone.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:16:10 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/13 16:57:40 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+void	ft_lstfiledelone(t_file **plst)
 {
-	if (argc == 2)
-		ft_straffichdos(argv[1]);
-	else if (argc == 1)
-		ft_straffichdos(".");
-	return (0);
+	if (*plst)
+	{
+		if ((*plst)->name)
+			free((*plst)->name);
+		if ((*plst)->username)
+			free((*plst)->username);
+		if ((*plst)->groupname)
+			free((*plst)->groupname);
+		free(*plst);
+		*plst = NULL;
+	}
 }

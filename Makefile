@@ -1,14 +1,18 @@
 NAME = ft_ls
 
-SRC = main.c
+SRC = main.c \
+	  ft_strreadfile.c \
+	  ft_strreaddir.c \
+	  ft_opendir.c \
+	  ft_straffichdos.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): lib
-	clang -Wall -Wextra -Werror -I libft/ -o $(OBJ) -c $(SRC);
-	clang -Wall -Wextra -Werror -o $(NAME) $(OBJ) -I libft/ -L libft/ -lft;
+	clang -Wall -Wextra -Werror -c $(SRC) -I includes/
+	clang -Wall -Wextra -Werror -o $(NAME) $(SRC) -I includes/ -L libft/ -lft;
 	rm -f $(OBJ);
 
 lib:

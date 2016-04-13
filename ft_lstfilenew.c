@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straffichdos.c                                  :+:      :+:    :+:   */
+/*   ft_lstfilenew.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:55:40 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 11:59:52 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/13 16:31:32 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 #include <stdlib.h>
 
-void	ft_straffichdos(char *path)
+t_file		*ft_lstfilenew(char *filename)
 {
-	char	**list;
-	int		i;
+	t_file		*new;
 
-	i = 0;
-	if (path)
-	{
-		list = ft_strreaddir(path);
-		while (list[i] != NULL)
-		{
-			ft_putendl(list[i]);
-			i++;
-		}
-	}
-	return ;
+	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
+		return (NULL);
+	if (filename == NULL)
+		new->name = NULL;
+	else
+		new->name = filename;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }
