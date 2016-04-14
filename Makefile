@@ -1,18 +1,31 @@
 NAME = ft_ls
 
-SRC = main.c \
-	  ft_strreadfile.c \
-	  ft_strreaddir.c \
-	  ft_opendir.c \
-	  ft_straffichdos.c
+LST = liblst/ft_lstreadfile.c \
+	  liblst/ft_lstreaddir.c \
+	  liblst/ft_lstaffichdos.c \
+	  liblst/ft_lstfileadd.c \
+	  liblst/ft_lstfilenew.c \
 
-OBJ = $(SRC:.c=.o)
+
+SRC = main.c \
+	  ft_opendir.c
+
+OBJ = main.o \
+	  ft_lstreadfile.o \
+	  ft_lstreaddir.o \
+	  ft_lstaffichdos.o \
+	  ft_lstfileadd.o \
+	  ft_lstfilenew.o \
+	  ft_opendir.o
+
+HEAD = includes/
+
 
 all: $(NAME)
 
 $(NAME): lib
-	clang -Wall -Wextra -Werror -c $(SRC) -I includes/
-	clang -Wall -Wextra -Werror -o $(NAME) $(SRC) -I includes/ -L libft/ -lft;
+	clang -Wall -Wextra -Werror -c $(SRC) $(LST) -I $(HEAD)
+	clang -Wall -Wextra -Werror -o $(NAME) $(OBJ) -I $(HEAD) -L libft/ -lft;
 	rm -f $(OBJ);
 
 lib:

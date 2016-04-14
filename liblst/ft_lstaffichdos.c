@@ -6,13 +6,24 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 16:53:02 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:34:03 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
 void	ft_lstaffichdos(char *path)
 {
+	t_file	**plst;
+
+	if (path)
+	{
+		plst = ft_lstreaddir(path);
+		while (*plst)
+		{
+			ft_putendl((*plst)->name);
+			*plst = (*plst)->next;
+		}
+	}
 	return ;
 }

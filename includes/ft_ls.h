@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 16:57:57 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:25:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void				ft_straffichdos(char *path);
 char				**ft_strreaddir(const char *file);
 char				*ft_strreadfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
+t_file				*ft_lstreadfile(DIR *dirp);
+t_file				**ft_lstreaddir(const char *file);
+void				ft_lstaffichdos(char *path);
 void				ft_lstfileadd(t_file **plst, t_file *new);
 void				ft_lstfiledel(t_file **plst);
 t_file				*ft_lstfiledelone(t_file **plst);

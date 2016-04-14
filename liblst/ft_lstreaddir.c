@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstreaddir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 17:36:44 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/14 17:10:51 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/14 17:34:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+t_file	**ft_lstreaddir(const char *file)
 {
-	if (argc == 2)
-		ft_lstaffichdos(argv[1]);
-	else if (argc == 1)
-		ft_lstaffichdos(".");
-	return (0);
+	t_file	**plst;
+	t_file	*tmp;
+	DIR		*doc;
+
+	if ((plst = (t_file **)malloc(512 * sizeof(t_file *))) != NULL)
+		if ((doc = ft_opendir(file)) != NULL)
+		{
+			while ((tmp = ft_lstreadfile(doc)) != NULL)
+				ft_lstfileadd(plst, tmp);
+			closedir(doc);
+		}
+	return (plst);
 }

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstreadfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 17:36:44 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/14 17:25:43 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <dirent.h>
+#include <string.h>
 
-int		main(int argc, char **argv)
+t_file	*ft_lstreadfile(DIR *dirp)
 {
-	if (argc == 2)
-		ft_lstaffichdos(argv[1]);
-	else if (argc == 1)
-		ft_lstaffichdos(".");
-	return (0);
+	t_file			*new;
+	struct dirent	*file;
+
+	new = NULL;
+	if ((file = readdir(dirp)))
+		new = ft_lstfilenew(file->d_name);
+	return (new);
 }
