@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaffichdos.c                                  :+:      :+:    :+:   */
+/*   ft_lstfiledelend.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 14:39:02 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/14 16:11:10 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/14 16:29:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
+#include <stdlib.h>
 
-void	ft_lstaffichdos(char *path)
+t_file		*ft_lstfiledelend(t_file **plst)
 {
-	
-	return ;
+	t_file		*tmp;
+	t_file		*one;
+
+	one = *plst;
+	while ((*plst)->next)
+		*plst = (*plst)->next;
+	tmp = (*plst)->prev;
+	tmp->next = NULL;
+	free(*plst);
+	*plst = NULL;
+	return (one);
 }

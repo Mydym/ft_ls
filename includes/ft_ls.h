@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 16:58:35 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/14 16:57:57 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char				*ft_strreadfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
 void				ft_lstfileadd(t_file **plst, t_file *new);
 void				ft_lstfiledel(t_file **plst);
-void				ft_lstfiledelone(t_file **plst);
+t_file				*ft_lstfiledelone(t_file **plst);
+t_file				*ft_lstfiledelend(t_file **plst);
 t_file				*ft_lstfilenew(char *filename);
 
 #endif

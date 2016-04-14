@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfiledelone.c                                 :+:      :+:    :+:   */
+/*   ft_lstfileadd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 16:57:40 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 16:30:26 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/14 15:45:12 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdlib.h>
 
-void	ft_lstfiledelone(t_file **plst)
+void		ft_lstfileadd(t_file **plst, t_file *new)
 {
-	if (*plst)
+	if (*plst != NULL)
 	{
-		if ((*plst)->name)
-			free((*plst)->name);
-		if ((*plst)->username)
-			free((*plst)->username);
-		if ((*plst)->groupname)
-			free((*plst)->groupname);
-		free(*plst);
-		*plst = NULL;
+		(*plst)->prev = new;
+		new->next = *plst;
 	}
+	*plst = new;
 }
