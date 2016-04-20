@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:30:26 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 15:45:12 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/20 18:57:51 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 void		ft_lstfileadd(t_file **plst, t_file *new)
 {
-	if (*plst != NULL)
+	if (plst)
 	{
-		(*plst)->prev = new;
-		new->next = *plst;
+		if (*plst != NULL)
+		{
+			if ((*plst)->prev)
+			{
+				((*plst)->prev)->next = new;
+				new->prev = (*plst)->prev;
+			}
+			(*plst)->prev = new;
+			new->next = *plst;
+			*plst = new;
+		}
+		else
+			*plst = new;
 	}
-	*plst = new;
+	return ;
 }

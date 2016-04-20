@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 17:36:44 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/20 19:08:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int		main(int argc, char **argv)
 {
-	if (argc == 2)
-		ft_lstaffichdos(argv[1]);
-	else if (argc == 1)
+	if (argc > 1)
+	{
+		if (argv[1][0] == '-')
+			ft_option(argv[1]);
+		else
+			ft_lstaffichdos(argv[1]);
+	}
+	else
 		ft_lstaffichdos(".");
 	return (0);
 }

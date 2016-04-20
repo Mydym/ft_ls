@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreadfile.c                                   :+:      :+:    :+:   */
+/*   ft_lstfileaddend.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/20 13:23:38 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/20 17:48:41 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/20 18:57:58 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <dirent.h>
-#include <string.h>
 
-t_file	*ft_lstreadfile(DIR *dirp)
+void	ft_lstfileaddend(t_file **plst, t_file *new)
 {
-	t_file			*new;
-	struct dirent	*file;
-
-	new = NULL;
-	if ((file = readdir(dirp)))
-		new = ft_lstfilenew(file->d_name);
-	return (new);
+	while ((*plst)->next)
+		*plst = (*plst)->next;
+	(*plst)->next = new;
+	new->prev = (*plst);
+	return ;
 }

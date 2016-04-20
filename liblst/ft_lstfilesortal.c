@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreadfile.c                                   :+:      :+:    :+:   */
+/*   ft_lstfilesortal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/20 13:23:38 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/20 15:26:31 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/20 19:01:28 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <dirent.h>
-#include <string.h>
 
-t_file	*ft_lstreadfile(DIR *dirp)
+void	ft_lstfilesortal(t_file **plst, t_file *elem)
 {
-	t_file			*new;
-	struct dirent	*file;
+	int		i;
 
-	new = NULL;
-	if ((file = readdir(dirp)))
-		new = ft_lstfilenew(file->d_name);
-	return (new);
+	i = -1;
+	if (*plst)
+	{
+		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next)
+			*plst = (*plst)->next;
+	}
+	if ((*plst) && !((*plst)->next))
+		if ((i = ft_strcmp(elem->name, (*plst)->name)) > 0)
+			ft_lstfileaddend(plst, elem);
+	if (i <= 0)
+		ft_lstfileadd(plst, elem);
+	return ;
 }

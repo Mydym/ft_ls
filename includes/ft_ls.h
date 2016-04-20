@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 17:25:33 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/20 19:07:27 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,28 @@ typedef struct		s_file
 	struct s_file	*prev;
 	struct s_file	*next;
 }					t_file;
+
+typedef struct		s_opt
+{
+	int		none;
+	int		a;
+	int		l;
+	int		r;
+	int		gr;
+	int		t;
+}					t_opt;
+
+t_opt				ft_option(char *arg);
 void				ft_straffichdos(char *path);
 char				**ft_strreaddir(const char *file);
 char				*ft_strreadfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
+void				ft_lstfilesortal(t_file **plst, t_file *elem);
 t_file				*ft_lstreadfile(DIR *dirp);
-t_file				**ft_lstreaddir(const char *file);
+t_file				*ft_lstreaddir(const char *file);
 void				ft_lstaffichdos(char *path);
 void				ft_lstfileadd(t_file **plst, t_file *new);
+void				ft_lstfileaddend(t_file **plst, t_file *new);
 void				ft_lstfiledel(t_file **plst);
 t_file				*ft_lstfiledelone(t_file **plst);
 t_file				*ft_lstfiledelend(t_file **plst);

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/14 17:34:03 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/20 18:25:26 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void	ft_lstaffichdos(char *path)
 {
-	t_file	**plst;
+	t_file	*plst;
 
 	if (path)
 	{
 		plst = ft_lstreaddir(path);
-		while (*plst)
+		while (plst->prev)
+			plst = plst->prev;
+		while (plst)
 		{
-			ft_putendl((*plst)->name);
-			*plst = (*plst)->next;
+			ft_putendl(plst->name);
+			plst = plst->next;
 		}
 	}
 	return ;
