@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/04/21 13:11:58 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/21 17:23:50 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ NAME = ft_ls
 SRCNAME = main.c \
 		  ft_option.c \
 		  ft_opendir.c \
+		  ft_filestat.c \
 		  ft_lstaffichdos.c \
 		  ft_lstfileadd.c \
 		  ft_lstfileaddend.c \
@@ -42,7 +43,7 @@ SRC = $(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
-.PHONY: all clean flcean re
+.PHONY: all clean fclean re
 
 all: libft $(NAME)
 

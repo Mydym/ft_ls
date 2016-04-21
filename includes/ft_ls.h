@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 12:01:41 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:16:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include "../lib/libft/libft.h"
 # include <dirent.h>
 # include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct		s_file
 {
@@ -28,6 +31,7 @@ typedef struct		s_file
 	char			*groupname;
 	off_t			size;
 	time_t			mtime;
+	char			*formattime;
 	struct s_file	*prev;
 	struct s_file	*next;
 }					t_file;
@@ -42,12 +46,12 @@ typedef struct		s_opt
 	int		t;
 }					t_opt;
 
+int					ft_recur1(t_opt *option, char **larg);
 t_opt				ft_option(char *arg);
-void				ft_straffichdos(char *path);
-char				**ft_strreaddir(const char *file);
-char				*ft_strreadfile(DIR *dirp);
 DIR					*ft_opendir(const char *file);
+void				ft_filestat(t_file *elem);
 void				ft_lstfilesortal(t_file **plst, t_file *elem);
+void				ft_lstfilesorttime(t_file **plst, t_file *elem);
 t_file				*ft_lstreadfile(DIR *dirp);
 t_file				*ft_lstreaddir(const char *file);
 void				ft_lstaffichdos(char *path);

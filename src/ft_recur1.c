@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_recur1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 15:13:08 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/21 14:10:14 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/21 15:11:53 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+int		ft_recur1(t_opt *option, char **larg)
 {
-//	t_opt		option;
-	int			i;
+	void	(*psort)(void);
+	t_file	*plst;
 
-	i = 0;
-	if (argc > 1)
-	{
-		/*if (argv[1][0] == '-')
-		{
-			option = ft_option(argv[1]);
-			i = ft_recur1(&option, argv);
-		}
-		else*/
-			ft_lstaffichdos(argv[1]);
-	}
+	if (option->t == 0)
+		psort = ft_lstfilesortal;
 	else
-		ft_lstaffichdos(".");
+		psort = ft_lstfilesorttime;
+	plst = ft_lstreaddir(larg[1]);
 	return (0);
 }

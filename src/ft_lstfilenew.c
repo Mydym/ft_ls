@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/20 13:23:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:47:10 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_file		*ft_lstfilenew(char *filename)
 
 	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
 		return (NULL);
-	if (filename == NULL)
-		new->name = NULL;
-	else
+	if (filename != NULL)
 		new->name = filename;
 	new->next = NULL;
 	new->prev = NULL;
