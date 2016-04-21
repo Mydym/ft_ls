@@ -6,13 +6,13 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/20 19:07:27 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/21 12:01:41 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-# include "../libft/libft.h"
+# include "../lib/libft/libft.h"
 # include <dirent.h>
 # include <sys/types.h>
 

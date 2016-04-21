@@ -6,52 +6,61 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/04/20 17:51:25 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/21 13:11:58 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -I includes/
+LIBFLAGS = -L $(LIBDIR) -lft
+
+SRCDIR = ./src/
+OBJDIR = ./obj/
+INCDIR = ./includes/
+LIBDIR = ./lib/libft/
+
 NAME = ft_ls
 
-LST = liblst/ft_lstreadfile.c \
-	  liblst/ft_lstreaddir.c \
-	  liblst/ft_lstaffichdos.c \
-	  liblst/ft_lstfileadd.c \
-	  liblst/ft_lstfileaddend.c \
-	  liblst/ft_lstfilenew.c \
-	  liblst/ft_lstfilesortal.c
+SRCNAME = main.c \
+		  ft_option.c \
+		  ft_opendir.c \
+		  ft_lstaffichdos.c \
+		  ft_lstfileadd.c \
+		  ft_lstfileaddend.c \
+		  ft_lstfiledel.c \
+		  ft_lstfiledelone.c \
+		  ft_lstfiledelend.c \
+		  ft_lstfilenew.c \
+		  ft_lstfilesortal.c \
+		  ft_lstreaddir.c \
+		  ft_lstreadfile.c
 
+OBJNAME = $(SRCNAME:.c=.o)
 
-SRC = main.c \
-	  ft_opendir.c \
-	  ft_option.c
+SRC = $(addprefix $(SRCDIR), $(SRCNAME))
 
-OBJ = main.o \
-	  ft_lstreadfile.o \
-	  ft_lstreaddir.o \
-	  ft_lstaffichdos.o \
-	  ft_lstfileadd.o \
-	  ft_lstfileaddend.o \
-	  ft_lstfilenew.o \
-	  ft_lstfilesortal.o \
-	  ft_opendir.o \
-	  ft_option.o
+OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
-HEAD = includes/
+.PHONY: all clean flcean re
 
-all: $(NAME)
+all: libft $(NAME)
 
-$(NAME): lib
-	gcc -Wall -Wextra -Werror -c $(SRC) $(LST) -I $(HEAD)
-	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) -I $(HEAD) -L libft/ -lft;
-	rm -f $(OBJ);
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	$(CC) $(CFLAGS) -o $@ -c $< $(IFLAGS)
 
-lib:
-	make -C libft/;
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFLAGS)
+
+libft:
+	make -C $(LIBDIR)
 
 clean:
-	rm -f $(OBJ)
+	make -C $(LIBDIR) clean
+	rm -rf $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	make -C $(LIBDIR) fclean
+	rm -rf $(NAME)
 
 re: fclean all

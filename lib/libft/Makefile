@@ -6,13 +6,13 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 20:15:57 by vgrenier          #+#    #+#              #
-#    Updated: 2016/01/08 16:30:47 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/21 13:16:30 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRC = $(shell find ./ -type f | grep ".c$$" | grep -vE "(/\.|main\.c)")
+SRC = $(shell find . -type f | grep ".c$$" | grep -vE "(/\.|main\.c)")
 
 OBJ = $(SRC:.c=.o)
 
