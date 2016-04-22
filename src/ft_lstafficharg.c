@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstafficharg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 15:20:46 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/20 18:58:22 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/22 16:48:40 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/22 17:31:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdlib.h>
 
-int	main(int argc, char **argv)
+/*
+**Fonction pour recuperer les arguments et leur type avec lstreadarg
+**Puis les afficher selon leur type avec lstcheckarg
+*/
+
+void	ft_lstafficharg(char **arg)
 {
-	t_file		*new;
-	t_file		*plst;
-	int			i;
+	t_file	*larg;
 
-	i = 1;
-	if (argc > 1 && argc < 11)
+	if ((larg = ft_lstreadarg(arg)))
 	{
-		plst = NULL;
-		while (argv[i])
-		{
-			if ((new = ft_lstfilenew(argv[argc - i])) != NULL)
-			{
-				ft_lstfileadd(&plst, new);
-			}
-			i++;
-		}
-		ft_lstfiledel(&plst);
-		while (plst)
-		{
-			ft_putendl(plst->name);
-			plst = plst->next;
-		}
+		while (larg->prev)
+			larg = larg->prev;
+		ft_lstcheckarg(&larg);
 	}
-	return (0);
 }

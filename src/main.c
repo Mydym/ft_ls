@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 15:13:08 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 16:53:35 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 int		main(int argc, char **argv)
 {
-//	t_opt		option;
+	if (argc >= 2)
+		ft_lstafficharg(&argv[1]);
+	else
+		ft_lstaffichdos(".");
+/*	t_opt		option;
 	int			i;
 
 	i = 0;
 	if (argc > 1)
 	{
-		/*if (argv[1][0] == '-')
+		if (argv[1][0] == '-')
 		{
 			option = ft_option(argv[1]);
 			i = ft_recur1(&option, argv);
 		}
-		else*/
+		else
 			ft_lstaffichdos(argv[1]);
 	}
 	else
-		ft_lstaffichdos(".");
+		ft_lstaffichdos(".");*/
 	return (0);
 }

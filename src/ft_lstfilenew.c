@@ -6,14 +6,17 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 16:47:10 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:23:13 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdlib.h>
 
-t_file		*ft_lstfilenew(char *filename)
+/*
+**Fonction pour creer un nouvel element de type t_file
+*/
+
+t_file		*ft_lstfilenew(char *filename, char type)
 {
 	t_file		*new;
 
@@ -21,6 +24,8 @@ t_file		*ft_lstfilenew(char *filename)
 		return (NULL);
 	if (filename != NULL)
 		new->name = filename;
+	if (type)
+		new->type = type;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

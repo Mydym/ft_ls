@@ -6,11 +6,15 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:10:51 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 17:14:51 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:28:46 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+**Fonction pour ouvrir un dossier et recuperer son contenu trie par ordre alpha
+*/
 
 t_file	*ft_lstreaddir(const char *file)
 {
@@ -25,8 +29,9 @@ t_file	*ft_lstreaddir(const char *file)
 		{
 		//	ft_filestat(elem);
 			ft_lstfilesortal(&plst, elem);
-			while (plst->prev)
-				plst = plst->prev;
+			if (plst)
+				while (plst->prev)
+					plst = plst->prev;
 		}
 		closedir(doc);
 	}

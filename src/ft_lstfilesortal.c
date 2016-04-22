@@ -6,11 +6,15 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 15:26:31 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 17:26:33 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:19:21 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+**Fonction pour ranger les elements dans la liste selon l'ordre alpha
+*/
 
 void	ft_lstfilesortal(t_file **plst, t_file *elem)
 {

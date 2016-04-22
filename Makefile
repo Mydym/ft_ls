@@ -6,12 +6,12 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/04/21 17:23:50 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/22 17:25:41 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I includes/
 LIBFLAGS = -L $(LIBDIR) -lft
 
@@ -35,7 +35,11 @@ SRCNAME = main.c \
 		  ft_lstfilenew.c \
 		  ft_lstfilesortal.c \
 		  ft_lstreaddir.c \
-		  ft_lstreadfile.c
+		  ft_lstreadfile.c \
+		  ft_lstreadarg.c \
+		  ft_lstfindtype.c \
+		  ft_lstcheckarg.c \
+		  ft_lstafficharg.c
 
 OBJNAME = $(SRCNAME:.c=.o)
 

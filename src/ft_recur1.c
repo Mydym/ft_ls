@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/21 14:10:14 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 15:11:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 14:04:29 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		ft_recur1(t_opt *option, char **larg)
 		psort = ft_lstfilesortal;
 	else
 		psort = ft_lstfilesorttime;
+	plst = ft_lstreadarg(larg);
 	plst = ft_lstreaddir(larg[1]);
 	return (0);
 }

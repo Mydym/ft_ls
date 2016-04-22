@@ -6,11 +6,15 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:30:26 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 16:45:30 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:20:11 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+**Fonction pour ajouter un element dans la liste a la place de l'element courant
+*/
 
 void		ft_lstfileadd(t_file **plst, t_file *new)
 {

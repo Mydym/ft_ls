@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/21 15:31:40 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/21 16:05:03 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:36:37 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	ft_filestat(t_file *elem)
 	if (stat(elem->name, &file) == 0)
 	{
 		elem->type = file.st_dev;
-		elem->perm = file.st_mode;
 		elem->nblink = file.st_nlink;
-		elem->iduser = file.st_uid;
-		elem->idgroup = file.st_gid;
 		elem->size = file.st_size;
 		elem->mtime = file.st_mtime;
 //		elem->formattime = ctime(&elem->mtime);

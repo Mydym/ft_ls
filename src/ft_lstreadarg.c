@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaffichdos.c                                  :+:      :+:    :+:   */
+/*   ft_lstreadarg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/22 17:24:44 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/22 14:13:58 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/22 17:18:36 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**Fonction pour recuper le contenu d'un dossier avec lstreaddir
-**Puis l'afficher fichier par fichier.
+**Fonction pour recupere les arguments et leur type, et les classe avec sortal
 */
 
-void	ft_lstaffichdos(char *path)
+t_file		*ft_lstreadarg(char **larg)
 {
-	t_file	*plst;
+	t_file		*plarg;
+	t_file		*elem;
+	int			i;
 
-	if (path)
-	{
-		plst = ft_lstreaddir(path);
-		while (plst->prev)
-			plst = plst->prev;
-		while (plst)
-		{
-			ft_putendl(plst->name);
-			plst = plst->next;
-		}
-	}
-	return ;
+	plarg = NULL;
+	i = -1;
+	while (larg[++i])
+		if ((elem = ft_lstfindtype(larg[i])))
+			ft_lstfilesortal(&plarg, elem);
+	return (plarg);
 }
