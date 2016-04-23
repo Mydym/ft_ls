@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strreaddir.c                                    :+:      :+:    :+:   */
+/*   ft_lstisdir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 13:32:34 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:17:24 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/23 13:45:34 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/23 13:49:29 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdlib.h>
 
-char	**ft_strreaddir(const char *file)
+/*
+**Fonction qui renvoie un booleen : 1 si l'element est un dossier et ) sinon.
+*/
+
+int		ft_lstisdir(char *name)
 {
-	DIR		*doc;
-	char	**list;
-	int		i;
+	struct stat	filetype;
 
-	i = 0;
-	if ((list = (char **)malloc(512 * sizeof(char *))) != NULL)
-		if ((doc = ft_opendir(file)) != NULL)
-		{
-			while ((list[i] = ft_strreadfile(doc)) != NULL)
-				i++;
-			closedir(doc);
-		}
-	return (list);
+	if (stat(name, &filetype) != -1)
+		if (S_ISDIR(filetype.st_mode))
+			return (1);
+	return (0);
 }

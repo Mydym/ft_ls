@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreaddir.c                                    :+:      :+:    :+:   */
+/*   ft_verifaffich.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 17:10:51 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:58:51 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/23 15:16:51 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/23 16:21:08 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*
-**Fonction pour ouvrir un dossier et recuperer son contenu trie par ordre alpha
-*/
-
-t_file	*ft_lstreaddir(const char *file)
+void	ft_verifaffich(t_file *larg)
 {
-	t_file		*plst;
-	t_file		*elem;
-	DIR			*doc;
-
-	plst = NULL;
-	if ((doc = ft_opendir(file)) != NULL)
+	if (larg->type == '-')
+		ft_putendl(larg->name);
+	else
 	{
-		while ((elem = ft_lstreadfile(doc)) != NULL)
-		{
-			ft_lstfilesortal(&plst, elem);
-			if (plst)
-				while (plst->prev)
-					plst = plst->prev;
-		}
-		closedir(doc);
+		if (larg->prev)
+			ft_putendl("");
+		if (larg->next || larg->prev)
+			ft_printdosname(larg->name);
+		ft_lstaffichdos(larg->name);
 	}
-	return (plst);
 }

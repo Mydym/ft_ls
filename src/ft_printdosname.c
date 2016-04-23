@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_straffichdos.c                                  :+:      :+:    :+:   */
+/*   ft_printdosname.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 11:55:40 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:18:06 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/23 14:53:20 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/23 15:13:56 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_straffichdos(char *path)
+void	ft_printdosname(char *name)
 {
-	char	**list;
-	int		i;
-
-	i = 0;
-	if (path)
-	{
-		list = ft_strreaddir(path);
-		while (list[i] != NULL)
-		{
-			ft_putendl(list[i]);
-			i++;
-		}
-	}
+	ft_putstr(name);
+	ft_putendl(":");
 	return ;
 }

@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strreadfile.c                                   :+:      :+:    :+:   */
+/*   ft_lstishidden.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 13:32:43 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/13 15:52:27 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/23 16:38:04 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/23 16:46:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
-#include <string.h>
+#include "ft_ls.h"
 
-char	*ft_strreadfile(DIR *dirp)
+int		ft_lstishidden(char *name)
 {
-	char			*filename;
-	struct dirent	*file;
-
-	filename = NULL;
-	if ((file = readdir(dirp)))
-		filename = file->d_name;
-	return (filename);
+	if (name[0] == '.' && ((name[1] == '\0') || (name[1] == '.' &&
+					name[2] == '\0') || ft_isalpha(name[1])))
+		return (1);
+	return (0);
 }

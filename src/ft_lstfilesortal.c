@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 15:26:31 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/22 17:19:21 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/23 16:43:43 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ void	ft_lstfilesortal(t_file **plst, t_file *elem)
 	int		i;
 
 	i = -1;
-	if (elem->name[0] == '.')
+	if (ft_lstishidden(elem->name))
 		return ;
 	if (*plst)
 	{
-		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next)
+		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next
+				&& (*plst)->type != 'd')
 			*plst = (*plst)->next;
 	}
-	if ((*plst) && !((*plst)->next))
+	if ((*plst) && !((*plst)->next) && (*plst)->type != 'd')
 		if ((i = ft_strcmp(elem->name, (*plst)->name)) > 0)
 			ft_lstfileaddend(plst, elem);
-	if (i <= 0)
+	if (i <= 0 || (*plst)->type == 'd')
 		ft_lstfileadd(plst, elem);
 	return ;
 }

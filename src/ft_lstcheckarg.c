@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 16:52:41 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/22 17:17:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/23 16:25:35 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,23 @@ void	ft_lstcheckarg(t_file **larg)
 	{
 		if ((*larg)->type == '-')
 		{
-			ft_putendl((*larg)->name);
-			*larg = ft_lstfiledelone(larg);
+			ft_verifaffich(*larg);
+			*larg = (*larg)->next;
 		}
 		else if ((*larg) && (*larg)->next)
 			*larg = (*larg)->next;
 		else if (*larg)
 			break ;
 	}
-	while ((*larg)->prev)
-		*larg = (*larg)->prev;
-	while (*larg)
+	if (*larg)
 	{
-		if ((*larg)->type == 'd')
+		while ((*larg)->prev)
+			*larg = (*larg)->prev;
+		while (*larg)
 		{
-			ft_putchar('\n');
-			ft_putstr((*larg)->name);
-			ft_putstr(":\n");
-			ft_lstaffichdos((*larg)->name);
+			if ((*larg)->type == 'd')
+				ft_verifaffich(*larg);
+			*larg = (*larg)->next;
 		}
-		*larg = (*larg)->next;
 	}
 }

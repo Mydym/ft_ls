@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/04/22 17:25:41 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/23 16:37:45 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,17 @@ SRCNAME = main.c \
 		  ft_lstfiledelend.c \
 		  ft_lstfilenew.c \
 		  ft_lstfilesortal.c \
+		  ft_lstargsortal.c \
 		  ft_lstreaddir.c \
 		  ft_lstreadfile.c \
 		  ft_lstreadarg.c \
 		  ft_lstfindtype.c \
 		  ft_lstcheckarg.c \
-		  ft_lstafficharg.c
+		  ft_lstafficharg.c \
+		  ft_printdosname.c \
+		  ft_verifaffich.c \
+		  ft_lstisdir.c \
+		  ft_lstishidden.c
 
 OBJNAME = $(SRCNAME:.c=.o)
 
