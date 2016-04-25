@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 13:56:42 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:34:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:02:41 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 
 void	ft_lstargsortal(t_file **larg, t_file *elem)
 {
-	if ((*larg))
-		while ((*larg)->prev)
-			*larg = (*larg)->prev;
+	while ((*larg) && (*larg)->prev)
+		*larg = (*larg)->prev;
 	if (elem->type == '-')
 		ft_lstfilesortal(larg, elem);
 	else

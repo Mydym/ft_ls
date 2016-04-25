@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/04/23 16:37:45 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/04/25 17:49:54 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,10 @@ SRCNAME = main.c \
 		  ft_printdosname.c \
 		  ft_verifaffich.c \
 		  ft_lstisdir.c \
-		  ft_lstishidden.c
+		  ft_lstisfile.c \
+		  ft_lstishidden.c \
+		  ft_recur1.c \
+		  ft_badname.c
 
 OBJNAME = $(SRCNAME:.c=.o)
 

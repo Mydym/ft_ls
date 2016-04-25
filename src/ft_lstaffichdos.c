@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:58:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:12:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	ft_lstaffichdos(char *path)
 	if (path)
 	{
 		plst = ft_lstreaddir(path);
-		if (plst)
-			while (plst->prev)
-				plst = plst->prev;
+		while (plst && plst->prev)
+			plst = plst->prev;
 		while (plst)
 		{
 			ft_putendl(plst->name);

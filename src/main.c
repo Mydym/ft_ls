@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 11:53:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 14:39:46 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/25 18:06:17 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,41 @@
 
 int		main(int argc, char **argv)
 {
-	if (argc >= 2)
+/*	if (argc >= 2)
 		ft_lstafficharg(&argv[1]);
 	else
-		ft_lstaffichdos(".");
-/*	t_opt		option;
-	int			i;
+		ft_lstaffichdos(".");*/
+	t_opt		option;
+	t_file		*plst;
 
-	i = 0;
+	plst = NULL;
 	if (argc > 1)
 	{
 		if (argv[1][0] == '-')
 		{
 			option = ft_option(argv[1]);
-			i = ft_recur1(&option, argv);
+			if (!option.none)
+				plst = ft_recur1(&option, &argv[2], argc - 2);
+			else
+				plst = ft_recur1(&option, &argv[1], argc - 1);
 		}
 		else
-			ft_lstaffichdos(argv[1]);
+		{
+			option = ft_option("");
+			plst = ft_recur1(&option, &argv[1], argc - 1);
+		}
+		while (plst && plst->prev)
+			plst = plst->prev;
+		while (plst)
+		{
+			ft_putendl(plst->name);
+			ft_putendl(&plst->type);
+			plst = plst->next;
+		}
 	}
 	else
-		ft_lstaffichdos(".");*/
+	{
+		ft_lstaffichdos(".");
+	}
 	return (0);
 }

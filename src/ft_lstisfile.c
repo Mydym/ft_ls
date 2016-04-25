@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_opendir.c                                       :+:      :+:    :+:   */
+/*   ft_lstisfile.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 13:32:50 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/25 17:31:11 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/25 17:37:06 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/25 18:01:45 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*
-**Fonction pour ouvrir un dossier et renvoyer le pointeur sur DIR correspondant
-*/
-
-DIR	*ft_opendir(const char *file)
+int		ft_lstisfile(char *name)
 {
-	DIR *repo;
+	struct stat		test;
 
-	repo = opendir(file);
-	if (repo)
-		return (repo);
-	else
-		return (NULL);
+	if ((stat(name, &test) == 0) && !(S_ISDIR(test.st_mode)))
+		return (1);
+	return (0);
 }

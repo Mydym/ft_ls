@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:37:22 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:50:14 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_opt
 	int		t;
 }					t_opt;
 
-int					ft_recur1(t_opt *option, char **larg);
+t_file				*ft_recur1(t_opt *option, char **larg, int k);
 t_opt				ft_option(char *arg);
 DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
@@ -67,6 +67,8 @@ void				ft_lstafficharg(char **arg);
 void				ft_printdosname(char *name);
 void				ft_verifaffich(t_file *larg);
 int					ft_lstisdir(char *name);
+int					ft_lstisfile(char *name);
 int					ft_lstishidden(char *name);
+void				ft_badname(char *name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:10:51 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:58:51 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:15:50 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ t_file	*ft_lstreaddir(const char *file)
 		while ((elem = ft_lstreadfile(doc)) != NULL)
 		{
 			ft_lstfilesortal(&plst, elem);
-			if (plst)
-				while (plst->prev)
-					plst = plst->prev;
+			while (plst && plst->prev)
+				plst = plst->prev;
 		}
 		closedir(doc);
 	}
