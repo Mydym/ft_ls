@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/25 17:50:14 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/26 15:20:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 # include "../lib/libft/libft.h"
 # include <dirent.h>
+# include <time.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
@@ -45,12 +46,13 @@ typedef struct		s_opt
 }					t_opt;
 
 t_file				*ft_recur1(t_opt *option, char **larg, int k);
-t_opt				ft_option(char *arg);
+t_opt				ft_option(char **arg);
 DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
 void				ft_lstfilesortal(t_file **plst, t_file *elem);
 void				ft_lstargsortal(t_file **larg, t_file *elem);
 void				ft_lstfilesorttime(t_file **plst, t_file *elem);
+void				ft_lstargsorttime(t_file **larg, t_file *elem);
 t_file				*ft_lstreadarg(char **larg);
 t_file				*ft_lstreadfile(DIR *dirp);
 t_file				*ft_lstreaddir(const char *file);

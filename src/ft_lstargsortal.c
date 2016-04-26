@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 13:56:42 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/25 17:02:41 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/26 17:06:28 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,36 @@ void	ft_lstargsortal(t_file **larg, t_file *elem)
 			while ((ft_strcmp(elem->name, (*larg)->name) > 0) && (*larg)->next)
 				*larg = (*larg)->next;
 		}
-		if ((*larg) && !(*larg)->next)
-			if ((ft_strcmp(elem->name, (*larg)->name) > 0))
-				ft_lstfileaddend(larg, elem);
-		if (!(*larg) || ft_strcmp(elem->name, (*larg)->name) <= 0)
+		if (((*larg) && !(*larg)->next) &&
+				(ft_strcmp(elem->name, (*larg)->name) > 0))
+			ft_lstfileaddend(larg, elem);
+		else
 			ft_lstfileadd(larg, elem);
 	}
+	return ;
+}
+
+/*
+**Fonction pour ranger les elements dans la liste selon l'ordre alpha
+*/
+
+void	ft_lstfilesortal(t_file **plst, t_file *elem)
+{
+	int		i;
+
+	i = -1;
+	if (ft_lstishidden(elem->name))
+		return ;
+	if (*plst)
+	{
+		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next
+				&& (*plst)->type != 'd')
+			*plst = (*plst)->next;
+	}
+	if ((*plst) && !((*plst)->next) && (*plst)->type != 'd')
+		if ((i = ft_strcmp(elem->name, (*plst)->name)) > 0)
+			ft_lstfileaddend(plst, elem);
+	if (i <= 0 || (*plst)->type == 'd')
+		ft_lstfileadd(plst, elem);
 	return ;
 }

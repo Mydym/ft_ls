@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:22:52 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/22 17:31:03 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/26 12:40:11 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ void	ft_init(t_opt *arg)
 	return ;
 }
 
-t_opt	ft_option(char *arg)
+t_opt	ft_option(char **arg)
 {
 	t_opt	new;
 	int		i;
 
 	i = 0;
 	ft_init(&new);
-	if (arg[0] == '-')
-		while (arg[i])
+	if (arg[1][0] == '-')
+		while (arg[1][i])
 		{
-			if (arg[i] == 'a')
+			if (arg[1][i] == 'a')
 				new.a = 1;
-			if (arg[i] == 'l')
+			if (arg[1][i] == 'l')
 				new.l = 1;
-			if (arg[i] == 'r')
+			if (arg[1][i] == 'r')
 				new.r = 1;
-			if (arg[i] == 'R')
+			if (arg[1][i] == 'R')
 				new.gr = 1;
-			if (arg[i] == 't')
+			if (arg[1][i] == 't')
 				new.t = 1;
 			if (new.a == 1 || new.l == 1 || new.r == 1 || new.t == 1 ||
 					new.gr == 1)
