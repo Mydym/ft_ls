@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 13:49:52 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 18:30:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 	if (larg[k])
 	{
 		if ((ft_lstisdir(larg[k])))
-			elem = ft_lstfilenew(larg[k], 'd');
+			elem = ft_lstfilenew(larg[k], 'd', "./");
 		if ((ft_lstisfile(larg[k])))
-			elem = ft_lstfilenew(larg[k], '-');
+			elem = ft_lstfilenew(larg[k], '-', "./");
 	}
 	if (elem)
 		psort(&new, elem);
@@ -62,32 +62,32 @@ void		ft_recurdos(char *doss, t_opt *option)
 {
 	void	(*psort)(t_file **, t_file *);
 	DIR		*path;
-	char	*dossier;
 	t_file	*lstfile;
 	t_file	*elem;
+//	char	*dossier;
 
 	path = NULL;
 	lstfile = NULL;
-	dossier = NULL;
+//	dossier = NULL;
 	if (option->t)
 		psort = &ft_lstfilesorttime;
 	else
 		psort = &ft_lstfilesortal;
 	if ((path = ft_opendir(doss)))
 	{
-		while ((elem = ft_lstreadfile(path)))
+		while ((elem = ft_lstreadfile(path, doss)))
 		{
-			if (elem->type == 'd')
-				dossier = elem->name;
+//			if (elem->type == 'd')
+//				dossier = elem->name;
 			lstfile = ft_gotostart(lstfile);
 			psort(&lstfile, elem);
 		}
 		closedir(path);
 	}
 	lstfile = ft_gotostart(lstfile);
-	ft_recurfile(lstfile, option);
-	if (option->gr && dossier)
-		ft_recurdos(dossier, option);
+	if (lstfile)
+		ft_recurfile(lstfile, option);
+//	if (option->gr && dossier)
+//		ft_recurdos(dossier, option);
 	return ;
-
 }

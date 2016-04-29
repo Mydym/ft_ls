@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:10:51 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/25 17:15:50 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:37:46 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_file	*ft_lstreaddir(const char *file)
 	plst = NULL;
 	if ((doc = ft_opendir(file)) != NULL)
 	{
-		while ((elem = ft_lstreadfile(doc)) != NULL)
+		while ((elem = ft_lstreadfile(doc, (char *)file)) != NULL)
 		{
 			ft_lstfilesortal(&plst, elem);
 			while (plst && plst->prev)

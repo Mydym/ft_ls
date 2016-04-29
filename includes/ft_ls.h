@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 13:13:56 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:40:44 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef struct		s_file
 {
+	char			*path;
 	char			*name;
 	char			type;
 	char			*perm;
@@ -30,6 +31,7 @@ typedef struct		s_file
 	char			*groupname;
 	int				size;
 	int				mtime;
+	long			mtimenano;
 	char			*formattime;
 	struct s_file	*prev;
 	struct s_file	*next;
@@ -55,10 +57,11 @@ DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
 void				ft_lstfilesortal(t_file **plst, t_file *elem);
 void				ft_lstargsortal(t_file **larg, t_file *elem);
+void				ft_lstsorttimenano(t_file **larg, t_file *elem);
 void				ft_lstfilesorttime(t_file **plst, t_file *elem);
 void				ft_lstargsorttime(t_file **larg, t_file *elem);
 t_file				*ft_lstreadarg(char **larg);
-t_file				*ft_lstreadfile(DIR *dirp);
+t_file				*ft_lstreadfile(DIR *dirp, char *repo);
 t_file				*ft_lstreaddir(const char *file);
 void				ft_lstaffichdos(char *path);
 void				ft_lstfileadd(t_file **plst, t_file *new);
@@ -66,7 +69,7 @@ void				ft_lstfileaddend(t_file **plst, t_file *new);
 void				ft_lstfiledel(t_file **plst);
 t_file				*ft_lstfiledelone(t_file **plst);
 t_file				*ft_lstfiledelend(t_file **plst);
-t_file				*ft_lstfilenew(char *filename, char type);
+t_file				*ft_lstfilenew(char *filename, char type, char *path);
 t_file				*ft_lstfindtype(char *name);
 void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);

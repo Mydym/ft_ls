@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 14:13:58 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:18:49 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:36:25 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_file		*ft_lstreadarg(char **larg)
 	while (larg[++i])
 	{
 		if ((ft_lstisdir(larg[i]) == 1))
-			ft_lstargsortal(&plarg, ft_lstfilenew(larg[i], 'd'));
+			ft_lstargsortal(&plarg, ft_lstfilenew(larg[i], 'd', "./"));
 		else
-			ft_lstargsortal(&plarg, ft_lstfilenew(larg[i], '-'));
+			ft_lstargsortal(&plarg, ft_lstfilenew(larg[i], '-', "./"));
 	}
 	return (plarg);
 }

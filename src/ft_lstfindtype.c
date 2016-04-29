@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 14:47:57 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/22 17:26:39 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:37:01 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_file		*ft_lstfindtype(char *name)
 			type = 'l';
 		if (S_ISSOCK(filetype.st_mode))
 			type = 's';
-		elem = ft_lstfilenew(name, type);
+		elem = ft_lstfilenew(name, type, "./");
 	}
 	return (elem);
 }
