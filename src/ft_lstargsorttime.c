@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfilesorttime.c                               :+:      :+:    :+:   */
+/*   ft_lstargsorttime.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/21 14:52:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/26 17:06:12 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/29 13:49:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem)
 	if (ft_lstishidden(elem->name))
 		return ;
 	if (*plst && ft_gettime(elem))
-		while ((elem->mtime < (*plst)->mtime) && (*plst)->next
-				&& (*plst)->type == '-')
+		while ((elem->mtime - (*plst)->mtime < 0) && (*plst)->next
+				&& (*plst)->type != 'd')
 			*plst = (*plst)->next;
 	if ((*plst) && !((*plst)->next) && (*plst)->type != 'd'
-			&& elem->mtime < (*plst)->mtime)
+			&& (elem->mtime - (*plst)->mtime < 0))
 		ft_lstfileaddend(plst, elem);
 	else
 		ft_lstfileadd(plst, elem);

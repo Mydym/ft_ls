@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/26 15:20:19 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 13:13:56 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ typedef struct		s_opt
 	int		t;
 }					t_opt;
 
-t_file				*ft_recur1(t_opt *option, char **larg, int k);
+void				ft_ls(int argc, char **arg);
+void				ft_lstprintarg(t_file *lst);
+t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
+void				ft_recurfile(t_file *lstarg, t_opt *option);
+void				ft_recurdos(char *doss, t_opt *option);
 t_opt				ft_option(char **arg);
 DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
@@ -66,11 +70,12 @@ t_file				*ft_lstfilenew(char *filename, char type);
 t_file				*ft_lstfindtype(char *name);
 void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);
-void				ft_printdosname(char *name);
+void				ft_printdosname(char *name, char *space);
 void				ft_verifaffich(t_file *larg);
 int					ft_lstisdir(char *name);
 int					ft_lstisfile(char *name);
 int					ft_lstishidden(char *name);
 void				ft_badname(char *name);
+t_file				*ft_gotostart(t_file *lst);
 
 #endif

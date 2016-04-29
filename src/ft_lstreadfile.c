@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 16:58:52 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/29 13:30:17 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ t_file	*ft_lstreadfile(DIR *dirp)
 
 	new = NULL;
 	if ((file = readdir(dirp)))
-		new = ft_lstfilenew(file->d_name, '\0');
+	{
+		if (file->d_type == 'd')
+			new = ft_lstfilenew(file->d_name, 'd');
+		else
+			new = ft_lstfilenew(file->d_name, '-');
+	}
 	return (new);
 }
