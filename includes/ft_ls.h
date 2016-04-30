@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 17:40:44 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/30 14:35:07 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int					ft_lstisfile(char *name);
 int					ft_lstishidden(char *name);
 void				ft_badname(char *name);
 t_file				*ft_gotostart(t_file *lst);
+int					ft_convertsectonsec(int sec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 18:30:34 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/04/30 14:35:08 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int		ft_gettime(t_file *plst)
 		}
 		else if (stat(ft_strcat(plst->path, plst->name), &m_time) == 0)
 		{
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec;
 			plst->mtime = m_time.st_mtimespec.tv_sec;
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec +
+				ft_convertsectonsec(plst->mtime);
 			plst->formattime = ctime(&m_time.st_mtime);
 		}
 		if (plst->next)
@@ -43,6 +44,16 @@ int		ft_gettime(t_file *plst)
 	if (plst->mtimenano != 0)
 		return (1);
 	return (0);
+}
+
+int		ft_convertsectonsec(int sec)
+{
+	int		k;
+
+	k = 9;
+	while (k-- != 0)
+		sec *= 10;
+	return (sec);
 }
 
 /*
@@ -67,8 +78,8 @@ void	ft_lstargsorttime(t_file **larg, t_file *elem)
 		if (((*larg) && !(*larg)->next)
 				&& (elem->mtime < (*larg)->mtime || (*larg)->type != 'd'))
 			ft_lstfileaddend(larg, elem);
-//		else if ((*larg && elem->mtime == (*larg)->mtime))
-//			ft_lstsorttimenano(larg, elem);
+		else if ((*larg && elem->mtime == (*larg)->mtime))
+			ft_lstsorttimenano(larg, elem);
 		else
 			ft_lstfileadd(larg, elem);
 	}
@@ -91,8 +102,8 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem)
 		if ((*plst) && !((*plst)->next) && (*plst)->type != 'd'
 				&& (elem->mtime - (*plst)->mtime < 0))
 			ft_lstfileaddend(plst, elem);
-//		else if ((*plst && elem->mtime == (*plst)->mtime))
-//			ft_lstsorttimenano(plst, elem);
+		else if ((*plst && elem->mtime == (*plst)->mtime))
+			ft_lstsorttimenano(plst, elem);
 		else
 			ft_lstfileadd(plst, elem);
 	}
@@ -101,17 +112,26 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem)
 
 void	ft_lstsorttimenano(t_file **larg, t_file *elem)
 {
+	while (elem->mtimenano == (*larg)->mtimenano && (*larg)->next)
+	{
+		if (ft_strcmp(elem->name, (*larg)->name) <= 0)
+		{
+			ft_lstfileadd(larg, elem);
+			break ;
+		}
+		*larg = (*larg)->next;
+	}
+	if (!(*larg)->next && ft_strcmp(elem->name, (*larg)->name) > 0
+				&& elem->mtimenano == (*larg)->mtimenano)
+		ft_lstfileaddend(larg, elem);
+	else if (!(*larg)->next && elem->mtimenano == (*larg)->mtimenano)
+		ft_lstfileadd(larg, elem);
 	while (elem->mtimenano < (*larg)->mtimenano && (*larg)->next)
 		*larg = (*larg)->next;
-	if (!(*larg)->next && elem->mtimenano < (*larg)->mtimenano)
+	if (elem->mtimenano < (*larg)->mtimenano)
 		ft_lstfileaddend(larg, elem);
 	else if (elem->mtimenano > (*larg)->mtimenano)
 		ft_lstfileadd(larg, elem);
-	while (elem->mtimenano == (*larg)->mtimenano &&
-			ft_strcmp(elem->name, (*larg)->name) > 0 && (*larg)->next)
-		*larg = (*larg)->next;
-	if (!(*larg)->next && ft_strcmp(elem->name, (*larg)->name) > 0)
-		ft_lstfileaddend(larg, elem);
-	else
-		ft_lstfileadd(larg, elem);
+	else if (elem->mtimenano == (*larg)->mtimenano)
+		ft_lstsorttimenano(larg, elem);
 }
