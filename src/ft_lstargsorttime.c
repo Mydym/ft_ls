@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/30 14:35:08 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/02 14:02:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **format 'jour/mois/num/heure/annee'
 */
 
-int		ft_gettime(t_file *plst)
+int					ft_gettime(t_file *plst)
 {
 	struct stat	m_time;
 
@@ -25,15 +25,14 @@ int		ft_gettime(t_file *plst)
 	{
 		if (stat(plst->name, &m_time) == 0)
 		{
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec;
 			plst->mtime = m_time.st_mtimespec.tv_sec;
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			plst->formattime = ctime(&m_time.st_mtime);
 		}
 		else if (stat(ft_strcat(plst->path, plst->name), &m_time) == 0)
 		{
 			plst->mtime = m_time.st_mtimespec.tv_sec;
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec +
-				ft_convertsectonsec(plst->mtime);
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			plst->formattime = ctime(&m_time.st_mtime);
 		}
 		if (plst->next)
@@ -46,7 +45,7 @@ int		ft_gettime(t_file *plst)
 	return (0);
 }
 
-int		ft_convertsectonsec(int sec)
+unsigned long long	ft_convertsectonsec(unsigned long long sec)
 {
 	int		k;
 
@@ -61,7 +60,7 @@ int		ft_convertsectonsec(int sec)
 **puis selon l'heure de derniere modification de chaque argument.
 */
 
-void	ft_lstargsorttime(t_file **larg, t_file *elem)
+void				ft_lstargsorttime(t_file **larg, t_file *elem)
 {
 	*larg = ft_gotostart(*larg);
 	if (elem->type == '-')
@@ -75,8 +74,7 @@ void	ft_lstargsorttime(t_file **larg, t_file *elem)
 			while (elem->mtime < (*larg)->mtime && (*larg)->next)
 				*larg = (*larg)->next;
 		}
-		if (((*larg) && !(*larg)->next)
-				&& (elem->mtime < (*larg)->mtime || (*larg)->type != 'd'))
+		if ((*larg) && (elem->mtime < (*larg)->mtime || (*larg)->type != 'd'))
 			ft_lstfileaddend(larg, elem);
 		else if ((*larg && elem->mtime == (*larg)->mtime))
 			ft_lstsorttimenano(larg, elem);
@@ -90,17 +88,17 @@ void	ft_lstargsorttime(t_file **larg, t_file *elem)
 **Fonction pour tirer des fichiers selon l'heure de derniere modification
 */
 
-void	ft_lstfilesorttime(t_file **plst, t_file *elem)
+void				ft_lstfilesorttime(t_file **plst, t_file *elem)
 {
 	if (ft_lstishidden(elem->name))
 		return ;
 	if (ft_gettime(elem))
 	{
-		while (*plst && (elem->mtime - (*plst)->mtime < 0) &&
+		while (*plst && (elem->mtime < (*plst)->mtime) &&
 				(*plst)->next && (*plst)->type != 'd')
 			*plst = (*plst)->next;
-		if ((*plst) && !((*plst)->next) && (*plst)->type != 'd'
-				&& (elem->mtime - (*plst)->mtime < 0))
+		if ((*plst) && (*plst)->type != 'd'
+				&& (elem->mtime < (*plst)->mtime))
 			ft_lstfileaddend(plst, elem);
 		else if ((*plst && elem->mtime == (*plst)->mtime))
 			ft_lstsorttimenano(plst, elem);
@@ -110,7 +108,7 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem)
 	return ;
 }
 
-void	ft_lstsorttimenano(t_file **larg, t_file *elem)
+void				ft_lstsorttimenano(t_file **larg, t_file *elem)
 {
 	while (elem->mtimenano == (*larg)->mtimenano && (*larg)->next)
 	{

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/30 14:35:07 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:48:30 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,23 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define SEC_TO_NSEC ft_convertsectonsec(plst->mtime)
+
 typedef struct		s_file
 {
-	char			*path;
-	char			*name;
-	char			type;
-	char			*perm;
-	int				nblink;
-	char			*username;
-	char			*groupname;
-	int				size;
-	int				mtime;
-	long			mtimenano;
-	char			*formattime;
-	struct s_file	*prev;
-	struct s_file	*next;
+	char				*path;
+	char				*name;
+	char				type;
+	char				*perm;
+	int					nblink;
+	char				*username;
+	char				*groupname;
+	int					size;
+	unsigned long long	mtime;
+	unsigned long long	mtimenano;
+	char				*formattime;
+	struct s_file		*prev;
+	struct s_file		*next;
 }					t_file;
 
 typedef struct		s_opt
@@ -51,8 +53,10 @@ void				ft_ls(int argc, char **arg);
 void				ft_lstprintarg(t_file *lst);
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
 void				ft_recurfile(t_file *lstarg, t_opt *option);
+void				ft_recurfilerev(t_file *lstarg, t_opt *option, int first);
 void				ft_recurdos(char *doss, t_opt *option);
 t_opt				ft_option(char **arg);
+void				ft_init(t_opt *arg);
 DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
 void				ft_lstfilesortal(t_file **plst, t_file *elem);
@@ -80,6 +84,9 @@ int					ft_lstisfile(char *name);
 int					ft_lstishidden(char *name);
 void				ft_badname(char *name);
 t_file				*ft_gotostart(t_file *lst);
-int					ft_convertsectonsec(int sec);
+t_file				*ft_gotoend(t_file *lst);
+t_file				*ft_gotofileend(t_file *lst);
+void				ft_printrevdos(t_file *lst, int first, t_opt *option);
+unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 #endif

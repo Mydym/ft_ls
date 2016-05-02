@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/30 14:35:06 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:49:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,43 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 
 void		ft_recurfile(t_file *lstarg, t_opt *option)
 {
-	if (lstarg->type == '-')
-		ft_putendl(lstarg->name);
-	else if (lstarg->type == 'd')
+	int		first;
+
+	first = 0;
+	if (!option->r)
 	{
-		if (lstarg->prev)
-			ft_printdosname(lstarg->name, "\n");
-		else if (lstarg->next)
-			ft_printdosname(lstarg->name, "");
-		ft_recurdos(lstarg->name, option);
+		if (lstarg->type == '-')
+			ft_putendl(lstarg->name);
+		else if (lstarg->type == 'd')
+		{
+			if (lstarg->prev)
+				ft_printdosname(lstarg->name, "\n");
+			else if (lstarg->next)
+				ft_printdosname(lstarg->name, "");
+			ft_recurdos(lstarg->name, option);
+		}
+		if (lstarg->next)
+			ft_recurfile(lstarg->next, option);
 	}
-	if (lstarg->next)
-		ft_recurfile(lstarg->next, option);
+	else
+		ft_recurfilerev(lstarg, option, first);
 	return ;
+}
+
+void		ft_recurfilerev(t_file *lstarg, t_opt *option, int first)
+{
+	lstarg = ft_gotofileend(lstarg);
+	while (lstarg && lstarg->type == '-')
+	{
+		first = 1;
+		ft_putendl(lstarg->name);
+		if (lstarg->prev)
+			lstarg = lstarg->prev;
+		else
+			break ;
+	}
+	lstarg = ft_gotoend(lstarg);
+	ft_printrevdos(lstarg, first, option);
 }
 
 void		ft_recurdos(char *doss, t_opt *option)
