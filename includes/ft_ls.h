@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/02 15:48:30 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/04 18:48:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "../lib/libft/libft.h"
 # include <dirent.h>
 # include <time.h>
+# include <pwd.h>
+# include <grp.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
@@ -27,6 +29,9 @@ typedef struct		s_file
 	char				*path;
 	char				*name;
 	char				type;
+	char				*permus;
+	char				*permgp;
+	char				*permoth;
 	char				*perm;
 	int					nblink;
 	char				*username;
@@ -50,7 +55,6 @@ typedef struct		s_opt
 }					t_opt;
 
 void				ft_ls(int argc, char **arg);
-void				ft_lstprintarg(t_file *lst);
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
 void				ft_recurfile(t_file *lstarg, t_opt *option);
 void				ft_recurfilerev(t_file *lstarg, t_opt *option, int first);
@@ -74,7 +78,7 @@ void				ft_lstfiledel(t_file **plst);
 t_file				*ft_lstfiledelone(t_file **plst);
 t_file				*ft_lstfiledelend(t_file **plst);
 t_file				*ft_lstfilenew(char *filename, char type, char *path);
-t_file				*ft_lstfindtype(char *name);
+void				ft_lstfindtype(t_file *elem);
 void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);
 void				ft_printdosname(char *name, char *space);
@@ -87,6 +91,9 @@ t_file				*ft_gotostart(t_file *lst);
 t_file				*ft_gotoend(t_file *lst);
 t_file				*ft_gotofileend(t_file *lst);
 void				ft_printrevdos(t_file *lst, int first, t_opt *option);
+void				ft_lstprintarg(t_file *lst);
+void				ft_putfilendl(t_file *file, t_opt *option);
+int					ft_gettime(t_file *plst);
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 #endif

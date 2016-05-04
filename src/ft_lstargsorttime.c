@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/02 14:02:22 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:53:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,25 @@
 int					ft_gettime(t_file *plst)
 {
 	struct stat	m_time;
+	char		*pathname;
 
+	pathname = ft_strstr(plst->path, plst->name);
 	while (plst)
 	{
-		if (stat(plst->name, &m_time) == 0)
+		if (lstat(plst->name, &m_time) == 0)
 		{
 			plst->mtime = m_time.st_mtimespec.tv_sec;
 			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			plst->formattime = ctime(&m_time.st_mtime);
 		}
-		else if (stat(ft_strcat(plst->path, plst->name), &m_time) == 0)
+		else if (lstat(plst->path, &m_time) == 0 && pathname &&
+				ft_strcmp(pathname, plst->name) == 0)
+		{
+			plst->mtime = m_time.st_mtimespec.tv_sec;
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
+			plst->formattime = ctime(&m_time.st_mtime);
+		}
+		else if (lstat(ft_strcat(plst->path, plst->name), &m_time) == 0)
 		{
 			plst->mtime = m_time.st_mtimespec.tv_sec;
 			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;

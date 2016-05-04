@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 14:47:57 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 17:37:01 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:56:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,53 @@
 **Fonction pour determiner le type de ficher d'un element.
 */
 
-t_file		*ft_lstfindtype(char *name)
+char		ft_testtype(struct stat filetype)
 {
-	t_file		*elem;
+	char		type;
+
+	type = '\0';
+	if (S_ISREG(filetype.st_mode))
+		type = '-';
+	else if (S_ISDIR(filetype.st_mode))
+		type = 'd';
+	else if (S_ISCHR(filetype.st_mode))
+		type = 'c';
+	else if (S_ISBLK(filetype.st_mode))
+		type = 'b';
+	else if (S_ISFIFO(filetype.st_mode))
+		type = 'p';
+	else if (S_ISLNK(filetype.st_mode))
+		type = 'l';
+	else if (S_ISSOCK(filetype.st_mode))
+		type = 's';
+	return (type);
+}
+
+void		ft_lstfindtype(t_file *elem)
+{
 	char		type;
 	struct stat	filetype;
+	char		*pathname;
 
-	type = '-';
-	elem = NULL;
-	if (stat(name, &filetype) != -1)
+	pathname = ft_strstr(elem->path, elem->name);
+	type = '\0';
+	if (lstat(elem->name, &filetype) == 0)
 	{
-		if (S_ISREG(filetype.st_mode))
-			type = '-';
-		if (S_ISDIR(filetype.st_mode))
-			type = 'd';
-		if (S_ISCHR(filetype.st_mode))
-			type = 'c';
-		if (S_ISBLK(filetype.st_mode))
-			type = 'b';
-		if (S_ISFIFO(filetype.st_mode))
-			type = 'p';
-		if (S_ISLNK(filetype.st_mode))
-			type = 'l';
-		if (S_ISSOCK(filetype.st_mode))
-			type = 's';
-		elem = ft_lstfilenew(name, type, "./");
+		{
+			type = ft_testtype(filetype);
+			elem->type = type;
+		}
 	}
-	return (elem);
+	else if (lstat(elem->path, &filetype) == 0 && pathname &&
+			ft_strcmp(pathname, elem->name) == 0)
+	{
+		type = ft_testtype(filetype);
+		elem->type = type;
+	}
+	else if (lstat(ft_strcat(elem->path, elem->name), &filetype) == 0)
+	{
+		type = ft_testtype(filetype);
+		elem->type = type;
+	}
+	return ;
 }

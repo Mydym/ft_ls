@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/02 15:49:00 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/04 18:48:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void		ft_recurfile(t_file *lstarg, t_opt *option)
 	if (!option->r)
 	{
 		if (lstarg->type == '-')
-			ft_putendl(lstarg->name);
+		{
+			ft_putfilendl(lstarg, option);
+		}
 		else if (lstarg->type == 'd')
 		{
 			if (lstarg->prev)
@@ -88,11 +90,9 @@ void		ft_recurdos(char *doss, t_opt *option)
 	DIR		*path;
 	t_file	*lstfile;
 	t_file	*elem;
-//	char	*dossier;
 
 	path = NULL;
 	lstfile = NULL;
-//	dossier = NULL;
 	if (option->t)
 		psort = &ft_lstfilesorttime;
 	else
@@ -101,8 +101,6 @@ void		ft_recurdos(char *doss, t_opt *option)
 	{
 		while ((elem = ft_lstreadfile(path, doss)))
 		{
-//			if (elem->type == 'd')
-//				dossier = elem->name;
 			lstfile = ft_gotostart(lstfile);
 			psort(&lstfile, elem);
 		}
@@ -111,7 +109,5 @@ void		ft_recurdos(char *doss, t_opt *option)
 	lstfile = ft_gotostart(lstfile);
 	if (lstfile)
 		ft_recurfile(lstfile, option);
-//	if (option->gr && dossier)
-//		ft_recurdos(dossier, option);
 	return ;
 }
