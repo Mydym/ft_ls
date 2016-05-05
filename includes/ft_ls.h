@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/04 18:48:18 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:20:39 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,12 @@ t_file				*ft_gotofileend(t_file *lst);
 void				ft_printrevdos(t_file *lst, int first, t_opt *option);
 void				ft_lstprintarg(t_file *lst);
 void				ft_putfilendl(t_file *file, t_opt *option);
+void				ft_permuser(struct stat detail, t_file *file);
+void				ft_permgroup(struct stat detail, t_file *file);
+void				ft_permother(struct stat detail, t_file *file);
+void				ft_permglobal(t_file *file);
 int					ft_gettime(t_file *plst);
+void				ft_stocktime(t_file *plst, struct stat m_time);
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/04 15:10:12 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/05/05 16:08:34 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ NAME = ft_ls
 
 SRCNAME = main.c \
 		  ft_putfilendl.c \
+		  ft_perm.c \
 		  ft_option.c \
 		  ft_opendir.c \
 		  ft_filestat.c \
@@ -36,6 +37,7 @@ SRCNAME = main.c \
 		  ft_lstfilenew.c \
 		  ft_lstargsortal.c \
 		  ft_lstargsorttime.c \
+		  ft_convertsectonsec.c \
 		  ft_lstreaddir.c \
 		  ft_lstreadfile.c \
 		  ft_lstreadarg.c \

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/04 17:53:18 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/05 16:20:39 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **format 'jour/mois/num/heure/annee'
 */
 
-int					ft_gettime(t_file *plst)
+int		ft_gettime(t_file *plst)
 {
 	struct stat	m_time;
 	char		*pathname;
@@ -26,24 +26,12 @@ int					ft_gettime(t_file *plst)
 	while (plst)
 	{
 		if (lstat(plst->name, &m_time) == 0)
-		{
-			plst->mtime = m_time.st_mtimespec.tv_sec;
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
-			plst->formattime = ctime(&m_time.st_mtime);
-		}
+			ft_stocktime(plst, m_time);
 		else if (lstat(plst->path, &m_time) == 0 && pathname &&
 				ft_strcmp(pathname, plst->name) == 0)
-		{
-			plst->mtime = m_time.st_mtimespec.tv_sec;
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
-			plst->formattime = ctime(&m_time.st_mtime);
-		}
+			ft_stocktime(plst, m_time);
 		else if (lstat(ft_strcat(plst->path, plst->name), &m_time) == 0)
-		{
-			plst->mtime = m_time.st_mtimespec.tv_sec;
-			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
-			plst->formattime = ctime(&m_time.st_mtime);
-		}
+			ft_stocktime(plst, m_time);
 		if (plst->next)
 			plst = plst->next;
 		else
@@ -54,14 +42,11 @@ int					ft_gettime(t_file *plst)
 	return (0);
 }
 
-unsigned long long	ft_convertsectonsec(unsigned long long sec)
+void	ft_stocktime(t_file *plst, struct stat m_time)
 {
-	int		k;
-
-	k = 9;
-	while (k-- != 0)
-		sec *= 10;
-	return (sec);
+	plst->mtime = m_time.st_mtimespec.tv_sec;
+	plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
+	plst->formattime = ctime(&m_time.st_mtime);
 }
 
 /*
@@ -69,7 +54,7 @@ unsigned long long	ft_convertsectonsec(unsigned long long sec)
 **puis selon l'heure de derniere modification de chaque argument.
 */
 
-void				ft_lstargsorttime(t_file **larg, t_file *elem)
+void	ft_lstargsorttime(t_file **larg, t_file *elem)
 {
 	*larg = ft_gotostart(*larg);
 	if (elem->type == '-')
@@ -97,7 +82,7 @@ void				ft_lstargsorttime(t_file **larg, t_file *elem)
 **Fonction pour tirer des fichiers selon l'heure de derniere modification
 */
 
-void				ft_lstfilesorttime(t_file **plst, t_file *elem)
+void	ft_lstfilesorttime(t_file **plst, t_file *elem)
 {
 	if (ft_lstishidden(elem->name))
 		return ;
@@ -117,7 +102,7 @@ void				ft_lstfilesorttime(t_file **plst, t_file *elem)
 	return ;
 }
 
-void				ft_lstsorttimenano(t_file **larg, t_file *elem)
+void	ft_lstsorttimenano(t_file **larg, t_file *elem)
 {
 	while (elem->mtimenano == (*larg)->mtimenano && (*larg)->next)
 	{
