@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/05 16:20:39 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:35:16 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct		s_file
 {
 	char				*path;
+	char				*pathname;
 	char				*name;
 	char				type;
 	char				*permus;

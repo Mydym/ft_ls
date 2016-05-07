@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/04 18:48:33 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:42:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void		ft_recurfile(t_file *lstarg, t_opt *option)
 	if (!option->r)
 	{
 		if (lstarg->type == '-')
-		{
 			ft_putfilendl(lstarg, option);
-		}
 		else if (lstarg->type == 'd')
 		{
 			if (lstarg->prev)
@@ -74,7 +72,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *option, int first)
 	while (lstarg && lstarg->type == '-')
 	{
 		first = 1;
-		ft_putendl(lstarg->name);
+		ft_putfilendl(lstarg, option);
 		if (lstarg->prev)
 			lstarg = lstarg->prev;
 		else

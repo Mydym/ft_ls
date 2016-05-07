@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/05 16:20:39 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:23:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,12 @@
 int		ft_gettime(t_file *plst)
 {
 	struct stat	m_time;
-	char		*pathname;
 
-	pathname = ft_strstr(plst->path, plst->name);
 	while (plst)
 	{
 		if (lstat(plst->name, &m_time) == 0)
 			ft_stocktime(plst, m_time);
-		else if (lstat(plst->path, &m_time) == 0 && pathname &&
-				ft_strcmp(pathname, plst->name) == 0)
-			ft_stocktime(plst, m_time);
-		else if (lstat(ft_strcat(plst->path, plst->name), &m_time) == 0)
+		else if (lstat(plst->pathname, &m_time) == 0)
 			ft_stocktime(plst, m_time);
 		if (plst->next)
 			plst = plst->next;
@@ -44,9 +39,24 @@ int		ft_gettime(t_file *plst)
 
 void	ft_stocktime(t_file *plst, struct stat m_time)
 {
+	char	*time;
+	char	*shorttime;
+	char	*year;
+
 	plst->mtime = m_time.st_mtimespec.tv_sec;
 	plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
-	plst->formattime = ctime(&m_time.st_mtime);
+	time = ft_strdup(ctime(&m_time.st_mtime));
+	shorttime = ft_strsub(time, 4, ft_strlen(time) - 4);
+	free(time);
+	year = ft_strsub(shorttime, ft_strlen(shorttime) - 5, 4);
+	time = ft_strnew(ft_strlen(shorttime) - 8);
+	time = ft_strncpy(time, shorttime, ft_strlen(shorttime) - 9);
+	ft_strcat(time, " ");
+	free(shorttime);
+	shorttime = ft_strjoin(time, year);
+	free(time);
+	free(year);
+	plst->formattime = shorttime;
 }
 
 /*

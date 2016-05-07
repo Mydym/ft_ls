@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/29 17:30:27 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/07 15:14:05 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,17 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 		new->name = filename;
 	if (type)
 		new->type = type;
+	new->username = NULL;
+	new->groupname = NULL;
+	new->permus = NULL;
+	new->permgp = NULL;
+	new->permoth = NULL;
+	new->perm = NULL;
+	new->nblink = 0;
+	if (path)
+		new->path = ft_strnew(ft_strlen(path));
 	new->path = path;
+	new->pathname = ft_strjoin(new->path, new->name);
 	new->mtimenano = 0;
 	new->mtime = 0;
 	new->formattime = NULL;
