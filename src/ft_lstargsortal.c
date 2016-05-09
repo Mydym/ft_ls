@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 13:56:42 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/04 13:50:35 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/09 11:37:12 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 **Puis dans l'ordre alphabetique
 */
 
-void	ft_lstargsortal(t_file **larg, t_file *elem)
+void	ft_lstargsortal(t_file **larg, t_file *elem, t_opt *option)
 {
 	while ((*larg) && (*larg)->prev)
 		*larg = (*larg)->prev;
 	if (elem->type == '-')
-		ft_lstfilesortal(larg, elem);
+		ft_lstfilesortal(larg, elem, option);
 	else
 	{
 		if (*larg)
@@ -45,13 +45,14 @@ void	ft_lstargsortal(t_file **larg, t_file *elem)
 **Fonction pour ranger les elements dans la liste selon l'ordre alpha
 */
 
-void	ft_lstfilesortal(t_file **plst, t_file *elem)
+void	ft_lstfilesortal(t_file **plst, t_file *elem, t_opt *option)
 {
 	int		i;
 
 	i = -1;
-	if (ft_lstishidden(elem->name))
-		return ;
+	if (!option->a)
+		if (ft_lstishidden(elem->name))
+			return ;
 	if (*plst)
 	{
 		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next

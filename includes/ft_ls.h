@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/07 15:35:16 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:42:08 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ t_opt				ft_option(char **arg);
 void				ft_init(t_opt *arg);
 DIR					*ft_opendir(const char *file);
 void				ft_filestat(t_file *elem);
-void				ft_lstfilesortal(t_file **plst, t_file *elem);
-void				ft_lstargsortal(t_file **larg, t_file *elem);
+void				ft_lstfilesortal(t_file **plst, t_file *elem, t_opt *option);
+void				ft_lstargsortal(t_file **larg, t_file *elem, t_opt *option);
 void				ft_lstsorttimenano(t_file **larg, t_file *elem);
-void				ft_lstfilesorttime(t_file **plst, t_file *elem);
-void				ft_lstargsorttime(t_file **larg, t_file *elem);
+void				ft_lstfilesorttime(t_file **plst, t_file *elem, t_opt *option);
+void				ft_lstargsorttime(t_file **larg, t_file *elem, t_opt *option);
 t_file				*ft_lstreadarg(char **larg);
 t_file				*ft_lstreadfile(DIR *dirp, char *repo);
 t_file				*ft_lstreaddir(const char *file);
@@ -82,7 +82,7 @@ t_file				*ft_lstfilenew(char *filename, char type, char *path);
 void				ft_lstfindtype(t_file *elem);
 void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);
-void				ft_printdosname(char *name, char *space);
+void				ft_printdosname(t_file *elem, char *space);
 void				ft_verifaffich(t_file *larg);
 int					ft_lstisdir(char *name);
 int					ft_lstisfile(char *name);
@@ -98,8 +98,8 @@ void				ft_permuser(struct stat detail, t_file *file);
 void				ft_permgroup(struct stat detail, t_file *file);
 void				ft_permother(struct stat detail, t_file *file);
 void				ft_permglobal(t_file *file);
-int					ft_gettime(t_file *plst);
-void				ft_stocktime(t_file *plst, struct stat m_time);
+int					ft_gettime(t_file *plst, t_opt *option);
+void				ft_stocktime(t_file *plst, struct stat m_time, t_opt *option);
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/07 15:22:51 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/09 16:14:31 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_putfilendl(t_file *file, t_opt *option)
 	else
 	{
 		ft_lstfindtype(file);
-		ft_gettime(file);
+		ft_gettime(file, option);
 		ft_getfiledetail(file);
 		ft_putchar(file->type);
 		ft_putstr(file->perm);
