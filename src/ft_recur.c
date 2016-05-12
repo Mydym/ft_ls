@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/09 16:14:28 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/12 19:01:16 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,36 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 		if ((ft_lstisdir(larg[k])))
 			elem = ft_lstfilenew(larg[k], 'd', "./");
 		if ((ft_lstisfile(larg[k])))
-			elem = ft_lstfilenew(larg[k], '-', "./");
+			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', "./"), option);
 	}
 	if (elem)
 		psort(&new, elem, option);
 	new = ft_gotostart(new);
 	if (k == i - 1)
-		ft_recurfile(new, option);
+		ft_recurfile(new, option, 0);
 	return (new);
 }
 
-void		ft_recurfile(t_file *lstarg, t_opt *option)
+void		ft_recurfile(t_file *lstarg, t_opt *option, int x)
 {
-	int		first;
+	int				first;
+	static t_size	max;
+	static int		k[1] = {0};
+//	t_file			*temp;
 
 	first = 0;
-	if (!option->r)
+//	temp = lstarg;
+//	lstarg = ft_gotostart(lstarg);
+/*	while (lstarg)
 	{
-		if (lstarg->type == '-')
-			ft_putfilendl(lstarg, option);
-		else if (lstarg->type == 'd')
+		ft_putchar('$');
+		ft_putendl(lstarg->name);
+		lstarg = lstarg->next;
+	}*/
+//	lstarg = temp;
+	if (!option->r || x == 0)
+	{
+		if (lstarg->type == 'd' && x == 0)
 		{
 			if (lstarg->prev)
 				ft_printdosname(lstarg, "\n");
@@ -58,15 +68,26 @@ void		ft_recurfile(t_file *lstarg, t_opt *option)
 				ft_printdosname(lstarg, "");
 			ft_recurdos(lstarg->name, option);
 		}
-		if (lstarg->next)
-			ft_recurfile(lstarg->next, option);
+		else if (!option->r)
+		{
+			if (k[0] != 42)
+			{
+				k[0] = 42;
+				max = ft_getmaxsize(lstarg);
+			}
+			ft_putdetail(lstarg, option, max);
+		}
+		if (option->r && lstarg->next)
+			ft_recurfile(lstarg->next, option, 1);
+		else if (lstarg->next)
+			ft_recurfile(lstarg->next, option, x);
 	}
-	else
-		ft_recurfilerev(lstarg, option, first);
+	else if (option->r)
+		ft_recurfilerev(lstarg, option, first, max);
 	return ;
 }
 
-void		ft_recurfilerev(t_file *lstarg, t_opt *option, int first)
+void		ft_recurfilerev(t_file *lstarg, t_opt *opt, int first, t_size max)
 {
 	t_file	*elem;
 
@@ -75,7 +96,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *option, int first)
 	while (lstarg && lstarg->type == '-')
 	{
 		first = 1;
-		ft_putfilendl(lstarg, option);
+		ft_putdetail(lstarg, opt, max);
 		if (lstarg->prev)
 			lstarg = lstarg->prev;
 		else
@@ -84,7 +105,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *option, int first)
 	lstarg = ft_gotoend(lstarg);
 	if (lstarg->type == 'd' &&
 			(ft_strcmp(elem->name, lstarg->name) != 0 || first == 0))
-		ft_printrevdos(lstarg, first, option);
+		ft_printrevdos(lstarg, first, opt);
 }
 
 void		ft_recurdos(char *doss, t_opt *option)
@@ -105,12 +126,13 @@ void		ft_recurdos(char *doss, t_opt *option)
 		while ((elem = ft_lstreadfile(path, doss)))
 		{
 			lstfile = ft_gotostart(lstfile);
+			ft_putfilendl(elem, option);
 			psort(&lstfile, elem, option);
 		}
 		closedir(path);
 	}
 	lstfile = ft_gotostart(lstfile);
 	if (lstfile)
-		ft_recurfile(lstfile, option);
+		ft_recurfile(lstfile, option, 1);
 	return ;
 }

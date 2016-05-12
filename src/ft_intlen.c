@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 16:41:05 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/10 13:17:13 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/05/10 12:39:13 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/05/10 12:44:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "libft.h"
+#include "ft_ls.h"
 
-size_t	ft_strlen(const char *s)
+int		ft_intlen(int nombre)
 {
-	size_t i;
+	int		compt;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	compt = 0;
+	while (nombre > 0)
+	{
+		nombre /= 10;
+		compt++;
+	}
+	return (compt);
 }

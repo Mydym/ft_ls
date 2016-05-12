@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/09 14:42:08 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/12 18:51:58 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ typedef struct		s_file
 	struct s_file		*next;
 }					t_file;
 
+typedef struct		s_size
+{
+	int		link;
+	int		user;
+	int		group;
+	int		taille;
+}					t_size;
+
 typedef struct		s_opt
 {
 	int		none;
@@ -57,8 +65,8 @@ typedef struct		s_opt
 
 void				ft_ls(int argc, char **arg);
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
-void				ft_recurfile(t_file *lstarg, t_opt *option);
-void				ft_recurfilerev(t_file *lstarg, t_opt *option, int first);
+void				ft_recurfile(t_file *lstarg, t_opt *option, int x);
+void				ft_recurfilerev(t_file *lstarg, t_opt *option, int first, t_size max);
 void				ft_recurdos(char *doss, t_opt *option);
 t_opt				ft_option(char **arg);
 void				ft_init(t_opt *arg);
@@ -101,5 +109,11 @@ void				ft_permglobal(t_file *file);
 int					ft_gettime(t_file *plst, t_opt *option);
 void				ft_stocktime(t_file *plst, struct stat m_time, t_opt *option);
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
+void				ft_getfiledetail(t_file *file);
+void				ft_putdetail(t_file *file, t_opt *option, t_size max);
+void				ft_stockfiledetail(t_file *file, struct stat detail);
+int					ft_intlen(int nombre);
+void				ft_maxinit(t_size *max);
+t_size				ft_getmaxsize(t_file *lst);
 
 #endif
