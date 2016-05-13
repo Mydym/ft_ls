@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 15:16:51 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/09 14:20:34 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/13 17:57:30 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	ft_verifaffich(t_file *larg)
 	{
 		if (larg->prev)
 			ft_putendl("");
-		if (larg->prev)
-			ft_printdosname(larg, "\n");
-		else if (larg->next)
-			ft_printdosname(larg, "");
+		ft_printdosname(larg);
 		ft_lstaffichdos(larg->name);
 	}
 }

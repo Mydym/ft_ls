@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/12 18:51:58 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/13 17:51:39 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_file				*ft_lstfilenew(char *filename, char type, char *path);
 void				ft_lstfindtype(t_file *elem);
 void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);
-void				ft_printdosname(t_file *elem, char *space);
+void				ft_printdosname(t_file *elem);
 void				ft_verifaffich(t_file *larg);
 int					ft_lstisdir(char *name);
 int					ft_lstisfile(char *name);

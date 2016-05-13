@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:05:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/12 19:01:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/13 18:49:52 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void		ft_printrevdos(t_file *lst, int first, t_opt *option)
 	{
 		if (lst->next || first != 0)
 		{
-			ft_printdosname(lst, "\n");
+			ft_printdosname(lst);
 			first = 0;
 		}
 		else if (lst->prev)
-			ft_printdosname(lst, "");
+			ft_printdosname(lst);
 		ft_recurdos(lst->name, option);
 		if (lst->prev)
 			lst = lst->prev;
