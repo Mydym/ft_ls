@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/10 12:37:31 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/19 14:59:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ int		ft_gettime(t_file *plst, t_opt *option)
 
 	while (plst)
 	{
-		if (lstat(plst->name, &m_time) == 0)
+		if (ft_strcmp(plst->path, "./") == 0 && lstat(plst->name, &m_time) == 0)
+		{
+			plst->mtime = m_time.st_mtimespec.tv_sec;
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			ft_stocktime(plst, m_time, option);
+		}
 		else if (lstat(plst->pathname, &m_time) == 0)
+		{
+			plst->mtime = m_time.st_mtimespec.tv_sec;
+			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			ft_stocktime(plst, m_time, option);
+		}
 		if (plst->next)
 			plst = plst->next;
 		else
@@ -39,26 +47,30 @@ int		ft_gettime(t_file *plst, t_opt *option)
 
 void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
 {
-	char	*time;
+	char	*alltime;
 	char	*shorttime;
-	char	*year;
+	time_t	local;
 
-	plst->mtime = m_time.st_mtimespec.tv_sec;
-	plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
+	time(&local);
 	if (option->l)
 	{
-		time = ft_strdup(ctime(&m_time.st_mtime));
-		shorttime = ft_strsub(time, 4, ft_strlen(time) - 4);
-		free(time);
-		year = ft_strsub(shorttime, ft_strlen(shorttime) - 5, 4);
-		time = ft_strnew(ft_strlen(shorttime) - 8);
-		time = ft_strncpy(time, shorttime, ft_strlen(shorttime) - 9);
-		ft_strcat(time, " ");
-		free(shorttime);
-		shorttime = ft_strjoin(time, year);
-		free(time);
-		free(year);
-		plst->formattime = shorttime;
+		if (plst->mtime > local - 15778800 && plst->mtime < local + 3600)
+		{
+			alltime = ft_strdup(ctime(&m_time.st_mtime));
+			shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 4);
+			free(alltime);
+			alltime = ft_strnew(ft_strlen(shorttime) - 8);
+			alltime = ft_strncpy(alltime, shorttime, ft_strlen(shorttime) - 9);
+			free(shorttime);
+			plst->formattime = alltime;
+		}
+		else
+		{
+			alltime = ft_strdup(ctime(&m_time.st_mtime));
+			shorttime = ft_strsub(alltime, ft_strlen(alltime) - 5, 4);
+			free(alltime);
+			plst->formattime = shorttime;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/13 18:49:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/19 15:28:21 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_getfiledetail(t_file *file)
 {
 	struct stat		detail;
 
-	if ((lstat(file->name, &detail) == 0))
+	if (ft_strcmp(file->path, "./") == 0 && lstat(file->name, &detail) == 0)
 		ft_stockfiledetail(file, detail);
 	else if (lstat(file->pathname, &detail) == 0)
 		ft_stockfiledetail(file, detail);
@@ -81,9 +81,13 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_putstr(file->formattime);
 		ft_putstr(" ");
 		ft_putendl(file->name);
+		ft_lstfiledelone(&file);
 	}
 	else
+	{
 		ft_putendl(file->name);
+		ft_lstfiledelone(&file);
+	}
 }
 
 void	ft_putfilendl(t_file *file, t_opt *option)

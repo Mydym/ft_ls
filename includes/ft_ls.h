@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/13 17:51:39 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/19 14:46:23 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct		s_file
 	char				*username;
 	char				*groupname;
 	int					size;
-	unsigned long long	mtime;
-	unsigned long long	mtimenano;
+	long long			mtime;
+	long long			mtimenano;
 	char				*formattime;
 	struct s_file		*prev;
 	struct s_file		*next;
