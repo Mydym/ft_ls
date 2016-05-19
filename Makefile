@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/10 12:55:05 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/05/19 18:06:46 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCNAME = main.c \
 		  ft_ls.c \
 		  ft_badname.c \
 		  ft_intlen.c \
+		  ft_getfiledetail.c \
 		  ft_sizemax.c
 
 OBJNAME = $(SRCNAME:.c=.o)

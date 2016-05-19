@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 14:47:57 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/07 15:18:21 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:55:24 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		ft_lstfindtype(t_file *elem)
 	struct stat	filetype;
 
 	type = '\0';
-	if (lstat(elem->name, &filetype) == 0)
+	if (ft_strcmp(elem->path, "./") == 0 && lstat(elem->name, &filetype) == 0)
 	{
 		type = ft_testtype(filetype);
 		elem->type = type;
