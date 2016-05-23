@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 15:10:14 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 17:16:48 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_putspace(int a, int b, int c)
 		a = 0;
 		b = i + 2;
 	}
+	else if (a == 0)
+		a++;
 	while (a < b)
 	{
 		ft_putchar(' ');
