@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/19 18:04:29 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 17:03:10 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,14 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 
 	elem = NULL;
 	new = NULL;
-	if (option->t)
-		psort = &ft_lstargsorttime;
-	else
-		psort = &ft_lstargsortal;
+	psort = ((option->t) ? &ft_lstargsorttime : &ft_lstargsortal);
 	if (--k > 0)
 		new = ft_recurarg(option, larg, k, i);
 	if (larg[k])
 	{
-		if ((ft_lstisdir(larg[k])))
+		if ((ft_lstisdir(larg[k], *option)))
 			elem = ft_lstfilenew(larg[k], 'd', "./");
-		if ((ft_lstisfile(larg[k])))
+		else
 			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', "./"), option);
 	}
 	if (elem)
@@ -102,10 +99,7 @@ void		ft_recurdos(char *doss, t_opt *option)
 
 	path = NULL;
 	lstfile = NULL;
-	if (option->t)
-		psort = &ft_lstfilesorttime;
-	else
-		psort = &ft_lstfilesortal;
+	psort = ((option->t) ? &ft_lstfilesorttime : &ft_lstfilesortal);
 	if ((path = ft_opendir(doss)))
 	{
 		while ((elem = ft_lstreadfile(path, doss)))
@@ -117,6 +111,7 @@ void		ft_recurdos(char *doss, t_opt *option)
 		closedir(path);
 	}
 	lstfile = ft_gotostart(lstfile);
+	ft_puttotal(lstfile, *option);
 	if (lstfile)
 		ft_recurfile(lstfile, option, 1);
 	return ;

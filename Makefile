@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/19 18:06:46 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/05/23 15:48:50 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,12 +48,14 @@ SRCNAME = main.c \
 		  ft_verifaffich.c \
 		  ft_lstisdir.c \
 		  ft_lstisfile.c \
+		  ft_islink.c \
 		  ft_lstishidden.c \
 		  ft_recur.c \
 		  ft_ls.c \
 		  ft_badname.c \
 		  ft_intlen.c \
 		  ft_getfiledetail.c \
+		  ft_gettime.c \
 		  ft_sizemax.c
 
 OBJNAME = $(SRCNAME:.c=.o)

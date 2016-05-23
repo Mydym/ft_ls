@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:56:11 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/19 18:08:45 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 17:03:11 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 void	ft_addlink(t_file *elem)
 {
 	char	*buff;
+	char	*temp;
 
-	buff = ft_strnew(512);
-	if (readlink(elem->name, buff, 510) != -1)
+	buff = ft_strnew(1000);
+	if (readlink(elem->name, buff, 1000) != -1)
 	{
-		ft_strcat(elem->name, " -> ");
-		ft_strcat(elem->name, buff);
+		temp = ft_strjoin(elem->name, " -> ");
+		free(elem->name);
+		elem->name = ft_strjoin(temp, buff);
+		free(temp);
+	}
+	else if (readlink(elem->pathname, buff, 1000) != -1)
+	{
+		temp = ft_strjoin(elem->name, " -> ");
+		free(elem->name);
+		elem->name = ft_strjoin(temp, buff);
+		free(temp);
 	}
 	free(buff);
 }
@@ -38,6 +48,7 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 			file->groupname = ft_strdup(grp->gr_name);
 	file->nblink = detail.st_nlink;
 	file->size = detail.st_size;
+	file->sblock = detail.st_blocks;
 	ft_permuser(detail, file);
 	ft_permgroup(detail, file);
 	ft_permother(detail, file);

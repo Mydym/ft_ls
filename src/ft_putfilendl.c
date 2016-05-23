@@ -6,23 +6,48 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/19 18:08:43 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 15:10:14 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+void	ft_puttotal(t_file *elem, t_opt option)
+{
+	int		total;
+	int		compt;
+
+	total = 0;
+	compt = 0;
+	if (option.l == 1)
+	{
+		while (elem)
+		{
+			total += elem->sblock;
+			compt++;
+			elem = elem->next;
+		}
+		if (compt != 0)
+		{
+			ft_putstr("total ");
+			ft_putnbr(total);
+			ft_putchar('\n');
+		}
+	}
+	return ;
+}
+
 void	ft_putspace(int a, int b, int c)
 {
 	int		i;
 
-	i = 3 - a;
-	if (i <= 0)
+	i = b - a;
+	if (i < 0)
 		i = 1;
 	if (c == 0)
 	{
 		a = 0;
-		b = i;
+		b = i + 2;
 	}
 	while (a < b)
 	{
@@ -38,7 +63,7 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_lstfindtype(file);
 		ft_putchar(file->type);
 		ft_putstr(file->perm);
-		ft_putspace(ft_intlen(file->nblink), 3, 0);
+		ft_putspace(ft_intlen(file->nblink), max.link, 0);
 		ft_putnbr(file->nblink);
 		ft_putstr(" ");
 		ft_putstr(file->username);

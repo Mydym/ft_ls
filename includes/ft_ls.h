@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/19 14:46:23 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 15:48:09 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_file
 	char				*username;
 	char				*groupname;
 	int					size;
+	int					sblock;
 	long long			mtime;
 	long long			mtimenano;
 	char				*formattime;
@@ -92,8 +93,9 @@ void				ft_lstcheckarg(t_file **larg);
 void				ft_lstafficharg(char **arg);
 void				ft_printdosname(t_file *elem);
 void				ft_verifaffich(t_file *larg);
-int					ft_lstisdir(char *name);
+int					ft_lstisdir(char *name, t_opt option);
 int					ft_lstisfile(char *name);
+int					ft_islink(char *name);
 int					ft_lstishidden(char *name);
 void				ft_badname(char *name);
 t_file				*ft_gotostart(t_file *lst);
@@ -111,6 +113,7 @@ void				ft_stocktime(t_file *plst, struct stat m_time, t_opt *option);
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
 void				ft_getfiledetail(t_file *file);
 void				ft_putdetail(t_file *file, t_opt *option, t_size max);
+void				ft_puttotal(t_file *elem, t_opt option);
 void				ft_stockfiledetail(t_file *file, struct stat detail);
 int					ft_intlen(int nombre);
 void				ft_maxinit(t_size *max);

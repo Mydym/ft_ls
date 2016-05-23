@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/07 15:14:05 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/23 14:48:12 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
 		return (NULL);
 	if (filename != NULL)
-		new->name = filename;
+		new->name = ft_strdup(filename);
 	if (type)
 		new->type = type;
 	new->username = NULL;
