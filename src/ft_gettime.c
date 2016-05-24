@@ -6,15 +6,15 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 13:19:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 13:24:40 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/24 16:28:38 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**Fonction qui recupere l'heure de derniere modif d'un element en int et en
-**format 'jour/mois/num/heure/annee'
+** Fonction qui recupere l'heure de derniere modif d'un element en int et en
+** format 'jour/mois/num/heure/annee'
 */
 
 int		ft_gettime(t_file *plst, t_opt *option)

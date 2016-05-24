@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 14:50:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/07 15:23:06 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/24 16:42:52 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ void	ft_permuser(struct stat detail, t_file *file)
 	else
 		ft_strcat(file->permus, "-");
 	if (detail.st_mode & S_IXUSR)
-		ft_strcat(file->permus, "x");
+		if (detail.st_mode & S_ISUID)
+			ft_strcat(file->permus, "s");
+		else
+			ft_strcat(file->permus, "x");
+	else if (detail.st_mode & S_ISUID)
+		ft_strcat(file->permus, "S");
 	else
 		ft_strcat(file->permus, "-");
 }
@@ -55,7 +60,12 @@ void	ft_permgroup(struct stat detail, t_file *file)
 	else
 		ft_strcat(file->permgp, "-");
 	if (detail.st_mode & S_IXGRP)
-		ft_strcat(file->permgp, "x");
+		if (detail.st_mode & S_ISGID)
+			ft_strcat(file->permgp, "s");
+		else
+			ft_strcat(file->permgp, "x");
+	else if (detail.st_mode & S_ISGID)
+		ft_strcat(file->permgp, "S");
 	else
 		ft_strcat(file->permgp, "-");
 }
@@ -73,7 +83,12 @@ void	ft_permother(struct stat detail, t_file *file)
 	else
 		ft_strcat(file->permoth, "-");
 	if (detail.st_mode & S_IXOTH)
-		ft_strcat(file->permoth, "x");
+		if (detail.st_mode & S_ISVTX)
+			ft_strcat(file->permoth, "t");
+		else
+			ft_strcat(file->permoth, "x");
+	else if (detail.st_mode & S_ISVTX)
+		ft_strcat(file->permoth, "T");
 	else
 		ft_strcat(file->permoth, "-");
 }

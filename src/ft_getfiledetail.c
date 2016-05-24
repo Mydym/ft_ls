@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:56:11 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 17:03:11 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/24 18:09:30 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 	file->nblink = detail.st_nlink;
 	file->size = detail.st_size;
 	file->sblock = detail.st_blocks;
+//	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
+//		file->maj = detail.st_rdev;
 	ft_permuser(detail, file);
 	ft_permgroup(detail, file);
 	ft_permother(detail, file);

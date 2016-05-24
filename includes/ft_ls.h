@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 15:48:09 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/24 18:09:34 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct		s_file
 	int					nblink;
 	char				*username;
 	char				*groupname;
+	int					maj;
+	int					min;
 	int					size;
 	int					sblock;
 	long long			mtime;

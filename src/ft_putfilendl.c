@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 17:16:48 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/24 18:09:32 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,16 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_putspace(ft_strlen(file->username), max.user + 2, 1);
 		ft_putstr(file->groupname);
 		ft_putspace(ft_strlen(file->groupname), max.group + 2, 1);
-		ft_putspace(ft_intlen(file->size), max.taille, 1);
-		ft_putnbr(file->size);
+//		if (file->type != 'c' && file->type != 'b')
+//		{
+			ft_putspace(ft_intlen(file->size), max.taille, 1);
+			ft_putnbr(file->size);
+//		}
+//		else
+//		{
+//			ft_putspace(ft_intlen(file->maj), 3, 0);
+//			ft_putnbr(file->maj);
+//		}
 		ft_putstr(" ");
 		ft_putstr(file->formattime);
 		ft_putstr(" ");
