@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 12:39:13 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/10 12:44:04 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 15:25:24 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		ft_intlen(int nombre)
 {
 	int		compt;
 
-	compt = 0;
-	while (nombre > 0)
+	compt = 1;
+	while (nombre >= 10)
 	{
 		nombre /= 10;
 		compt++;

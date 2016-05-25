@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 12:44:31 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 18:08:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 18:49:44 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	ft_maxinit(t_size *max)
 	max->user = 0;
 	max->group = 0;
 	max->taille = 0;
+	max->maj = 0;
+	max->min = 0;
 }
 
-t_size	ft_getmaxsize(t_file *lst)
+t_size	ft_getmaxsize(t_file *lst, t_size max)
 {
-	t_size	max;
 	int		user;
 	int		group;
 
-	ft_maxinit(&max);
 	while (lst)
 	{
 		if (lst->username)
@@ -41,6 +41,13 @@ t_size	ft_getmaxsize(t_file *lst)
 			max.link = ft_intlen(lst->nblink);
 		if (ft_intlen(lst->size) > max.taille)
 			max.taille = ft_intlen(lst->size);
+		if (lst->maj != -1 || lst->min != -1)
+		{
+			if (ft_intlen(lst->maj) > max.maj)
+				max.maj = ft_intlen(lst->maj);
+			if (ft_intlen(lst->min) > max.min)
+				max.min = ft_intlen(lst->min);
+		}
 		lst = lst->next;
 	}
 	return (max);

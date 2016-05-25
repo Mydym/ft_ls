@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:56:11 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 18:09:30 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 15:30:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@ void	ft_addlink(t_file *elem)
 	char	*buff;
 	char	*temp;
 
-	buff = ft_strnew(1000);
-	if (readlink(elem->name, buff, 1000) != -1)
+	if ((buff = ft_strnew(1000)) != NULL)
 	{
-		temp = ft_strjoin(elem->name, " -> ");
-		free(elem->name);
-		elem->name = ft_strjoin(temp, buff);
-		free(temp);
+		if (readlink(elem->name, buff, 1000) != -1)
+		{
+			temp = ft_strjoin(elem->name, " -> ");
+			free(elem->name);
+			elem->name = ft_strjoin(temp, buff);
+			free(temp);
+		}
+		else if (readlink(elem->pathname, buff, 1000) != -1)
+		{
+			temp = ft_strjoin(elem->name, " -> ");
+			free(elem->name);
+			elem->name = ft_strjoin(temp, buff);
+			free(temp);
+		}
+		free(buff);
 	}
-	else if (readlink(elem->pathname, buff, 1000) != -1)
-	{
-		temp = ft_strjoin(elem->name, " -> ");
-		free(elem->name);
-		elem->name = ft_strjoin(temp, buff);
-		free(temp);
-	}
-	free(buff);
 }
 
 void	ft_stockfiledetail(t_file *file, struct stat detail)
@@ -47,10 +49,13 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 		if (grp->gr_name)
 			file->groupname = ft_strdup(grp->gr_name);
 	file->nblink = detail.st_nlink;
-	file->size = detail.st_size;
+	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
+	{
+		file->maj = major(detail.st_rdev);
+		file->min = minor(detail.st_rdev);
+	}
+	file->size = (long)detail.st_size;
 	file->sblock = detail.st_blocks;
-//	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
-//		file->maj = detail.st_rdev;
 	ft_permuser(detail, file);
 	ft_permgroup(detail, file);
 	ft_permother(detail, file);

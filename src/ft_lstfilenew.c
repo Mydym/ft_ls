@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 17:12:25 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 15:50:11 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 	new->permgp = NULL;
 	new->permoth = NULL;
 	new->perm = NULL;
+	new->maj = -1;
+	new->min = -1;
+	new->size = 0;
 	new->nblink = 0;
 	new->sblock = 0;
 	if (path)

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 18:09:34 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 16:24:34 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_file
 	char				*groupname;
 	int					maj;
 	int					min;
-	int					size;
+	long				size;
 	int					sblock;
 	long long			mtime;
 	long long			mtimenano;
@@ -54,6 +54,8 @@ typedef struct		s_size
 	int		user;
 	int		group;
 	int		taille;
+	int		maj;
+	int		min;
 }					t_size;
 
 typedef struct		s_opt
@@ -119,6 +121,6 @@ void				ft_puttotal(t_file *elem, t_opt option);
 void				ft_stockfiledetail(t_file *file, struct stat detail);
 int					ft_intlen(int nombre);
 void				ft_maxinit(t_size *max);
-t_size				ft_getmaxsize(t_file *lst);
+t_size				ft_getmaxsize(t_file *lst, t_size max);
 
 #endif

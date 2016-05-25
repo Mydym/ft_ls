@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/23 17:03:10 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 18:49:44 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 		psort(&new, elem, option);
 	new = ft_gotostart(new);
 	if (k == i - 1)
-		ft_recurfile(new, option, 0);
+		ft_recurfile(new, option, 1);
 	return (new);
 }
 
@@ -43,14 +43,16 @@ void		ft_recurfile(t_file *lstarg, t_opt *option, int x)
 	static t_size	max;
 	static int		k[1] = {0};
 
+	if ((x == 0 && k[0] != 42) || (x == 1 && k[0] != 42))
+		ft_maxinit(&max);
 	if (!option->r || x == 0)
 	{
 		if (k[0] != 42)
 		{
 			k[0] = 42;
-			max = ft_getmaxsize(lstarg);
+			max = ft_getmaxsize(lstarg, max);
 		}
-		if (lstarg->type == 'd' && x == 0)
+		if (lstarg->type == 'd' && x == 1)
 		{
 			k[0] = 0;
 			ft_printdosname(lstarg);
@@ -59,7 +61,7 @@ void		ft_recurfile(t_file *lstarg, t_opt *option, int x)
 		else if (!option->r)
 			ft_putdetail(lstarg, option, max);
 		if (option->r && lstarg->next)
-			ft_recurfile(lstarg->next, option, 1);
+			ft_recurfile(lstarg->next, option, 0);
 		else if (lstarg->next)
 			ft_recurfile(lstarg->next, option, x);
 	}
@@ -72,7 +74,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, int first, t_size max)
 	t_file	*elem;
 
 	if (opt->l)
-		max = ft_getmaxsize(lstarg);
+		max = ft_getmaxsize(lstarg, max);
 	lstarg = ft_gotofileend(lstarg);
 	elem = lstarg;
 	while (lstarg && lstarg->type == '-')

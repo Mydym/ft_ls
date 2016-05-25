@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/23 15:48:50 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/05/25 13:12:40 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,11 +78,9 @@ libft:
 	make -C $(LIBDIR)
 
 clean:
-	make -C $(LIBDIR) clean
 	rm -rf $(OBJ)
 
 fclean: clean
-	make -C $(LIBDIR) fclean
 	rm -rf $(NAME)
 
 re: fclean all

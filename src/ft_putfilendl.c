@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 18:09:32 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/25 18:49:45 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_putspace(int a, int b, int c)
 	}
 	else if (a == 0)
 		a++;
-	while (a < b)
+	while (a <= b)
 	{
 		ft_putchar(' ');
 		a++;
@@ -65,23 +65,34 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_lstfindtype(file);
 		ft_putchar(file->type);
 		ft_putstr(file->perm);
-		ft_putspace(ft_intlen(file->nblink), max.link, 0);
+		ft_putspace(ft_intlen(file->nblink), max.link + 1, 1);
 		ft_putnbr(file->nblink);
 		ft_putstr(" ");
 		ft_putstr(file->username);
-		ft_putspace(ft_strlen(file->username), max.user + 2, 1);
+		ft_putspace(ft_strlen(file->username), max.user + 1, 1);
 		ft_putstr(file->groupname);
-		ft_putspace(ft_strlen(file->groupname), max.group + 2, 1);
-//		if (file->type != 'c' && file->type != 'b')
-//		{
+		ft_putspace(ft_strlen(file->groupname), max.group, 1);
+		if (ft_strstr(file->path, "/dev/") != NULL)
+		{
+			if (file->type == 'c' || file->type == 'b')
+			{
+				ft_putspace(ft_intlen(file->maj), 3, 1);
+				ft_putnbr(file->maj);
+				ft_putstr(",");
+				ft_putspace(ft_intlen(file->min), 3, 1);
+				ft_putnbr(file->min);
+			}
+			else
+			{
+				ft_putspace(ft_intlen(file->size), 8, 1);
+				ft_putnbr(file->size);
+			}
+		}
+		else
+		{
 			ft_putspace(ft_intlen(file->size), max.taille, 1);
 			ft_putnbr(file->size);
-//		}
-//		else
-//		{
-//			ft_putspace(ft_intlen(file->maj), 3, 0);
-//			ft_putnbr(file->maj);
-//		}
+		}
 		ft_putstr(" ");
 		ft_putstr(file->formattime);
 		ft_putstr(" ");
