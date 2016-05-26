@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 14:53:20 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 13:23:47 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/26 19:10:40 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_printdosname(t_file *elem, t_opt *option)
 			ft_putstr("\n");
 		if (elem->prev || elem->next)
 		{
-			if (ft_strcmp(elem->path, "./") == 0)
+			if (ft_strcmp(elem->path, "./") == 0 && !option->gr)
 				ft_putstr(elem->name);
 			else
 				ft_putstr(elem->pathname);
@@ -31,7 +31,7 @@ void	ft_printdosname(t_file *elem, t_opt *option)
 	{
 		if (elem->prev || elem->next)
 		{
-			if (ft_strcmp(elem->path, "./") == 0)
+			if (ft_strcmp(elem->path, "./") == 0 && !option->gr)
 				ft_putstr(elem->name);
 			else
 				ft_putstr(elem->pathname);
