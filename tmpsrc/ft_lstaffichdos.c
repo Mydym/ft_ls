@@ -1,45 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfiledelone.c                                 :+:      :+:    :+:   */
+/*   ft_lstaffichdos.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 14:29:42 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/13 13:32:15 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/25 17:12:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Fonction pour supprimer l'element courant de la liste.
+**Fonction pour recuper le contenu d'un dossier avec lstreaddir
+**Puis l'afficher fichier par fichier.
 */
 
-t_file		*ft_lstfiledelone(t_file **plst)
+void	ft_lstaffichdos(char *path)
 {
-	t_file	*next;
-	t_file	*prev;
+	t_file	*plst;
 
-	next = NULL;
-	prev = NULL;
-	if (*plst)
+	if (path)
 	{
-		if ((*plst)->next)
-			next = (*plst)->next;
-		if ((*plst)->prev)
-			prev = (*plst)->prev;
-		free(*plst);
-		*plst = NULL;
+		plst = ft_lstreaddir(path);
+		while (plst && plst->prev)
+			plst = plst->prev;
+		while (plst)
+		{
+			ft_putendl(plst->name);
+			plst = plst->next;
+		}
 	}
-	if (next && prev)
-	{
-		next->prev = prev;
-		prev->next = next;
-	}
-	if (prev)
-		return (prev);
-	if (next)
-		return (next);
-	return (NULL);
+	return ;
 }

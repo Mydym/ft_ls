@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfiledelone.c                                 :+:      :+:    :+:   */
+/*   ft_lstafficharg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 14:29:42 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/04/22 16:48:40 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/04/23 16:26:20 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** Fonction pour supprimer l'element courant de la liste.
+**Fonction pour recuperer les arguments et leur type avec lstreadarg
+**Puis les afficher selon leur type avec lstcheckarg
 */
 
-t_file		*ft_lstfiledelone(t_file **plst)
+void	ft_lstafficharg(char **arg)
 {
-	t_file	*next;
-	t_file	*prev;
+	t_file	*larg;
 
-	next = NULL;
-	prev = NULL;
-	if (*plst)
+	if ((larg = ft_lstreadarg(arg)))
 	{
-		if ((*plst)->next)
-			next = (*plst)->next;
-		if ((*plst)->prev)
-			prev = (*plst)->prev;
-		free(*plst);
-		*plst = NULL;
+		while (larg->prev)
+			larg = larg->prev;
+		ft_lstcheckarg(&larg);
 	}
-	if (next && prev)
-	{
-		next->prev = prev;
-		prev->next = next;
-	}
-	if (prev)
-		return (prev);
-	if (next)
-		return (next);
-	return (NULL);
 }

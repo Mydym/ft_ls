@@ -6,36 +6,11 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/25 18:49:45 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/26 15:48:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	ft_puttotal(t_file *elem, t_opt option)
-{
-	int		total;
-	int		compt;
-
-	total = 0;
-	compt = 0;
-	if (option.l == 1)
-	{
-		while (elem)
-		{
-			total += elem->sblock;
-			compt++;
-			elem = elem->next;
-		}
-		if (compt != 0)
-		{
-			ft_putstr("total ");
-			ft_putnbr(total);
-			ft_putchar('\n');
-		}
-	}
-	return ;
-}
 
 void	ft_putspace(int a, int b, int c)
 {
@@ -58,6 +33,44 @@ void	ft_putspace(int a, int b, int c)
 	}
 }
 
+void	ft_put_majandmin(t_file *file)
+{
+	if (file->type == 'c' || file->type == 'b')
+	{
+		ft_putspace(ft_intlen(file->maj), 3, 1);
+		ft_putnbr(file->maj);
+		ft_putstr(",");
+		ft_putspace(ft_intlen(file->min), 3, 1);
+		ft_putnbr(file->min);
+	}
+	else
+	{
+		ft_putspace(ft_intlen(file->size), 8, 1);
+		ft_putnbr(file->size);
+	}
+}
+
+void	ft_putotherdetail(t_file *file, t_size max)
+{
+	if (file->groupname != NULL)
+	{
+		ft_putstr(file->groupname);
+		ft_putspace(ft_strlen(file->groupname), max.group, 1);
+	}
+	else
+	{
+		ft_putspace(ft_intlen(file->groupid), max.group, 1);
+		ft_putnbr(file->groupid);
+	}
+	if (ft_strstr(file->path, "/dev/") != NULL)
+		ft_put_majandmin(file);
+	else
+	{
+		ft_putspace(ft_intlen(file->size), max.taille, 1);
+		ft_putnbr(file->size);
+	}
+}
+
 void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 {
 	if (option->l)
@@ -70,40 +83,14 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_putstr(" ");
 		ft_putstr(file->username);
 		ft_putspace(ft_strlen(file->username), max.user + 1, 1);
-		ft_putstr(file->groupname);
-		ft_putspace(ft_strlen(file->groupname), max.group, 1);
-		if (ft_strstr(file->path, "/dev/") != NULL)
-		{
-			if (file->type == 'c' || file->type == 'b')
-			{
-				ft_putspace(ft_intlen(file->maj), 3, 1);
-				ft_putnbr(file->maj);
-				ft_putstr(",");
-				ft_putspace(ft_intlen(file->min), 3, 1);
-				ft_putnbr(file->min);
-			}
-			else
-			{
-				ft_putspace(ft_intlen(file->size), 8, 1);
-				ft_putnbr(file->size);
-			}
-		}
-		else
-		{
-			ft_putspace(ft_intlen(file->size), max.taille, 1);
-			ft_putnbr(file->size);
-		}
+		ft_putotherdetail(file, max);
 		ft_putstr(" ");
 		ft_putstr(file->formattime);
 		ft_putstr(" ");
-		ft_putendl(file->name);
-		ft_lstfiledelone(&file);
 	}
-	else
-	{
-		ft_putendl(file->name);
+	ft_putendl(file->name);
+	if (!option->r)
 		ft_lstfiledelone(&file);
-	}
 }
 
 void	ft_putfilendl(t_file *file, t_opt *option)

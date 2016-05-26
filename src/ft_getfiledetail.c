@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:56:11 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/25 15:30:04 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/26 14:30:41 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 	struct passwd	*id;
 	struct group	*grp;
 
-	if ((id = getpwuid(detail.st_uid)))
-		if (id->pw_name)
-			file->username = ft_strdup(id->pw_name);
-	if ((grp = getgrgid(detail.st_gid)))
-		if (grp->gr_name)
-			file->groupname = ft_strdup(grp->gr_name);
+	if ((id = getpwuid(detail.st_uid)) && id->pw_name)
+		file->username = ft_strdup(id->pw_name);
+	if ((grp = getgrgid(detail.st_gid)) && grp->gr_name)
+	{
+		file->groupname = ft_strdup(grp->gr_name);
+		file->groupid = grp->gr_gid;
+	}
 	file->nblink = detail.st_nlink;
 	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
 	{

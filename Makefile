@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/25 13:12:40 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/05/26 16:09:03 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,31 +24,21 @@ NAME = ft_ls
 
 SRCNAME = main.c \
 		  ft_putfilendl.c \
+		  ft_puttotal.c \
 		  ft_perm.c \
 		  ft_option.c \
 		  ft_opendir.c \
-		  ft_filestat.c \
-		  ft_lstaffichdos.c \
 		  ft_lstfileadd.c \
 		  ft_lstfileaddend.c \
-		  ft_lstfiledel.c \
+		  ft_lstreadfile.c \
 		  ft_lstfiledelone.c \
-		  ft_lstfiledelend.c \
 		  ft_lstfilenew.c \
 		  ft_lstargsortal.c \
 		  ft_lstargsorttime.c \
 		  ft_convertsectonsec.c \
-		  ft_lstreaddir.c \
-		  ft_lstreadfile.c \
-		  ft_lstreadarg.c \
 		  ft_lstfindtype.c \
-		  ft_lstcheckarg.c \
-		  ft_lstafficharg.c \
 		  ft_printdosname.c \
-		  ft_verifaffich.c \
 		  ft_lstisdir.c \
-		  ft_lstisfile.c \
-		  ft_islink.c \
 		  ft_lstishidden.c \
 		  ft_recur.c \
 		  ft_ls.c \
@@ -78,9 +68,11 @@ libft:
 	make -C $(LIBDIR)
 
 clean:
+	make -C $(LIBDIR) clean
 	rm -rf $(OBJ)
 
 fclean: clean
+	make -C $(LIBDIR) fclean
 	rm -rf $(NAME)
 
 re: fclean all
