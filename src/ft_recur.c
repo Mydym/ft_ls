@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 19:13:12 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/30 17:46:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,23 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 	return (new);
 }
 
-void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x)
+void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y)
+{
+	if (option->r)
+		ft_recurfile(lstarg->next, option, x - 1, y);
+	else
+		ft_recurfile(lstarg->next, option, x - 1, y);
+	return ;
+}
+
+/*void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x)
 {
 	if (option->r)
 		ft_recurfile(lstarg->next, option, x - 1, x);
 	else
 		ft_recurfile(lstarg->next, option, x - 1, x);
 	return ;
-}
+}*/
 
 void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i)
 {
@@ -57,26 +66,27 @@ void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i)
 	{
 		if (k == i)
 			max = ft_getmaxsize(lstarg, max);
-		if (lstarg->type == 'd')
+		if (lstarg->type == '-')
+			ft_putdetail(lstarg, option, max);
+		else if (lstarg->type == 'd')
 		{
-			if (k == i && option->gr)
-				ft_putendl("");
+//			if (k == i && option->gr)
+//				ft_putendl("");
 			ft_printdosname(lstarg, option);
 			ft_recurdos(lstarg->name, option);
 		}
-		else if (!option->r)
-			ft_putdetail(lstarg, option, max);
 		if (lstarg->next)
-			ft_recur_or_not(lstarg, option, i);
+			ft_recur_or_not(lstarg, option, k, i);
 	}
 	else if (option->r)
 		ft_recurfilerev(lstarg, option, 0, max);
 }
 
-/*void		ft_recurfile(t_file *lstarg, t_opt *option, int x)
+/*void		ft_recurfile(t_file *lstarg, t_opt *option, int x, int i)
 {
 	static t_size	max;
 	static int		k[1] = {0};
+	(void)i;
 
 	if ((x == 0 && k[0] != 42) || (x == 1 && k[0] != 42))
 		ft_maxinit(&max);
@@ -87,7 +97,7 @@ void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i)
 			k[0] = 42;
 			max = ft_getmaxsize(lstarg, max);
 		}
-		if (lstarg->type == 'd' && x == 1)
+		if (lstarg->type == 'd')
 		{
 			k[0] = 0;
 			ft_printdosname(lstarg, option);
@@ -131,15 +141,16 @@ void		ft_recurdos(char *doss, t_opt *option)
 	DIR		*path;
 	t_file	*lstfile;
 	t_file	*elem;
-	int		compt;;
+	int		compt;
 
 	path = NULL;
 	lstfile = NULL;
 	compt = 0;
-	psort = ((option->t) ? &ft_lstfilesorttime : &ft_lstfilesortal);
+	errno = 0;
+	psort = ((option->t) ? &ft_lstargsorttime : &ft_lstargsortal);
 	if ((path = ft_opendir(doss)))
 	{
-		while ((elem = ft_lstreadfile(path, doss)))
+		while ((elem = ft_lstreadfile(path, doss)) != NULL)
 		{
 			compt++;
 			lstfile = ft_gotostart(lstfile);
@@ -148,12 +159,17 @@ void		ft_recurdos(char *doss, t_opt *option)
 		}
 		closedir(path);
 	}
+	if (errno != 0)
+	{
+		ft_putstr("ls: ");
+		perror(doss);
+	}
 	lstfile = ft_gotostart(lstfile);
 	ft_puttotal(lstfile, *option);
 	if (lstfile)
 		ft_recurfile(lstfile, option, compt, compt);
 	lstfile = ft_gotostart(lstfile);
-	if (option->gr && lstfile)
-		ft_recurarg(option, ft_lst_to_char(lstfile, option), ft_lst_compt_elem(lstfile), ft_lst_compt_elem(lstfile));
+/*	if (option->gr && lstfile)
+		ft_recurarg(option, ft_lst_to_char(lstfile, option), ft_lst_compt_elem(lstfile), ft_lst_compt_elem(lstfile));*/
 	return ;
 }

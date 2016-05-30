@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 17:04:37 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/30 17:46:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_putotherdetail(t_file *file, t_size max)
 		ft_putspace(ft_intlen(file->groupid), max.group, 1);
 		ft_putnbr(file->groupid);
 	}
-	if (ft_strstr(file->path, "/dev/") != NULL)
+	if (ft_strstr(file->pathname, "/dev/") != NULL)
 		ft_put_majandmin(file);
 	else
 	{

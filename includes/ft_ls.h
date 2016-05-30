@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 19:10:41 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/05/30 16:36:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <errno.h>
 
 # define SEC_TO_NSEC ft_convertsectonsec(plst->mtime)
 
