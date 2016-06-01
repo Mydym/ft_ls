@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/05/26 16:55:05 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/06/01 13:13:24 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCNAME = main.c \
 		  ft_lstfindtype.c \
 		  ft_printdosname.c \
 		  ft_lstisdir.c \
+		  ft_lstisfile.c \
 		  ft_lstishidden.c \
 		  ft_recur.c \
 		  ft_ls.c \

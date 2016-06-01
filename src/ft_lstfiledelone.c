@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 14:29:42 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/01 16:07:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ t_file		*ft_lstfiledelone(t_file **plst)
 		next->prev = prev;
 		prev->next = next;
 	}
+	if (prev)
+		if (!next)
+			prev->next = NULL;
+	if (next)
+		if (!prev)
+			next->prev = NULL;
 	if (prev)
 		return (prev);
 	if (next)

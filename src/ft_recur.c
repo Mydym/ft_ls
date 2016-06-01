@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/30 17:46:18 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/01 16:08:38 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 	{
 		if ((ft_lstisdir(larg[k], *option)))
 			elem = ft_lstfilenew(larg[k], 'd', "./");
-		else
+		else if ((ft_lstisfile(larg[k])))
 			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', "./"), option);
 	}
 	if (elem)
@@ -40,10 +40,13 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 
 void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y)
 {
-	if (option->r)
-		ft_recurfile(lstarg->next, option, x - 1, y);
-	else
-		ft_recurfile(lstarg->next, option, x - 1, y);
+	if (x > 1)
+	{
+		if (option->r)
+			ft_recurfile(lstarg->next, option, x - 1, y);
+		else
+			ft_recurfile(lstarg->next, option, x - 1, y);
+	}
 	return ;
 }
 
@@ -122,7 +125,6 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, int first, t_size max)
 	elem = lstarg;
 	while (lstarg && lstarg->type == '-')
 	{
-		first = 1;
 		ft_putdetail(lstarg, opt, max);
 		if (lstarg->prev)
 			lstarg = lstarg->prev;
@@ -130,9 +132,16 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, int first, t_size max)
 			break ;
 	}
 	lstarg = ft_gotoend(lstarg);
-	if (lstarg->type == 'd' &&
-			(ft_strcmp(elem->name, lstarg->name) != 0 || first == 0))
-		ft_printrevdos(lstarg, first, opt);
+	while (lstarg && lstarg->type == 'd' && first == 0)
+	{
+		first = 1;
+		ft_printdosname(lstarg, opt);
+		ft_recurdos(lstarg->name, opt);
+		if (lstarg->prev)
+			lstarg = lstarg->prev;
+		else
+			break ;
+	}
 }
 
 void		ft_recurdos(char *doss, t_opt *option)
@@ -152,10 +161,11 @@ void		ft_recurdos(char *doss, t_opt *option)
 	{
 		while ((elem = ft_lstreadfile(path, doss)) != NULL)
 		{
-			compt++;
 			lstfile = ft_gotostart(lstfile);
 			ft_putfilendl(elem, option);
 			psort(&lstfile, elem, option);
+			if ((ft_lstishidden(elem->name) == 0 && !option->a) || option->a)
+				compt++;
 		}
 		closedir(path);
 	}

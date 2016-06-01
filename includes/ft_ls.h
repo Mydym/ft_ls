@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/30 16:36:33 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/01 13:13:06 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_file				*ft_gotofileend(t_file *lst);
 void				ft_lstfindtype(t_file *elem);
 int					ft_lstisdir(char *name, t_opt option);
 int					ft_lstishidden(char *name);
+int					ft_lstisfile(char *name);
 
 void				ft_permuser(struct stat detail, t_file *file);
 void				ft_permgroup(struct stat detail, t_file *file);

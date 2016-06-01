@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 14:53:20 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 19:10:40 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/01 14:45:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,18 @@
 
 void	ft_printdosname(t_file *elem, t_opt *option)
 {
-	if (!option->r)
+	t_file	*temp;
+
+	temp = ft_gotostart(elem);
+	if ((elem->prev && !option->r) || ((elem->next || temp->type == '-') && option->r))
+		ft_putchar('\n');
+	if (elem->prev || elem->next)
 	{
-		if (elem->prev)
-			ft_putstr("\n");
-		if (elem->prev || elem->next)
-		{
-			if (ft_strcmp(elem->path, "./") == 0 && !option->gr)
-				ft_putstr(elem->name);
-			else
-				ft_putstr(elem->pathname);
-			ft_putendl(":");
-		}
+		if (ft_strcmp(elem->path, "./") == 0 && !option->gr)
+			ft_putstr(elem->name);
+		else
+			ft_putstr(elem->pathname);
+		ft_putendl(":");
+	
 	}
-	else
-	{
-		if (elem->prev || elem->next)
-		{
-			if (ft_strcmp(elem->path, "./") == 0 && !option->gr)
-				ft_putstr(elem->name);
-			else
-				ft_putstr(elem->pathname);
-			ft_putendl(":");
-		}
-	}
-	return ;
 }
