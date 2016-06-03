@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/01 13:13:06 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/03 15:37:18 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void				ft_ls(int argc, char **arg);
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
 void				ft_recurfile(t_file *lstarg, t_opt *option, int k, int i);
 void				ft_recurdos(char *doss, t_opt *option);
-void				ft_recurfilerev(t_file *lstarg, t_opt *option, int first,
-		t_size max);
+void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max, int i);
 
 int					ft_intlen(int nombre);
 
@@ -98,6 +97,7 @@ t_file				*ft_lstfilenew(char *filename, char type, char *path);
 void				ft_lstfileadd(t_file **plst, t_file *new);
 void				ft_lstfileaddend(t_file **plst, t_file *new);
 t_file				*ft_lstfiledelone(t_file **plst);
+void				ft_lstfiledel(t_file **plst);
 
 char				**ft_lst_to_char(t_file *lst, t_opt *option);
 int					ft_lst_compt_elem(t_file *lst);
@@ -107,7 +107,8 @@ t_file				*ft_gotoend(t_file *lst);
 t_file				*ft_gotofileend(t_file *lst);
 
 void				ft_lstfindtype(t_file *elem);
-int					ft_lstisdir(char *name, t_opt option);
+int					ft_charisdir(char *name, t_opt option);
+int					ft_lstisdir(t_file *elem, t_opt option);
 int					ft_lstishidden(char *name);
 int					ft_lstisfile(char *name);
 

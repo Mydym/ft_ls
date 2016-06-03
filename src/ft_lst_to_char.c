@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:44:49 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 17:41:08 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/03 16:47:35 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option)
 	lst = ft_gotostart(lst);
 	compt = ft_lst_compt_elem(lst);
 	arg = (char **)malloc(sizeof(char *) * (compt + 1));
+	arg[compt] = NULL;
+	compt = 0;
 	while (lst)
 	{
-		if (lst->name && ft_lstisdir(lst->name, *option))
+		if (lst->name && ft_lstisdir(lst, *option) == 1)
 		{
-			*arg = ft_strdup(lst->name);
-			if (lst->next)
-				arg++;
+			arg[compt] = lst->pathname;
+			compt++;
 		}
 		lst = lst->next;
 	}
-	while (*arg)
-		arg--;
 	return (arg);
 }

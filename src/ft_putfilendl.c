@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/01 16:01:38 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/03 16:48:28 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_putstr(" ");
 	}
 	ft_putendl(file->name);
-	if (!option->gr)
-		ft_lstfiledelone(&file);
 }
 
 void	ft_putfilendl(t_file *file, t_opt *option)

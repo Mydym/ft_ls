@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/06/01 13:13:24 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/06/03 13:08:41 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCNAME = main.c \
 		  ft_lstfileaddend.c \
 		  ft_lstreadfile.c \
 		  ft_lstfiledelone.c \
+		  ft_lstfiledel.c \
 		  ft_lstfilenew.c \
 		  ft_lstargsortal.c \
 		  ft_lstargsorttime.c \

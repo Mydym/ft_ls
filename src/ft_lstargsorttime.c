@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 16:10:59 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/03 14:45:26 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,25 @@ void	ft_lstsorttimenano(t_file **larg, t_file *elem)
 	}
 	if (!(*larg)->next && ft_strcmp(elem->name, (*larg)->name) > 0
 				&& elem->mtimenano == (*larg)->mtimenano)
+	{
 		ft_lstfileaddend(larg, elem);
+		return ;
+	}
 	else if (!(*larg)->next && elem->mtimenano == (*larg)->mtimenano)
+	{
 		ft_lstfileadd(larg, elem);
-	while (elem->mtimenano < (*larg)->mtimenano && (*larg)->next)
-		*larg = (*larg)->next;
-	if (elem->mtimenano < (*larg)->mtimenano)
+		return ;
+	}
+	while ((*larg)->next)
+	{
+		if (elem->mtimenano > (*larg)->mtimenano)
+		{
+			ft_lstfileadd(larg, elem);
+			break ;
+		}
+		else
+			*larg = (*larg)->next;
+	}
+	if (elem->mtimenano > (*larg)->mtimenano || !(*larg)->next)
 		ft_lstfileaddend(larg, elem);
-	else if (elem->mtimenano > (*larg)->mtimenano)
-		ft_lstfileadd(larg, elem);
 }
