@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/03 15:37:18 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 16:06:34 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ typedef struct		s_opt
 void				ft_ls(int argc, char **arg);
 
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
-void				ft_recurfile(t_file *lstarg, t_opt *option, int k, int i);
-void				ft_recurdos(char *doss, t_opt *option);
-void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max, int i);
+void				ft_recurfile(t_file *lstarg, t_opt *option, int k, int i,
+		int pass);
+void				ft_recurdos(char *doss, t_opt *option, int pass);
+void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
+		int i, int pass);
 
 int					ft_intlen(int nombre);
 
@@ -99,7 +101,7 @@ void				ft_lstfileaddend(t_file **plst, t_file *new);
 t_file				*ft_lstfiledelone(t_file **plst);
 void				ft_lstfiledel(t_file **plst);
 
-char				**ft_lst_to_char(t_file *lst, t_opt *option);
+char				**ft_lst_to_char(t_file *lst, t_opt *option, int *compt);
 int					ft_lst_compt_elem(t_file *lst);
 
 t_file				*ft_gotostart(t_file *lst);
@@ -125,12 +127,11 @@ unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 void				ft_badname(char *name);
 
-void				ft_printrevdos(t_file *lst, int first, t_opt *option);
-void				ft_printdosname(t_file *elem, t_opt *option);
+void				ft_printdosname(t_file *elem, t_opt *option, int pass);
 void				ft_putdetail(t_file *file, t_opt *option, t_size max);
 void				ft_puttotal(t_file *elem, t_opt option);
 
-t_opt				ft_option(char **arg);
+int					ft_option(char **arg, t_opt *new);
 void				ft_init(t_opt *arg);
 
 void				ft_maxinit(t_size *max);

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:05:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/01 16:08:37 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 16:34:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@ void		ft_ls(int argc, char **arg)
 	t_opt		option;
 	t_file		*plst;
 	char		*path;
+	int			opt;
 
 	path = ft_strnew(1);
 	path = ".";
 	plst = NULL;
+	opt = 0;
 	if (argc > 1)
-		option = ft_option(arg);
+		opt = ft_option(arg, &option);
 	else
 		ft_init(&option);
 	if (option.none == 0)
 	{
-		if (argc > 2)
-			plst = ft_recurarg(&option, &arg[2], argc - 2, argc - 2);
+		if (opt > 1)
+			plst = ft_recurarg(&option, &arg[opt - 1], argc - opt + 1, argc - opt + 1);
 		else
 			plst = ft_recurarg(&option, &path, argc - 1, argc - 1);
 	}
@@ -62,24 +64,4 @@ t_file		*ft_gotofileend(t_file *lst)
 			break ;
 	}
 	return (lst);
-}
-
-void		ft_printrevdos(t_file *lst, int first, t_opt *option)
-{
-	while (lst && lst->type == 'd')
-	{
-		if (lst->next || first != 0)
-		{
-			ft_putendl("");
-			ft_printdosname(lst, option);
-			first = 0;
-		}
-		else if (lst->prev)
-			ft_printdosname(lst, option);
-		ft_recurdos(lst->name, option);
-		if (lst->prev)
-			lst = lst->prev;
-		else
-			break ;
-	}
 }

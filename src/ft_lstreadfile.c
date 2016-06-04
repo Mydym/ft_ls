@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/30 17:46:20 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 15:41:02 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,8 @@ t_file	*ft_lstreadfile(DIR *dirp, char *repo)
 	file = NULL;
 	errno = 0;
 	if ((file = readdir(dirp)))
-	{
-//		if (file->d_type == DT_DIR)
-//			new = ft_lstfilenew(file->d_name, 'd', path);
-//		else
 		new = ft_lstfilenew(file->d_name, '-', path);
-	}
-	else if (errno != 0)
+	if (errno != 0)
 		perror(path);
 	free(path);
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/03 16:51:52 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 16:34:21 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 {
-	void	(*psort)(t_file **, t_file *, t_opt *);
-	t_file	*elem;
-	t_file	*new;
+	static int	pass[1] = {0};
+	void		(*psort)(t_file **, t_file *, t_opt *);
+	t_file		*elem;
+	t_file		*new;
 
 	elem = NULL;
 	new = NULL;
@@ -34,32 +35,29 @@ t_file		*ft_recurarg(t_opt *option, char **larg, int k, int i)
 		psort(&new, elem, option);
 	new = ft_gotostart(new);
 	if (k == i - 1 && new)
-		ft_recurfile(new, option, i, i);
+	{
+		if (i == 2)
+			pass[0]++;
+		else
+			pass[0] += 2;
+		ft_recurfile(new, option, i, i, pass[0]);
+	}
 	return (new);
 }
 
-void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y)
+void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y, int pass)
 {
 	if (x > 1)
 	{
 		if (option->r)
-			ft_recurfile(lstarg->next, option, x - 1, y);
+			ft_recurfile(lstarg->next, option, x - 1, y, pass);
 		else
-			ft_recurfile(lstarg->next, option, x - 1, y);
+			ft_recurfile(lstarg->next, option, x - 1, y, pass);
 	}
 	return ;
 }
 
-/*void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x)
-{
-	if (option->r)
-		ft_recurfile(lstarg->next, option, x - 1, x);
-	else
-		ft_recurfile(lstarg->next, option, x - 1, x);
-	return ;
-}*/
-
-void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i)
+void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i, int pass)
 {
 	static t_size	max;
 
@@ -75,47 +73,19 @@ void		ft_recurfile(t_file *lstarg, t_opt *option, int k, int i)
 		{
 //			if (k == i && option->gr)
 //				ft_putendl("");
-			ft_printdosname(lstarg, option);
-			ft_recurdos(lstarg->name, option);
+			if (pass != 1)
+				ft_putchar('\n');
+			ft_printdosname(lstarg, option, pass);
+			ft_recurdos(lstarg->name, option, pass);
 		}
 		if (lstarg->next)
-			ft_recur_or_not(lstarg, option, k, i);
+			ft_recur_or_not(lstarg, option, k, i, pass);
 	}
 	else if (option->r)
-		ft_recurfilerev(lstarg, option, max, i);
+		ft_recurfilerev(lstarg, option, max, i, pass);
 }
 
-/*void		ft_recurfile(t_file *lstarg, t_opt *option, int x, int i)
-{
-	static t_size	max;
-	static int		k[1] = {0};
-	(void)i;
-
-	if ((x == 0 && k[0] != 42) || (x == 1 && k[0] != 42))
-		ft_maxinit(&max);
-	if (!option->r || x == 0)
-	{
-		if (k[0] != 42)
-		{
-			k[0] = 42;
-			max = ft_getmaxsize(lstarg, max);
-		}
-		if (lstarg->type == 'd')
-		{
-			k[0] = 0;
-			ft_printdosname(lstarg, option);
-			ft_recurdos(lstarg->name, option);
-		}
-		else if (!option->r)
-			ft_putdetail(lstarg, option, max);
-		if (lstarg->next)
-			ft_recur_or_not(lstarg, option, x);
-	}
-	else if (option->r)
-		ft_recurfilerev(lstarg, option, 0, max);
-}*/
-
-void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
+void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i, int pass)
 {
 	if (opt->l)
 		max = ft_getmaxsize(lstarg, max);
@@ -131,8 +101,10 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 	lstarg = ft_gotoend(lstarg);
 	while (lstarg && lstarg->type == 'd' && i-- > 0)
 	{
-		ft_printdosname(lstarg, opt);
-		ft_recurdos(lstarg->name, opt);
+		if (pass != 1)
+			ft_putchar('\n');
+		ft_printdosname(lstarg, opt, pass);
+		ft_recurdos(lstarg->name, opt, pass);
 		if (lstarg->prev && lstarg->prev->type == 'd')
 			lstarg = lstarg->prev;
 		else
@@ -142,7 +114,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 //	ft_lstfiledel(&lstarg);
 }
 
-void		ft_recurdos(char *doss, t_opt *option)
+void		ft_recurdos(char *doss, t_opt *option, int pass)
 {
 	void	(*psort)(t_file **, t_file *, t_opt *);
 	DIR		*path;
@@ -157,7 +129,7 @@ void		ft_recurdos(char *doss, t_opt *option)
 	psort = ((option->t) ? &ft_lstargsorttime : &ft_lstargsortal);
 	if ((path = ft_opendir(doss)))
 	{
-		while ((elem = ft_lstreadfile(path, doss)) != NULL)
+		while ((elem = ft_lstreadfile(path, doss)))
 		{
 			lstfile = ft_gotostart(lstfile);
 			ft_putfilendl(elem, option);
@@ -170,14 +142,18 @@ void		ft_recurdos(char *doss, t_opt *option)
 /*	if (errno != 0)
 	{
 		ft_putstr("ls: ");
-		perror(doss);
+		perror(elem->name);
 	}*/
 	lstfile = ft_gotostart(lstfile);
 	ft_puttotal(lstfile, *option);
 	if (lstfile)
-		ft_recurfile(lstfile, option, compt, compt);
+		ft_recurfile(lstfile, option, compt, compt, pass);
 	lstfile = ft_gotostart(lstfile);
 	if (option->gr && lstfile)
-		ft_recurarg(option, ft_lst_to_char(lstfile, option), ft_lst_compt_elem(lstfile), ft_lst_compt_elem(lstfile));
+	{
+//		if ((compt = ft_lst_compt_elem(lstfile)) > 0)
+//			ft_putchar('\n');
+		ft_recurarg(option, ft_lst_to_char(lstfile, option, &compt), compt, compt);
+	}
 	return ;
 }

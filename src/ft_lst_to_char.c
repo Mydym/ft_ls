@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:44:49 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/03 16:47:35 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 15:43:35 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@ int		ft_lst_compt_elem(t_file *lst)
 	compt = 0;
 	while (lst)
 	{
-		compt++;
+		if (ft_lstishidden(lst->name) == 0)
+			compt++;
 		lst = lst->next;
 	}
 	return (compt);
 }
 
-char	**ft_lst_to_char(t_file *lst, t_opt *option)
+char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 {
-	int		compt;
 	char	**arg;
 
 	lst = ft_gotostart(lst);
-	compt = ft_lst_compt_elem(lst);
-	arg = (char **)malloc(sizeof(char *) * (compt + 1));
-	arg[compt] = NULL;
-	compt = 0;
+	*compt = ft_lst_compt_elem(lst);
+	arg = (char **)malloc(sizeof(char *) * (*compt + 1));
+	arg[*compt] = NULL;
+	*compt = 0;
 	while (lst)
 	{
-		if (lst->name && ft_lstisdir(lst, *option) == 1)
+		if (lst->name && ft_lstisdir(lst, *option) == 1 &&
+				(ft_lstishidden(lst->name) == 0 || (option->a &&
+				lst->name[0] != '.' && lst->name[1] != '\0')))
 		{
-			arg[compt] = lst->pathname;
-			compt++;
+			arg[*compt] = lst->pathname;
+			*compt += 1;
 		}
 		lst = lst->next;
 	}

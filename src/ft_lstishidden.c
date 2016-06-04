@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 16:38:04 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/30 17:35:05 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/04 15:42:41 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		ft_lstishidden(char *name)
 {
 	if (name && (name[0] == '.' && ((name[1] == '\0') ||
-					(name[1] == '.' && name[2] == '\0') || ft_isalpha(name[1]))))
+					(name[1] == '.' && name[2] == '\0') ||
+					ft_isalpha(name[1]))))
 		return (1);
 	return (0);
 }
