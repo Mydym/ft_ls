@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 13:19:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/24 16:28:38 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 15:08:38 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
 
 	local = 0;
 	time(&local);
-	if (option->l)
+	if (option->opt & F_LMIN)
 	{
 		if (plst->mtime > local - 15778800 && plst->mtime < local + 3600)
 			ft_formtimehour(plst, m_time);

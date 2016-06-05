@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/04 16:06:34 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 16:30:36 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 # include <errno.h>
 
 # define SEC_TO_NSEC ft_convertsectonsec(plst->mtime)
+
+# define BSHL(x,y) ((x) << (y))
+# define B(x) BSHL(1,(x))
+
+# define F_LMIN B(0)
+# define F_AMIN B(1)
+# define F_RMIN B(2)
+# define F_TMIN B(3)
+# define F_RMAJ B(4)
 
 typedef struct		s_file
 {
@@ -63,12 +72,7 @@ typedef struct		s_size
 
 typedef struct		s_opt
 {
-	int		none;
-	int		a;
-	int		l;
-	int		r;
-	int		gr;
-	int		t;
+	int		opt;
 }					t_opt;
 
 void				ft_ls(int argc, char **arg);

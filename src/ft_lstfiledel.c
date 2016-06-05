@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:38:35 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/04/23 14:52:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 17:25:24 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@ void	ft_lstfiledel(t_file **plst)
 	if ((*plst)->next)
 		ft_lstfiledel(&((*plst)->next));
 	if (*plst)
-	{
 		ft_lstfiledelone(plst);
-	}
 }

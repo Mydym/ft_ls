@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 13:56:42 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/09 11:37:12 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 17:09:24 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_lstargsortal(t_file **larg, t_file *elem, t_opt *option)
 				*larg = (*larg)->next;
 		}
 		if (((*larg) && !(*larg)->next) &&
-				(ft_strcmp(elem->name, (*larg)->name) > 0))
+				(ft_strcmp(elem->name, (*larg)->name) > 0 ||
+				((*larg)->type != 'd')))
 			ft_lstfileaddend(larg, elem);
 		else
 			ft_lstfileadd(larg, elem);
@@ -50,19 +51,21 @@ void	ft_lstfilesortal(t_file **plst, t_file *elem, t_opt *option)
 	int		i;
 
 	i = -1;
-	if (!option->a)
+	if (!(option->opt & F_AMIN))
 		if (ft_lstishidden(elem->name))
 			return ;
+	while ((*plst) && (*plst)->prev)
+		*plst = (*plst)->prev;
 	if (*plst)
 	{
 		while ((i = ft_strcmp(elem->name, (*plst)->name) > 0) && (*plst)->next
 				&& (*plst)->type != 'd')
 			*plst = (*plst)->next;
 	}
-	if ((*plst) && !((*plst)->next) && (*plst)->type != 'd')
-		if ((i = ft_strcmp(elem->name, (*plst)->name)) > 0)
-			ft_lstfileaddend(plst, elem);
-	if (i <= 0 || (*plst)->type == 'd')
+	if ((*plst) && !((*plst)->next) && (*plst)->type != 'd' &&
+		(i = ft_strcmp(elem->name, (*plst)->name)) > 0)
+		ft_lstfileaddend(plst, elem);
+	else if (i <= 0 || (*plst)->type == 'd')
 		ft_lstfileadd(plst, elem);
 	return ;
 }

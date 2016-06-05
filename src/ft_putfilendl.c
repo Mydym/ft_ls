@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/03 16:48:28 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 14:53:44 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_putotherdetail(t_file *file, t_size max)
 
 void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 {
-	if (option->l)
+	if (option->opt & F_LMIN)
 	{
 		ft_lstfindtype(file);
 		ft_putchar(file->type);
@@ -93,7 +93,7 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 
 void	ft_putfilendl(t_file *file, t_opt *option)
 {
-	if (option->l)
+	if (option->opt & F_LMIN)
 	{
 		ft_gettime(file, option);
 		ft_getfiledetail(file);

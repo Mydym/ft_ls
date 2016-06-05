@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/04 13:48:49 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 19:22:30 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_lstargsorttime(t_file **larg, t_file *elem, t_opt *option)
 
 void	ft_lstfilesorttime(t_file **plst, t_file *elem, t_opt *option)
 {
-	if (!option->a)
+	if (!(option->opt & F_AMIN))
 		if (ft_lstishidden(elem->name))
 			return ;
 	if (ft_gettime(elem, option))
@@ -90,7 +90,7 @@ void	ft_lstsorttimenano(t_file **larg, t_file *elem)
 		else
 			break ;
 	}
-	if (!(*larg)->next)
+	if (!(*larg)->next && elem->mtimenano < (*larg)->mtimenano)
 		ft_lstfileaddend(larg, elem);
 	else if (elem->mtimenano > (*larg)->mtimenano)
 		ft_lstfileadd(larg, elem);

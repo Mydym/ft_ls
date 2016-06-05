@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/23 13:45:34 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/03 15:31:07 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 15:02:21 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_charisdir(char *name, t_opt option)
 	{
 		if (S_ISDIR(type.st_mode))
 			return (1);
-		else if (S_ISLNK(type.st_mode) && option.l == 0)
+		else if (S_ISLNK(type.st_mode) && (!(option.opt & F_LMIN)))
 			return (1);
 	}
 	return (0);
@@ -38,7 +38,7 @@ int		ft_lstisdir(t_file *elem, t_opt option)
 	{
 		if (S_ISDIR(type.st_mode))
 			return (1);
-		else if (S_ISLNK(type.st_mode) && option.l == 0)
+		else if (S_ISLNK(type.st_mode) && (!(option.opt & F_LMIN)))
 			return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 15:45:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 15:46:17 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 14:54:17 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_puttotal(t_file *elem, t_opt option)
 
 	total = 0;
 	compt = 0;
-	if (option.l == 1)
+	if (option.opt & F_LMIN)
 	{
 		while (elem)
 		{

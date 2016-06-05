@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:22:52 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/04 16:34:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/05 19:22:31 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	ft_init(t_opt *arg)
 {
-	arg->none = 1;
-	arg->a = 0;
-	arg->l = 0;
-	arg->r = 0;
-	arg->t = 0;
-	arg->gr = 0;
+	arg->opt = 0;
 	return ;
 }
 
@@ -28,30 +23,26 @@ int		ft_option(char **arg, t_opt *new)
 	int		i;
 	int		j;
 
-	i = 0;
 	j = 1;
-	ft_init(new);
-	while (arg[j][0] == '-')
+	new->opt = 0;
+	while (arg[j] && arg[j][0] == '-' && arg[j][1] != '-')
 	{
+		i = 0;
 		while (arg[j][i])
 		{
 			if (arg[j][i] == 'a')
-				new->a = 1;
+				new->opt |= F_AMIN;
 			if (arg[j][i] == 'l')
-				new->l = 1;
+				new->opt |= F_LMIN;
 			if (arg[j][i] == 'r')
-				new->r = 1;
+				new->opt |= F_RMIN;
 			if (arg[j][i] == 'R')
-				new->gr = 1;
+				new->opt |= F_RMAJ;
 			if (arg[j][i] == 't')
-				new->t = 1;
-			if (new->a == 1 || new->l == 1 || new->r == 1 || new->t == 1 ||
-					new->gr == 1)
-				new->none = 0;
+				new->opt |= F_TMIN;
 			i++;
 		}
-		i = 0;
 		j++;
 	}
-	return (j);
+	return (j - 1);
 }
