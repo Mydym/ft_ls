@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/06/04 12:24:14 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/06/06 15:05:32 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRCNAME = main.c \
 		  ft_lstishidden.c \
 		  ft_recur.c \
 		  ft_ls.c \
-		  ft_badname.c \
+		  ft_error.c \
 		  ft_intlen.c \
 		  ft_getfiledetail.c \
 		  ft_gettime.c \

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:05:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/05 18:16:22 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/06 16:15:22 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void		ft_ls(int argc, char **arg)
 		opt = ft_option(arg, &option);
 	else
 		option.opt = 0;
-	if (option.opt != 0)
+	if (option.opt != 0 && opt != -1)
 	{
 		if (++opt > 1 && argc > opt)
 			plst = ft_recurarg(&option, &arg[opt], argc - opt, argc - opt);
 		else
 			plst = ft_recurarg(&option, &path, argc - opt + 1, argc - opt + 1);
 	}
-	else if (argc > 1 && option.opt == 0)
+	else if (argc > 1 && option.opt == 0 && opt != -1)
 		plst = ft_recurarg(&option, &arg[1], argc - 1, argc - 1);
-	else
+	else if (opt != -1)
 		plst = ft_recurarg(&option, &path, argc, argc);
 }
 

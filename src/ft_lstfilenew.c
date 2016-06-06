@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/26 17:20:18 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/06 18:34:34 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,33 @@ t_file		*ft_lstfileinit(t_file *new)
 t_file		*ft_lstfilenew(char *filename, char type, char *path)
 {
 	t_file		*new;
+	char		*tmp;
 
 	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
 		return (NULL);
 	if (filename)
-		new->name = ft_strdup(filename);
+	{
+		if ((tmp = ft_strrchr(filename, '/')) != NULL)
+		{
+			new->name = ft_strdup(tmp + 1);
+			new->path = ft_strnew(ft_strlen(filename) - ft_strlen(tmp + 1));
+			new->path = ft_strncpy(new->path, filename,
+					ft_strlen(filename) - ft_strlen(tmp + 1));
+		}
+		else
+		{
+			new->name = ft_strdup(filename);
+			new->path = ft_strdup(path);
+		}
+	}
 	if (type)
 		new->type = type;
+	else
+		new->type = '-';
 	ft_lstfileinit(new);
-	if (path)
-		new->path = ft_strdup(path);
-	new->path = path;
+//	if (path)
+//		new->path = ft_strdup(path);
+//	new->path = path;
 	new->pathname = ft_strjoin(new->path, new->name);
 	return (new);
 }

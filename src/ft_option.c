@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:22:52 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/05 19:22:31 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/06 17:24:07 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ void	ft_init(t_opt *arg)
 
 int		ft_option(char **arg, t_opt *new)
 {
-	int		i;
-	int		j;
+	int		i[2];
 
-	j = 1;
+	i[0] = 1;
 	new->opt = 0;
-	while (arg[j] && arg[j][0] == '-' && arg[j][1] != '-')
+	while (arg[i[0]] && arg[i[0]][0] == '-' && arg[i[0]][1] != '-')
 	{
-		i = 0;
-		while (arg[j][i])
+		i[1] = -1;
+		while (arg[i[0]][++i[1]])
 		{
-			if (arg[j][i] == 'a')
+			if (arg[i[0]][i[1]] == 'a')
 				new->opt |= F_AMIN;
-			if (arg[j][i] == 'l')
+			else if (arg[i[0]][i[1]] == 'l')
 				new->opt |= F_LMIN;
-			if (arg[j][i] == 'r')
+			else if (arg[i[0]][i[1]] == 'r')
 				new->opt |= F_RMIN;
-			if (arg[j][i] == 'R')
+			else if (arg[i[0]][i[1]] == 'R')
 				new->opt |= F_RMAJ;
-			if (arg[j][i] == 't')
+			else if (arg[i[0]][i[1]] == 't')
 				new->opt |= F_TMIN;
-			i++;
+			else if (arg[i[0]][i[1]] != '-')
+				return (ft_err_opt(arg[i[0]][i[1]]));
 		}
-		j++;
+		i[0]++;
 	}
-	return (j - 1);
+	return (i[0] - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/05 19:22:29 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/06 18:34:33 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ t_file		*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 	psort = ((opt->opt & F_TMIN) ? &ft_lstargsorttime : &ft_lstargsortal);
 	if (--k > 0)
 		new = ft_recurarg(opt, larg, k, i);
-	if (larg[k])
+	if (k >= 0 && larg[k])
 	{
 		if ((ft_charisdir(larg[k], *opt)))
 			elem = ft_lstfilenew(larg[k], 'd', "");
 		else if ((ft_lstisfile(larg[k])))
 			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', ""), opt);
+		else
+			ft_error(larg[k]);
 	}
 	if (elem)
 		psort(&new, elem, opt);
@@ -81,11 +83,6 @@ void		ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i, int pass)
 		if (lstarg && lstarg->next)
 			ft_recur_or_not(lstarg, opt, k, i, pass);
 	}
-	if (k == 1 && (!(opt->opt & F_RMAJ)))
-	{
-		lstarg = ft_gotostart(lstarg);
-		ft_lstfiledel(&lstarg);
-	}
 }
 
 void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i, int pass)
@@ -112,11 +109,6 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i, int pass)
 			lstarg = lstarg->prev;
 		else
 			break ;
-	}
-	if (!(opt->opt & F_RMAJ))
-	{
-		lstarg = ft_gotostart(lstarg);
-		ft_lstfiledel(&lstarg);
 	}
 }
 
@@ -157,10 +149,11 @@ void		ft_recurdos(char *doss, t_opt *opt, int pass)
 		ft_recurfile(lstfile, opt, compt, compt, pass);
 	lstfile = ft_gotostart(lstfile);
 	if (opt->opt & F_RMAJ && lstfile)
-	{
 		ft_recurarg(opt, ft_lst_to_char(lstfile, opt, &compt), compt, compt);
+	//if (lstfile)
+//	{
 		lstfile = ft_gotostart(lstfile);
 		ft_lstfiledel(&lstfile);
-	}
+//	}
 	return ;
 }

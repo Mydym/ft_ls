@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/05 16:30:36 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/06 17:18:02 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <errno.h>
+
+# define STDERR_FD 1
+# define PROG_NAME "ft_ls"
+# define LEN_NAME 5
 
 # define SEC_TO_NSEC ft_convertsectonsec(plst->mtime)
 
@@ -130,6 +134,8 @@ void				ft_stocktime(t_file *plst, struct stat m_time,
 unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
 void				ft_badname(char *name);
+void				ft_error(char *name);
+int					ft_err_opt(char c);
 
 void				ft_printdosname(t_file *elem, t_opt *option, int pass);
 void				ft_putdetail(t_file *file, t_opt *option, t_size max);
