@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/06/06 15:05:32 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/06/08 14:18:50 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCNAME = main.c \
 		  ft_opendir.c \
 		  ft_lstfileadd.c \
 		  ft_lstfileaddend.c \
+		  ft_readdir.c \
 		  ft_lstreadfile.c \
 		  ft_lstfiledelone.c \
 		  ft_lstfiledel.c \
@@ -49,6 +50,7 @@ SRCNAME = main.c \
 		  ft_getfiledetail.c \
 		  ft_gettime.c \
 		  ft_sizemax.c \
+		  ft_compt_lst.c \
 		  ft_lst_to_char.c
 
 OBJNAME = $(SRCNAME:.c=.o)

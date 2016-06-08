@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreadfile.c                                   :+:      :+:    :+:   */
+/*   ft_readdir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
+/*   Created: 2016/06/08 10:35:45 by vgrenier          #+#    #+#             */
 /*   Updated: 2016/06/08 18:21:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <dirent.h>
-#include <string.h>
 
-/*
-**Fonction pour recuperer le nom du fichier suivant, dans le repertoire pointe
-**par dirp, et le stocker dans un nouvel element de la liste.
-*/
-
-t_file	*ft_lstreadfile(DIR *dirp, char *repo)
+t_file	*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **,
+			t_file *, t_opt *))
 {
-	t_file			*new;
-	struct dirent	*file;
-	char			*path;
+	t_file	*plst;
+	t_file	*new;
+	DIR		*rep;
 
-	new = NULL;
-	path = NULL;
-	if (repo[0] != '/')
-		path = ft_strjoin(repo, "/");
-	file = NULL;
-	errno = 0;
-	if ((file = readdir(dirp)))
-		new = ft_lstfilenew(file->d_name, '-', path);
-	//if (errno != 0)
-	//	perror(path);
-	if (path)
-		free(path);
-	return (new);
+	plst = NULL;
+	if ((rep = ft_opendir(path)) != NULL)
+	{
+		while ((new = ft_lstreadfile(rep, (char *)path)) != NULL)
+		{
+			plst = ft_gotostart(plst);
+			ft_putfilendl(new, opt);
+			psort(&plst, new, opt);
+		}
+		closedir(rep);
+	}
+	plst = ft_gotostart(plst);
+	return (plst);
 }

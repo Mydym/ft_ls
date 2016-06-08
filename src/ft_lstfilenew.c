@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/06 18:34:34 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/08 18:13:49 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,33 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 {
 	t_file		*new;
 	char		*tmp;
+	char		*temp;
 
 	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
 		return (NULL);
 	if (filename)
 	{
-		if ((tmp = ft_strrchr(filename, '/')) != NULL)
+		temp = ft_strdup(filename);
+		while ((tmp = ft_strrchr(temp, '/')) != NULL)
 		{
-			new->name = ft_strdup(tmp + 1);
-			new->path = ft_strnew(ft_strlen(filename) - ft_strlen(tmp + 1));
-			new->path = ft_strncpy(new->path, filename,
-					ft_strlen(filename) - ft_strlen(tmp + 1));
+			if (ft_strlen(tmp) > 1)
+			{
+				new->name = ft_strdup(tmp + 1);
+				new->path = ft_strnew(ft_strlen(filename) - ft_strlen(tmp + 1));
+				new->path = ft_strncpy(new->path, filename,
+						ft_strlen(filename) - ft_strlen(tmp + 1));
+				break ;
+			}
+			else
+				break ;
+			free(temp);
+			temp = ft_strdup(tmp);
 		}
-		else
+		if (!tmp || ft_strlen(tmp) <= 1)
 		{
 			new->name = ft_strdup(filename);
-			new->path = ft_strdup(path);
+			if (path)
+				new->path = ft_strdup(path);
 		}
 	}
 	if (type)
