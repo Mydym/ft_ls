@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/08 18:13:49 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/09 17:15:31 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,47 +37,47 @@ t_file		*ft_lstfileinit(t_file *new)
 	return (new);
 }
 
+int			ft_cut_name(t_file *new, char *file, char *path)
+{
+	char		*tmp;
+
+	while ((tmp = ft_strrchr(file, '/')) != NULL && file)
+	{
+		if (ft_strlen(tmp) > 1)
+		{
+			new->name = ft_strdup(tmp + 1);
+			new->path = ft_strnew(ft_strlen(file) - ft_strlen(tmp + 1));
+			new->path = ft_strncpy(new->path, file,
+					ft_strlen(file) - ft_strlen(tmp + 1));
+			break ;
+		}
+		else
+			break ;
+	}
+	if ((!tmp || ft_strlen(tmp) <= 1) && file)
+	{
+		new->name = ft_strdup(file);
+		new->path = ((path) ? ft_strdup(path) : ft_strdup(file));
+		return (2);
+	}
+	if (new->name && new->path)
+		return (1);
+	return (0);
+}
+
 t_file		*ft_lstfilenew(char *filename, char type, char *path)
 {
 	t_file		*new;
-	char		*tmp;
-	char		*temp;
 
-	if ((new = (t_file *)malloc(sizeof(t_file))) == NULL)
+	if (!(new = (t_file *)ft_memalloc(sizeof(t_file))))
 		return (NULL);
 	if (filename)
-	{
-		temp = ft_strdup(filename);
-		while ((tmp = ft_strrchr(temp, '/')) != NULL)
-		{
-			if (ft_strlen(tmp) > 1)
-			{
-				new->name = ft_strdup(tmp + 1);
-				new->path = ft_strnew(ft_strlen(filename) - ft_strlen(tmp + 1));
-				new->path = ft_strncpy(new->path, filename,
-						ft_strlen(filename) - ft_strlen(tmp + 1));
-				break ;
-			}
-			else
-				break ;
-			free(temp);
-			temp = ft_strdup(tmp);
-		}
-		if (!tmp || ft_strlen(tmp) <= 1)
-		{
-			new->name = ft_strdup(filename);
-			if (path)
-				new->path = ft_strdup(path);
-		}
-	}
-	if (type)
-		new->type = type;
-	else
-		new->type = '-';
+		ft_cut_name(new, filename, path);
+	new->type = ((type) ? type : '-');
 	ft_lstfileinit(new);
-//	if (path)
-//		new->path = ft_strdup(path);
-//	new->path = path;
-	new->pathname = ft_strjoin(new->path, new->name);
+	if (ft_strcmp(new->name, new->path) != 0)
+		new->pathname = ft_strjoin(new->path, new->name);
+	else
+		new->pathname = ft_strdup(new->name);
 	return (new);
 }

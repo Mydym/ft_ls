@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstishidden.c                                   :+:      :+:    :+:   */
+/*   ft_tab.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/23 16:38:04 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 15:56:57 by vgrenier         ###   ########.fr       */
+/*   Created: 2016/06/09 19:09:06 by vgrenier          #+#    #+#             */
+/*   Updated: 2016/06/09 19:17:58 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_lstishidden(char *name)
+void	ft_init_tab(int tab[2], int i)
 {
-	if (name && (name[0] == '.' && ((name[1] == '\0') ||
-					(name[1] == '.' && name[2] == '\0') ||
-					ft_isascii(name[1]))))
-		return (1);
-	return (0);
+	tab[0] = i;
+	if (tab[1] < 0 || tab[i] > 3)
+		tab[1] = 0;
 }

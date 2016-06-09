@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:22:52 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/06 17:24:07 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/09 15:37:10 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@ void	ft_init(t_opt *arg)
 {
 	arg->opt = 0;
 	return ;
+}
+
+int		ft_check_arg(char **arg, int i, t_opt option)
+{
+	if (ft_strcmp(arg[i + 1], "--") == 0 && option.opt != 0)
+		i++;
+	else if (option.opt == 0 && ft_strcmp(arg[i + 1], "--") == 0)
+		i += 2;
+	else if (option.opt == 0)
+		i++;
+	return (i);
 }
 
 int		ft_option(char **arg, t_opt *new)
@@ -44,5 +55,5 @@ int		ft_option(char **arg, t_opt *new)
 		}
 		i[0]++;
 	}
-	return (i[0] - 1);
+	return (ft_check_arg(arg, i[0] - 1, *new));
 }

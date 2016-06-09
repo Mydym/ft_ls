@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/08 14:37:59 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/09 19:10:00 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,18 @@ typedef struct		s_opt
 void				ft_ls(int argc, char **arg);
 
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
-void				ft_recurfile(t_file *lstarg, t_opt *option, int k, int i,
-		int pass);
+void				ft_recurfile(t_file *lstarg, t_opt *option, int k,
+		int i[2]);
 void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
-		int i, int pass);
+		int i[2]);
 void				ft_recurdir(t_file *lstdir, t_opt *opt, int pass);
-//void				ft_recurdos(char *doss, t_opt *option, int pass);
 
 int					ft_intlen(int nombre);
+void				ft_init_tab(int tab[2], int i);
 
 DIR					*ft_opendir(const char *file);
-t_file				*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **, t_file *, t_opt *));
+t_file				*ft_readdir(const char *path, t_opt *opt,
+		void (*psort)(t_file **, t_file *, t_opt *));
 t_file				*ft_lstreadfile(DIR *dirp, char *repo);
 
 void				ft_lstfilesortal(t_file **plst, t_file *elem,
