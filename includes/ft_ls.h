@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 19:10:00 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 11:53:30 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,18 @@ typedef struct		s_size
 
 typedef struct		s_opt
 {
-	int		opt;
+	int				opt;
+	int				tour;
 }					t_opt;
 
 void				ft_ls(int argc, char **arg);
 
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
 void				ft_recurfile(t_file *lstarg, t_opt *option, int k,
-		int i[2]);
+		int i);
 void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
-		int i[2]);
-void				ft_recurdir(t_file *lstdir, t_opt *opt, int pass);
+		int i);
+void				ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i);
 
 int					ft_intlen(int nombre);
 void				ft_init_tab(int tab[2], int i);
@@ -141,7 +142,7 @@ void				ft_badname(char *name);
 void				ft_error(char *name);
 int					ft_err_opt(char c);
 
-void				ft_printdosname(t_file *elem, t_opt *option, int pass);
+void				ft_printdosname(t_file *elem, t_opt *option);
 void				ft_putdetail(t_file *file, t_opt *option, t_size max);
 void				ft_puttotal(t_file *elem, t_opt option);
 

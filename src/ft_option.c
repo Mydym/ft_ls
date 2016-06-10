@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:22:52 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 15:37:10 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 11:56:01 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	ft_init(t_opt *arg)
 {
 	arg->opt = 0;
+	arg->tour = -1;
 	return ;
 }
 
 int		ft_check_arg(char **arg, int i, t_opt option)
 {
-	if (ft_strcmp(arg[i + 1], "--") == 0 && option.opt != 0)
+	if (arg[i + 1] && ft_strcmp(arg[i + 1], "--") == 0 && option.opt != 0)
 		i++;
 	else if (option.opt == 0 && ft_strcmp(arg[i + 1], "--") == 0)
 		i += 2;
@@ -34,7 +35,7 @@ int		ft_option(char **arg, t_opt *new)
 	int		i[2];
 
 	i[0] = 1;
-	new->opt = 0;
+	ft_init(new);
 	while (arg[i[0]] && arg[i[0]][0] == '-' && arg[i[0]][1] != '-')
 	{
 		i[1] = -1;
