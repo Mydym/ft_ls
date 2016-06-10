@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:14:00 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 17:15:31 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:14:21 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 	ft_lstfileinit(new);
 	if (ft_strcmp(new->name, new->path) != 0)
 		new->pathname = ft_strjoin(new->path, new->name);
-	else
+	else if (new->name)
 		new->pathname = ft_strdup(new->name);
 	return (new);
 }

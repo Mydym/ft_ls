@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/06 17:59:46 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:38:53 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 void	ft_putfilendl(t_file *file, t_opt *option)
 {
 	if (option->opt & F_LMIN)
-	{
-		ft_gettime(file, option);
 		ft_getfiledetail(file);
-	}
+	if (option->opt & F_TMIN || option->opt & F_LMIN)
+		ft_gettime(file, option);
 }

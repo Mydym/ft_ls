@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:48:45 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 19:07:42 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:08:42 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem, t_opt *option)
 	if (!(option->opt & F_AMIN))
 		if (ft_lstishidden(elem->name))
 			return ;
-	if (ft_gettime(elem, option))
+	if (elem)
 	{
 		while (*plst && (elem->mtime < (*plst)->mtime) &&
 				(*plst)->next && (*plst)->type != 'd')

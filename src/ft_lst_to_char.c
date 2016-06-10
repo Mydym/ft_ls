@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 16:44:49 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/09 18:12:31 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:15:01 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 	*compt = 0;
 	while (lst)
 	{
-		if (lst->name && ft_lstisdir(lst, *option) == 1 &&
+		if (lst->name && ft_lstisdir(lst, *option) &&
 				(ft_lstishidden(lst->name) == 0 || (option->opt & F_AMIN &&
 				ft_strcmp(lst->name, ".") != 0
 				&& ft_strcmp(lst->name, "..") != 0)))
