@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:45:32 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 13:31:07 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:07:46 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,19 @@ void		ft_lst_file_clear(t_file *elem)
 		free(elem->path);
 		free(elem->name);
 		free(elem->pathname);
-		free(elem->permus);
-		free(elem->permgp);
-		free(elem->permoth);
-		free(elem->perm);
-		free(elem->username);
-		free(elem->groupname);
-		free(elem->formattime);
+		if (elem->perm)
+		{
+			free(elem->permus);
+			free(elem->permgp);
+			free(elem->permoth);
+			free(elem->perm);
+		}
+		if (elem->username)
+			free(elem->username);
+		if (elem->groupname)
+			free(elem->groupname);
+		if (elem->formattime)
+			free(elem->formattime);
 	}
 }
 

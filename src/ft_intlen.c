@@ -6,15 +6,15 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 12:39:13 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/05/25 15:25:24 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 18:21:53 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_intlen(int nombre)
+long		ft_intlen(long nombre)
 {
-	int		compt;
+	long	compt;
 
 	compt = 1;
 	while (nombre >= 10)

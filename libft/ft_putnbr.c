@@ -6,13 +6,13 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 17:04:09 by vgrenier          #+#    #+#             */
-/*   Updated: 2015/11/30 19:25:13 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:28:04 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long n)
 {
 	if (n >= 10)
 	{
@@ -23,7 +23,7 @@ void	ft_putnbr(int n)
 	{
 		ft_putchar('-');
 		if (n < -9)
-			ft_putnbr((0 - (unsigned int)n) / 10);
+			ft_putnbr((0 - n) / 10);
 		ft_putchar((n % 10) * -1 + '0');
 	}
 	else

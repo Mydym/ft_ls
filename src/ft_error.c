@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 15:05:50 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/06 17:36:14 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:35:51 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ void		ft_error(char *name)
 	strerr = strerror(errno);
 	write(STDERR_FD, PROG_NAME, LEN_NAME);
 	write(STDERR_FD, ": ", 2);
-	perror(name);
-/*	write(STDERR_FD, name, ft_strlen(name));
+	write(STDERR_FD, name, ft_strlen(name));
 	write(STDERR_FD, ": ", 2);
 	write(STDERR_FD, strerr, ft_strlen(strerr));
-	write(STDERR_FD, "\n", 1);*/
+	write(STDERR_FD, "\n", 1);
 	return ;
 }

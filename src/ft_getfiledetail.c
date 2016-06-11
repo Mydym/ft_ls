@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:56:11 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:38:52 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:29:19 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 		file->maj = major(detail.st_rdev);
 		file->min = minor(detail.st_rdev);
 	}
-	file->size = (long)detail.st_size;
+	file->size = detail.st_size;
 	file->sblock = detail.st_blocks;
 	ft_permuser(detail, file);
 	ft_permgroup(detail, file);

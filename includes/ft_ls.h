@@ -6,13 +6,13 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 15:08:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:38:55 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 18:21:52 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-# include "../lib/libft/libft.h"
+# include "../libft/libft.h"
 # include <dirent.h>
 # include <time.h>
 # include <pwd.h>
@@ -27,6 +27,8 @@
 # define STDERR_FD 1
 # define PROG_NAME "ft_ls"
 # define LEN_NAME 5
+
+# define OPTRMAJ (opt->opt & F_RMAJ)
 
 # define SEC_TO_NSEC ft_convertsectonsec(plst->mtime)
 
@@ -55,8 +57,8 @@ typedef struct		s_file
 	int					groupid;
 	int					maj;
 	int					min;
-	long				size;
-	int					sblock;
+	unsigned long		size;
+	unsigned long		sblock;
 	long long			mtime;
 	long long			mtimenano;
 	char				*formattime;
@@ -69,7 +71,7 @@ typedef struct		s_size
 	int		link;
 	int		user;
 	int		group;
-	int		taille;
+	long	taille;
 	int		maj;
 	int		min;
 }					t_size;
@@ -89,8 +91,7 @@ void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
 		int i);
 void				ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i);
 
-int					ft_intlen(int nombre);
-void				ft_init_tab(int tab[2], int i);
+long				ft_intlen(long nombre);
 
 DIR					*ft_opendir(const char *file);
 t_file				*ft_readdir(const char *path, t_opt *opt,
@@ -132,7 +133,7 @@ void				ft_permgroup(struct stat detail, t_file *file);
 void				ft_permother(struct stat detail, t_file *file);
 void				ft_permglobal(t_file *file);
 void				ft_getfiledetail(t_file *file);
-void				ft_putfilendl(t_file *file, t_opt *option);
+int					ft_putfilendl(t_file *file, t_opt *option);
 int					ft_gettime(t_file *plst, t_opt *option);
 void				ft_stocktime(t_file *plst, struct stat m_time,
 		t_opt *option);

@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 14:50:02 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:38:51 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:01:57 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void	ft_permglobal(t_file *file)
 {
 	if (!file->perm)
-		file->perm = ft_strnew(9);
+		file->perm = ft_strnew(10);
+	file->perm[9] = '\0';
 	if (file->permus)
-		file->perm = ft_strjoin(file->perm, file->permus);
+		file->perm = ft_strcat(file->perm, file->permus);
 	if (file->permgp)
-		file->perm = ft_strjoin(file->perm, file->permgp);
+		file->perm = ft_strcat(file->perm, file->permgp);
 	if (file->permoth)
-		file->perm = ft_strjoin(file->perm, file->permoth);
+		file->perm = ft_strcat(file->perm, file->permoth);
 }
 
 void	ft_permuser(struct stat detail, t_file *file)

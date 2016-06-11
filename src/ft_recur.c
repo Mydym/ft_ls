@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:24 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:38:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:03:25 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i)
 		ft_maxinit(&max);
 	if (opt->opt & F_RMIN)
 		ft_recurfilerev(lstarg, opt, max, i);
-	else
+	else if (lstarg)
 	{
 		if (k == i)
 			max = ft_getmaxsize(lstarg, max);
@@ -62,8 +62,8 @@ void		ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i)
 			ft_putdetail(lstarg, opt, max);
 		else if (lstarg->type == 'd')
 			ft_recurdir(lstarg, opt, k, i);
-//		else if (k == 0 && !(opt->opt & F_RMAJ))
-//			ft_lstfiledel(&lstarg);
+		else if (k == 0 && !(OPTRMAJ))
+			ft_lstfiledel(&lstarg);
 		if (lstarg && lstarg->next)
 			ft_recur_or_not(lstarg, opt, k, i);
 	}
@@ -95,7 +95,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 			break ;
 		lstarg = lstarg->prev;
 	}
-//	((lstarg->type != 'd' && !(opt->opt & F_RMAJ)) ? ft_lstfiledel(&lstarg) : 0);
+	((lstarg->type != 'd' && !(OPTRMAJ)) ? ft_lstfiledel(&lstarg) : 0);
 }
 
 void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
@@ -110,7 +110,8 @@ void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
 			: ft_strdup(lstdir->name));
 	if (i > 1 || (i >= 1 && opt->opt & F_RMAJ && opt->tour > 0))
 	{
-		ft_putchar('\n');
+		if (k != i || (OPTRMAJ))
+			ft_putchar('\n');
 		ft_printdosname(lstdir, opt);
 	}
 	if ((lstfile = ft_readdir(path, opt, psort)) != NULL)
@@ -118,9 +119,10 @@ void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
 		x = ft_compt_lst(lstfile);
 		ft_puttotal(lstfile, *opt);
 		ft_recurfile(lstfile, opt, x, x);
-		if ((opt->opt & F_RMAJ) && lstfile)
+		if ((OPTRMAJ) && lstfile)
 			ft_recurarg(opt, ft_lst_to_char(lstfile, opt, &x), x, x);
 	}
+	((!lstfile) ? ft_error(lstdir->name) : 0);
 	if (k == 0)
 		ft_lstfiledel(&lstdir);
 }

@@ -6,7 +6,7 @@
 #    By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/20 15:52:08 by vgrenier          #+#    #+#              #
-#    Updated: 2016/06/09 20:26:13 by vgrenier         ###   ########.fr        #
+#    Updated: 2016/06/11 17:09:25 by vgrenier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFLAGS = -L $(LIBDIR) -lft
 SRCDIR = ./src/
 OBJDIR = ./obj/
 INCDIR = ./includes/
-LIBDIR = ./lib/libft/
+LIBDIR = ./libft
 
 NAME = ft_ls
 
@@ -60,18 +60,18 @@ SRC = $(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
-.PHONY: all clean fclean re
+.PHONY: all libft clean fclean re
 
 all: libft $(NAME)
+
+libft:
+	make -C $(LIBDIR)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(IFLAGS)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFLAGS)
-
-libft:
-	make -C $(LIBDIR)
 
 clean:
 	make -C $(LIBDIR) clean

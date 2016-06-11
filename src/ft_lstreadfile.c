@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 17:22:27 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:21:31 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:00:20 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,16 @@ t_file	*ft_lstreadfile(DIR *dirp, char *repo)
 	new = NULL;
 	path = NULL;
 	i = 0;
+	errno = 0;
 	while (repo && repo[i])
 	{
 		if (repo[i] == '/' && !repo[i + 1])
 			path = ft_strdup(repo);
 		i++;
-//		if (ft_strrchr(repo, '/') == NULL)
-//			path = ft_strjoin(repo, "/");
-//		else
-//			path = ft_strdup(repo);
 	}
 	if (!path)
 		path = ft_strjoin(repo, "/");
 	file = NULL;
-	errno = 0;
 	if ((file = readdir(dirp)))
 		new = ft_lstfilenew(file->d_name, '-', path);
 	if (errno != 0)

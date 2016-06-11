@@ -6,7 +6,7 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 13:32:50 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 13:46:50 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:01:13 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ DIR	*ft_opendir(const char *file)
 
 	errno = 0;
 	repo = opendir(file);
-	if (errno != 0)
+	if (errno != 0 && errno != 13)
 		ft_error((char *)file);
 	if (repo)
 		return (repo);

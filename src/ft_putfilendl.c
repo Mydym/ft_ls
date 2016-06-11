@@ -6,13 +6,13 @@
 /*   By: vgrenier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 14:12:12 by vgrenier          #+#    #+#             */
-/*   Updated: 2016/06/10 17:38:53 by vgrenier         ###   ########.fr       */
+/*   Updated: 2016/06/11 18:21:54 by vgrenier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_putspace(int a, int b, int c)
+void	ft_putspace(long a, long b, long c)
 {
 	int		i;
 
@@ -91,10 +91,21 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 	ft_putendl(file->name);
 }
 
-void	ft_putfilendl(t_file *file, t_opt *option)
+int		ft_putfilendl(t_file *file, t_opt *option)
 {
-	if (option->opt & F_LMIN)
+	int		res;
+
+	res = 0;
+	errno = 0;
+	if (option->opt & F_LMIN && (option->opt & F_AMIN ||
+				!ft_lstishidden(file->name)))
 		ft_getfiledetail(file);
 	if (option->opt & F_TMIN || option->opt & F_LMIN)
 		ft_gettime(file, option);
+	if (errno != 0)
+	{
+		ft_error(file->name);
+		res = 1;
+	}
+	return (res);
 }
