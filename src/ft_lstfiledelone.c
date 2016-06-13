@@ -30,10 +30,10 @@ void		ft_lst_file_clear(t_file *elem)
 			free(elem->permoth);
 			free(elem->perm);
 		}
-		if (elem->username)
-			free(elem->username);
-		if (elem->groupname)
-			free(elem->groupname);
+		/* if (elem->username) */
+		/* 	free(elem->username); */
+		/* if (elem->groupname) */
+		/* 	free(elem->groupname); */
 		if (elem->formattime)
 			free(elem->formattime);
 	}
@@ -41,29 +41,11 @@ void		ft_lst_file_clear(t_file *elem)
 
 t_file		*ft_lstfiledelone(t_file **plst)
 {
-	t_file	*next;
-	t_file	*prev;
-
 	if (*plst)
 	{
 		ft_lst_file_clear(*plst);
-		next = ((*plst)->next ? (*plst)->next : NULL);
-		prev = ((*plst)->prev ? (*plst)->prev : NULL);
 		free(*plst);
 		*plst = NULL;
-		if (next && prev)
-		{
-			next->prev = prev;
-			prev->next = next;
-		}
-		if (prev && !next)
-			prev->next = NULL;
-		if (next && !prev)
-			next->prev = NULL;
-		if (prev)
-			return (prev);
-		if (next)
-			return (next);
 	}
 	return (NULL);
 }

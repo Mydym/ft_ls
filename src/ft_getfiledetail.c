@@ -28,6 +28,7 @@ void	ft_addlink(t_file *elem)
 		}
 		else if (readlink(elem->pathname, buff, 1000) != -1)
 		{
+			errno = 0;
 			temp = ft_strjoin(elem->name, " -> ");
 			free(elem->name);
 			elem->name = ft_strjoin(temp, buff);
@@ -43,12 +44,11 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 	struct group	*grp;
 
 	if ((id = getpwuid(detail.st_uid)) && id->pw_name)
-		file->username = ft_strdup(id->pw_name);
+		file->username = id->pw_name;
 	if ((grp = getgrgid(detail.st_gid)) && grp->gr_name)
-	{
-		file->groupname = ft_strdup(grp->gr_name);
+		file->groupname = grp->gr_name;
+	if (grp->gr_gid)
 		file->groupid = grp->gr_gid;
-	}
 	file->nblink = detail.st_nlink;
 	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
 	{

@@ -14,9 +14,15 @@
 
 int		ft_lstishidden(char *name)
 {
-	if (name && (name[0] == '.' && ((name[1] == '\0') ||
-					(name[1] == '.' && name[2] == '\0') ||
+	/* ft_putendl(name); */
+	if (name && ft_strcmp(name, ".") != 0 && ft_strcmp(name, "..") != 0 &&
+			(name[0] == '.' && ((name[1] == '\0') ||
+				(name[1] == '.' && name[2] == '\0') ||
 					ft_isascii(name[1]))))
+	{
+		/* ft_putendl("1"); */
 		return (1);
+	}
+	/* ft_putendl("0"); */
 	return (0);
 }

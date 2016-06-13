@@ -50,9 +50,8 @@ void	ft_formtimehour(t_file *plst, struct stat m_time)
 	char	*alltime;
 	char	*shorttime;
 
-	alltime = ft_strdup(ctime(&m_time.st_mtime));
+	alltime = ctime(&m_time.st_mtime);
 	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 4);
-	free(alltime);
 	alltime = ft_strsub(shorttime, 0, ft_strlen(shorttime) - 9);
 	free(shorttime);
 	plst->formattime = alltime;
@@ -64,10 +63,9 @@ void	ft_formtimeyear(t_file *plst, struct stat m_time)
 	char	*shorttime;
 	char	*year;
 
-	alltime = ft_strdup(ctime(&m_time.st_mtime));
+	alltime = ctime(&m_time.st_mtime);
 	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 18);
 	year = ft_strsub(alltime, ft_strlen(alltime) - 6, 5);
-	free(alltime);
 	alltime = ft_strjoin(shorttime, year);
 	free(shorttime);
 	free(year);
@@ -82,7 +80,7 @@ void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
 	time(&local);
 	if (option->opt & F_LMIN)
 	{
-		if (plst->mtime > local - 15778800 && plst->mtime < local + 3600)
+		if (plst->mtime > local - 15778800 && plst->mtime < local + 1)
 			ft_formtimehour(plst, m_time);
 		else
 			ft_formtimeyear(plst, m_time);

@@ -24,10 +24,10 @@ t_file	*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **,
 	res = 0;
 	if ((rep = ft_opendir(path)) != NULL)
 	{
-		while ((new = ft_lstreadfile(rep, (char *)path)) != NULL)
+		while ((new = ft_lstreadfile(rep, (char *)path, opt)) != NULL)
 		{
 			plst = ft_gotostart(plst);
-			if ((res = ft_putfilendl(new, opt)) == 0)
+			if (new && (res = ft_putfilendl(new, opt)) == 0)
 				psort(&plst, new, opt);
 		}
 		closedir(rep);

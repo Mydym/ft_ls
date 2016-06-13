@@ -18,8 +18,16 @@
 
 void	ft_lstfiledel(t_file **plst)
 {
-	if ((*plst)->next)
-		ft_lstfiledel(&((*plst)->next));
-	if (*plst)
+	t_file	*tmp;
+
+	*plst = ft_gotostart(*plst);
+	while (plst && *plst)
+	{
+		if ((*plst)->next)
+			tmp = (*plst)->next;
+		else
+			tmp = NULL;
 		ft_lstfiledelone(plst);
+		*plst = tmp;
+	}
 }

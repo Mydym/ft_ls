@@ -53,7 +53,10 @@ void	ft_lstfilesortal(t_file **plst, t_file *elem, t_opt *option)
 	i = -1;
 	if (!(option->opt & F_AMIN))
 		if (ft_lstishidden(elem->name))
+		{
+			ft_lstfiledelone(&elem);
 			return ;
+		}
 	while ((*plst) && (*plst)->prev)
 		*plst = (*plst)->prev;
 	if (*plst)

@@ -49,7 +49,10 @@ void	ft_lstfilesorttime(t_file **plst, t_file *elem, t_opt *option)
 {
 	if (!(option->opt & F_AMIN))
 		if (ft_lstishidden(elem->name))
+		{
+			ft_lstfiledelone(&elem);
 			return ;
+		}
 	if (elem)
 	{
 		while (*plst && (elem->mtime < (*plst)->mtime) &&

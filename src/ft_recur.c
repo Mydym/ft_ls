@@ -21,7 +21,7 @@ t_file		*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 	elem = NULL;
 	new = NULL;
 	psort = ((opt->opt & F_TMIN) ? &ft_lstargsorttime : &ft_lstargsortal);
-	if (--k > 0)
+	if ((i == 1 && k > 1) || (--k > 0))
 		new = ft_recurarg(opt, larg, k, i);
 	if (k >= 0 && larg[k])
 	{
@@ -41,7 +41,7 @@ t_file		*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 
 void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y)
 {
-	if (x > 0)
+	if (x >= 2 && lstarg->next)
 		ft_recurfile(lstarg->next, option, x - 1, y);
 	return ;
 }
@@ -62,9 +62,9 @@ void		ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i)
 			ft_putdetail(lstarg, opt, max);
 		else if (lstarg->type == 'd')
 			ft_recurdir(lstarg, opt, k, i);
-		else if (k == 0 && !(OPTRMAJ))
+		if (k == 1 && !(OPTRMAJ))
 			ft_lstfiledel(&lstarg);
-		if (lstarg && lstarg->next)
+		if (lstarg)
 			ft_recur_or_not(lstarg, opt, k, i);
 	}
 }
@@ -95,7 +95,7 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 			break ;
 		lstarg = lstarg->prev;
 	}
-	((lstarg->type != 'd' && !(OPTRMAJ)) ? ft_lstfiledel(&lstarg) : 0);
+	((lstarg && !(OPTRMAJ)) ? ft_lstfiledel(&lstarg) : 0);
 }
 
 void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
@@ -122,7 +122,7 @@ void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
 		if ((OPTRMAJ) && lstfile)
 			ft_recurarg(opt, ft_lst_to_char(lstfile, opt, &x), x, x);
 	}
-	((!lstfile) ? ft_error(lstdir->name) : 0);
-	if (k == 0)
-		ft_lstfiledel(&lstdir);
+	free(path);
+	((!lstfile && errno != 0) ? ft_error(lstdir->name) : 0);
+	((k == 1 && (OPTRMAJ)) ? ft_lstfiledel(&lstdir) : 0);
 }

@@ -34,6 +34,7 @@ void		ft_ls(int argc, char **arg)
 		plst = ft_recurarg(&option, &arg[opt], argc - opt, argc - opt);
 	else if (opt != -1)
 		plst = ft_recurarg(&option, &path, argc, argc);
+	free(path);
 }
 
 t_file		*ft_gotostart(t_file *lst)

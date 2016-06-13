@@ -54,10 +54,11 @@ int			ft_cut_name(t_file *new, char *file, char *path)
 		else
 			break ;
 	}
-	if ((!tmp || ft_strlen(tmp) <= 1) && file)
+	if ((!tmp || ft_strlen(tmp) <= 1) && file && !new->name && !new->path)
 	{
 		new->name = ft_strdup(file);
-		new->path = ((path) ? ft_strdup(path) : ft_strdup(file));
+		/* ft_putendl(new->name); */
+		new->path = ((path) ? ft_strdup(path) : new->name);
 		return (2);
 	}
 	if (new->name && new->path)
@@ -71,8 +72,12 @@ t_file		*ft_lstfilenew(char *filename, char type, char *path)
 
 	if (!(new = (t_file *)ft_memalloc(sizeof(t_file))))
 		return (NULL);
-	if (filename)
+	new->name = NULL;
+	new->path = NULL;
+	if (filename && new && path)
 		ft_cut_name(new, filename, path);
+	else if (new)
+		free(new);
 	new->type = ((type) ? type : '-');
 	ft_lstfileinit(new);
 	if (ft_strcmp(new->name, new->path) != 0)

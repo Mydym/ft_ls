@@ -96,7 +96,7 @@ long				ft_intlen(long nombre);
 DIR					*ft_opendir(const char *file);
 t_file				*ft_readdir(const char *path, t_opt *opt,
 		void (*psort)(t_file **, t_file *, t_opt *));
-t_file				*ft_lstreadfile(DIR *dirp, char *repo);
+t_file				*ft_lstreadfile(DIR *dirp, char *repo, t_opt *opt);
 
 void				ft_lstfilesortal(t_file **plst, t_file *elem,
 		t_opt *option);

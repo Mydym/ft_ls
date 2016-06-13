@@ -19,12 +19,13 @@
 **par dirp, et le stocker dans un nouvel element de la liste.
 */
 
-t_file	*ft_lstreadfile(DIR *dirp, char *repo)
+t_file	*ft_lstreadfile(DIR *dirp, char *repo, t_opt *opt)
 {
 	t_file			*new;
 	struct dirent	*file;
 	char			*path;
 	int				i;
+	/* (void)opt; */
 
 	new = NULL;
 	path = NULL;
@@ -41,6 +42,11 @@ t_file	*ft_lstreadfile(DIR *dirp, char *repo)
 	file = NULL;
 	if ((file = readdir(dirp)))
 		new = ft_lstfilenew(file->d_name, '-', path);
+	if (file && ((ft_lstishidden(file->d_name) == 1) || (opt->opt & F_AMIN)))
+	{
+		/* ft_putendl(new->name); */
+		ft_lstfiledelone(&new);
+	}
 	if (errno != 0)
 		ft_error(path);
 	free(path);
