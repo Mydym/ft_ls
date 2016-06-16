@@ -24,18 +24,20 @@ t_file	*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **,
 	res = 0;
 	if ((rep = ft_opendir(path)) != NULL)
 	{
-		while ((new = ft_lstreadfile(rep, (char *)path, opt)) != NULL)
+		while ((new = ft_lstreadfile(rep, (char *)path)) != NULL)
 		{
 			plst = ft_gotostart(plst);
-			if (new && (res = ft_putfilendl(new, opt)) == 0)
+			if (!ft_lstishidden(new->name, *opt) && !ft_rmv_dot(new->name, opt)
+				&& (res = ft_putfilendl(new, opt)) == 0)
 				psort(&plst, new, opt);
+			else
+				ft_lstfiledelone(&new);
 		}
 		closedir(rep);
 	}
 	plst = ft_gotostart(plst);
 	if (res == 0)
 		return (plst);
-	else
-		errno = 13;
+	errno = 13;
 	return (NULL);
 }

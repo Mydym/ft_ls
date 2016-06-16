@@ -97,11 +97,10 @@ int		ft_putfilendl(t_file *file, t_opt *option)
 
 	res = 0;
 	errno = 0;
-	if (option->opt & F_LMIN && (option->opt & F_AMIN ||
-				!ft_lstishidden(file->name)))
+	if (option->opt & F_LMIN && !ft_lstishidden(file->name, *option))
 		ft_getfiledetail(file);
-	if ((option->opt & F_TMIN || option->opt & F_LMIN) && (option->opt & F_AMIN
-				|| !ft_lstishidden(file->name)))
+	if ((option->opt & F_TMIN || option->opt & F_LMIN) &&
+		!ft_lstishidden(file->name, *option))
 		ft_gettime(file, option);
 	if (errno != 0)
 	{

@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-int		ft_lst_compt_elem(t_file *lst)
+int		ft_lst_compt_elem(t_file *lst, t_opt *opt)
 {
 	int		compt;
 
@@ -20,7 +20,7 @@ int		ft_lst_compt_elem(t_file *lst)
 	compt = 0;
 	while (lst)
 	{
-		if (ft_lstishidden(lst->name) == 0)
+		if (ft_lstishidden(lst->name, *opt) == 0)
 			compt++;
 		lst = lst->next;
 	}
@@ -39,9 +39,8 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 	while (lst)
 	{
 		if (lst->name && ft_lstisdir(lst, *option) &&
-				(ft_lstishidden(lst->name) == 0 || (option->opt & F_AMIN &&
-				ft_strcmp(lst->name, ".") != 0
-				&& ft_strcmp(lst->name, "..") != 0)))
+			!ft_lstishidden(lst->name, *option) &&
+			!ft_rmv_dot(lst->name, option))
 		{
 			arg[*compt] = lst->pathname;
 			*compt += 1;

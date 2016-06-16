@@ -48,7 +48,7 @@ void	ft_lstargsorttime(t_file **larg, t_file *elem, t_opt *option)
 void	ft_lstfilesorttime(t_file **plst, t_file *elem, t_opt *option)
 {
 	if (!(option->opt & F_AMIN))
-		if (ft_lstishidden(elem->name))
+		if (ft_lstishidden(elem->name, *option))
 		{
 			ft_lstfiledelone(&elem);
 			return ;

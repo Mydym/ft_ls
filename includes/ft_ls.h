@@ -96,7 +96,7 @@ long				ft_intlen(long nombre);
 DIR					*ft_opendir(const char *file);
 t_file				*ft_readdir(const char *path, t_opt *opt,
 		void (*psort)(t_file **, t_file *, t_opt *));
-t_file				*ft_lstreadfile(DIR *dirp, char *repo, t_opt *opt);
+t_file				*ft_lstreadfile(DIR *dirp, char *repo);
 
 void				ft_lstfilesortal(t_file **plst, t_file *elem,
 		t_opt *option);
@@ -115,7 +115,7 @@ t_file				*ft_lstfiledelone(t_file **plst);
 void				ft_lstfiledel(t_file **plst);
 
 char				**ft_lst_to_char(t_file *lst, t_opt *option, int *compt);
-int					ft_lst_compt_elem(t_file *lst);
+int					ft_lst_compt_elem(t_file *lst, t_opt *opt);
 int					ft_compt_lst(t_file *plst);
 
 t_file				*ft_gotostart(t_file *lst);
@@ -125,7 +125,8 @@ t_file				*ft_gotofileend(t_file *lst);
 void				ft_lstfindtype(t_file *elem);
 int					ft_charisdir(char *name, t_opt option);
 int					ft_lstisdir(t_file *elem, t_opt option);
-int					ft_lstishidden(char *name);
+int					ft_lstishidden(char *name, t_opt opt);
+int					ft_rmv_dot(char *name, t_opt *opt);
 int					ft_lstisfile(char *name);
 
 void				ft_permuser(struct stat detail, t_file *file);

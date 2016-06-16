@@ -12,17 +12,20 @@
 
 #include "ft_ls.h"
 
-int		ft_lstishidden(char *name)
+int		ft_rmv_dot(char *name, t_opt *opt)
 {
-	/* ft_putendl(name); */
-	if (name && ft_strcmp(name, ".") != 0 && ft_strcmp(name, "..") != 0 &&
-			(name[0] == '.' && ((name[1] == '\0') ||
-				(name[1] == '.' && name[2] == '\0') ||
-					ft_isascii(name[1]))))
-	{
-		/* ft_putendl("1"); */
-		return (1);
-	}
-	/* ft_putendl("0"); */
+	if (name)
+		if (!(opt->opt & F_AMIN))
+			if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
+				return (1);
+	return (0);
+}
+
+int		ft_lstishidden(char *name, t_opt opt)
+{
+	if (name)
+		if (!(opt.opt & F_AMIN))
+			if (name[0] == '.')
+				return (1);
 	return (0);
 }
