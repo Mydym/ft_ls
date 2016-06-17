@@ -50,7 +50,6 @@ SRCNAME = main.c \
 		  ft_getfiledetail.c \
 		  ft_gettime.c \
 		  ft_sizemax.c \
-		  ft_tab.c \
 		  ft_compt_lst.c \
 		  ft_lst_to_char.c
 

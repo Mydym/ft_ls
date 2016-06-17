@@ -30,10 +30,6 @@ void		ft_lst_file_clear(t_file *elem)
 			free(elem->permoth);
 			free(elem->perm);
 		}
-		/* if (elem->username) */
-		/* 	free(elem->username); */
-		/* if (elem->groupname) */
-		/* 	free(elem->groupname); */
 		if (elem->formattime)
 			free(elem->formattime);
 	}

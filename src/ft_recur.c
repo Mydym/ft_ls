@@ -87,11 +87,11 @@ void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 			break ;
 	}
 	lstarg = ft_gotoend(lstarg);
-	while (lstarg && ft_lstisdir(lstarg, *opt) && i > 0)
+	while (lstarg && lstarg->type == 'd' && i > 0)
 	{
 		ft_recurdir(lstarg, opt, i, k);
 		i--;
-		if (!(lstarg->prev && ft_lstisdir(lstarg->prev, *opt) == 1))
+		if (!(lstarg->prev && lstarg->prev->type == 'd'))
 			break ;
 		lstarg = lstarg->prev;
 	}

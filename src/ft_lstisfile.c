@@ -16,7 +16,8 @@ int		ft_lstisfile(char *name)
 {
 	struct stat		test;
 
-	if ((lstat(name, &test) == 0) && !(S_ISDIR(test.st_mode)))
+	if ((lstat(name, &test) == 0) && (!(S_ISDIR(test.st_mode))
+		|| ft_strcmp(name, ".") || ft_strcmp(name, "..")))
 		return (1);
 	return (0);
 }

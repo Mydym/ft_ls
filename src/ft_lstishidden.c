@@ -12,19 +12,19 @@
 
 #include "ft_ls.h"
 
-int		ft_rmv_dot(char *name, t_opt *opt)
+int		ft_rmv_dot(t_file *file, t_opt *opt)
 {
-	if (name)
-		if (!(opt->opt & F_AMIN))
-			if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
+	if (!(opt->opt & F_AMIN))
+		if (file->name)
+			if (!ft_strcmp(file->name, ".") || !ft_strcmp(file->name, ".."))
 				return (1);
 	return (0);
 }
 
 int		ft_lstishidden(char *name, t_opt opt)
 {
-	if (name)
-		if (!(opt.opt & F_AMIN))
+	if (!(opt.opt & F_AMIN))
+		if (name)
 			if (name[0] == '.')
 				return (1);
 	return (0);

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
 unsigned long long	ft_convertsectonsec(unsigned long long sec)
 {
 	int		k;

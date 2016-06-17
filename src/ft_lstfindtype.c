@@ -21,9 +21,7 @@ char		ft_testtype(struct stat filetype)
 	char		type;
 
 	type = '\0';
-	if (S_ISREG(filetype.st_mode))
-		type = '-';
-	else if (S_ISDIR(filetype.st_mode))
+	if (S_ISDIR(filetype.st_mode))
 		type = 'd';
 	else if (S_ISCHR(filetype.st_mode))
 		type = 'c';
@@ -35,24 +33,18 @@ char		ft_testtype(struct stat filetype)
 		type = 'l';
 	else if (S_ISSOCK(filetype.st_mode))
 		type = 's';
+	else if (S_ISREG(filetype.st_mode))
+		type = '-';
 	return (type);
 }
 
 void		ft_lstfindtype(t_file *elem)
 {
-	char		type;
 	struct stat	filetype;
 
-	type = '\0';
 	if (ft_strcmp(elem->path, "./") == 0 && lstat(elem->name, &filetype) == 0)
-	{
-		type = ft_testtype(filetype);
-		elem->type = type;
-	}
+		elem->type = ft_testtype(filetype);
 	else if (lstat(elem->pathname, &filetype) == 0)
-	{
-		type = ft_testtype(filetype);
-		elem->type = type;
-	}
+		elem->type = ft_testtype(filetype);
 	return ;
 }

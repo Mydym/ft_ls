@@ -40,7 +40,7 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 	{
 		if (lst->name && ft_lstisdir(lst, *option) &&
 			!ft_lstishidden(lst->name, *option) &&
-			!ft_rmv_dot(lst->name, option))
+			!ft_rmv_dot(lst, option))
 		{
 			arg[*compt] = lst->pathname;
 			*compt += 1;

@@ -34,7 +34,9 @@ int		ft_lstisdir(t_file *elem, t_opt option)
 {
 	struct stat		type;
 
-	if ((lstat(elem->pathname, &type)) == 0)
+	if ((lstat(elem->pathname, &type)) == 0 && !(option.opt & F_RMAJ &&
+		option.opt & F_AMIN && (!ft_strcmp(elem->name, ".") ||
+		!ft_strcmp(elem->name, ".."))))
 	{
 		if (S_ISDIR(type.st_mode))
 			return (1);

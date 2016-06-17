@@ -27,7 +27,7 @@ t_file	*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **,
 		while ((new = ft_lstreadfile(rep, (char *)path)) != NULL)
 		{
 			plst = ft_gotostart(plst);
-			if (!ft_lstishidden(new->name, *opt) && !ft_rmv_dot(new->name, opt)
+			if (!ft_lstishidden(new->name, *opt) && !ft_rmv_dot(new, opt)
 				&& (res = ft_putfilendl(new, opt)) == 0)
 				psort(&plst, new, opt);
 			else

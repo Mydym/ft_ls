@@ -57,7 +57,6 @@ int			ft_cut_name(t_file *new, char *file, char *path)
 	if ((!tmp || ft_strlen(tmp) <= 1) && file && !new->name && !new->path)
 	{
 		new->name = ft_strdup(file);
-		/* ft_putendl(new->name); */
 		new->path = ((path) ? ft_strdup(path) : new->name);
 		return (2);
 	}

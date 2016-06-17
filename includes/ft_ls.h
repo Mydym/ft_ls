@@ -126,7 +126,7 @@ void				ft_lstfindtype(t_file *elem);
 int					ft_charisdir(char *name, t_opt option);
 int					ft_lstisdir(t_file *elem, t_opt option);
 int					ft_lstishidden(char *name, t_opt opt);
-int					ft_rmv_dot(char *name, t_opt *opt);
+int					ft_rmv_dot(t_file *file, t_opt *opt);
 int					ft_lstisfile(char *name);
 
 void				ft_permuser(struct stat detail, t_file *file);
