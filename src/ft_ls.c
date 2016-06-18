@@ -23,6 +23,7 @@ void		ft_ls(int argc, char **arg)
 	plst = NULL;
 	opt = ((argc > 1) ? ft_option(arg, &option) : 0);
 	option.opt = ((argc > 1) ? option.opt : 0);
+	arg = ((argc >= opt + 1) ? ft_alsort_arg(arg) : arg);
 	if (option.opt != 0 && opt != -1)
 	{
 		if (++opt > 1 && argc > opt)

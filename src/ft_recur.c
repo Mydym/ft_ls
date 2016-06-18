@@ -41,7 +41,7 @@ t_file		*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 
 void		ft_recur_or_not(t_file *lstarg, t_opt *option, int x, int y)
 {
-	if (x >= 2 && lstarg->next)
+	if (x > 1 && lstarg->next)
 		ft_recurfile(lstarg->next, option, x - 1, y);
 	return ;
 }

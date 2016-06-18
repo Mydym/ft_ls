@@ -107,6 +107,7 @@ void				ft_lstfilesorttime(t_file **plst, t_file *elem,
 		t_opt *option);
 void				ft_lstargsorttime(t_file **larg, t_file *elem,
 		t_opt *option);
+char				**ft_alsort_arg(char **arg);
 
 t_file				*ft_lstfilenew(char *filename, char type, char *path);
 void				ft_lstfileadd(t_file **plst, t_file *new);

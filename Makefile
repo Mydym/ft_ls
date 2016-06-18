@@ -51,6 +51,7 @@ SRCNAME = main.c \
 		  ft_gettime.c \
 		  ft_sizemax.c \
 		  ft_compt_lst.c \
+		  ft_alsort_arg.c \
 		  ft_lst_to_char.c
 
 OBJNAME = $(SRCNAME:.c=.o)
