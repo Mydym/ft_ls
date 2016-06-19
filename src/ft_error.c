@@ -27,12 +27,15 @@ void		ft_error(char *name)
 {
 	char	*strerr;
 
-	strerr = strerror(errno);
-	write(STDERR_FD, PROG_NAME, LEN_NAME);
-	write(STDERR_FD, ": ", 2);
-	write(STDERR_FD, name, ft_strlen(name));
-	write(STDERR_FD, ": ", 2);
-	write(STDERR_FD, strerr, ft_strlen(strerr));
-	write(STDERR_FD, "\n", 1);
+	if (name)
+	{
+		strerr = strerror(errno);
+		write(STDERR_FD, PROG_NAME, LEN_NAME);
+		write(STDERR_FD, ": ", 2);
+		write(STDERR_FD, name, ft_strlen(name));
+		write(STDERR_FD, ": ", 2);
+		write(STDERR_FD, strerr, ft_strlen(strerr));
+		write(STDERR_FD, "\n", 1);
+	}
 	return ;
 }

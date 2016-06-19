@@ -34,6 +34,7 @@ SRCNAME = main.c \
 		  ft_lstreadfile.c \
 		  ft_lstfiledelone.c \
 		  ft_lstfiledel.c \
+		  ft_pchar_del.c \
 		  ft_lstfilenew.c \
 		  ft_lstargsortal.c \
 		  ft_lstargsorttime.c \

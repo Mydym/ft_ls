@@ -12,14 +12,23 @@
 
 #include "ft_ls.h"
 
+t_file		*ft_recur_argv(t_opt *opt, char **larg, int k, int i)
+{
+	t_file	*recu;
+
+	recu = ft_recurarg(opt, larg, k, i);
+	ft_recurfile(recu, opt, i, i);
+	return (recu);
+}
+
 void		ft_ls(int argc, char **arg)
 {
 	t_opt		option;
 	t_file		*plst;
-	char		*path;
+	char		*pat;
 	int			opt;
 
-	path = ft_strdup(".");
+	pat = ft_strdup(".");
 	plst = NULL;
 	opt = ((argc > 1) ? ft_option(arg, &option) : 0);
 	option.opt = ((argc > 1) ? option.opt : 0);
@@ -27,15 +36,15 @@ void		ft_ls(int argc, char **arg)
 	if (option.opt != 0 && opt != -1)
 	{
 		if (++opt > 1 && argc > opt)
-			plst = ft_recurarg(&option, &arg[opt], argc - opt, argc - opt);
+			plst = ft_recur_argv(&option, &arg[opt], argc - opt, argc - opt);
 		else
-			plst = ft_recurarg(&option, &path, argc - opt + 1, argc - opt + 1);
+			plst = ft_recur_argv(&option, &pat, argc - opt + 1, argc - opt + 1);
 	}
 	else if (argc > 1 && option.opt == 0 && opt != -1)
-		plst = ft_recurarg(&option, &arg[opt], argc - opt, argc - opt);
+		plst = ft_recur_argv(&option, &arg[opt], argc - opt, argc - opt);
 	else if (opt != -1)
-		plst = ft_recurarg(&option, &path, argc, argc);
-	free(path);
+		plst = ft_recur_argv(&option, &pat, argc, argc);
+	free(pat);
 }
 
 t_file		*ft_gotostart(t_file *lst)

@@ -24,7 +24,7 @@
 # include <stdio.h>
 # include <errno.h>
 
-# define STDERR_FD 1
+# define STDERR_FD 2
 # define PROG_NAME "ft_ls"
 # define LEN_NAME 5
 
@@ -114,9 +114,10 @@ void				ft_lstfileadd(t_file **plst, t_file *new);
 void				ft_lstfileaddend(t_file **plst, t_file *new);
 t_file				*ft_lstfiledelone(t_file **plst);
 void				ft_lstfiledel(t_file **plst);
+void				ft_pchar_del(char **s);
 
 char				**ft_lst_to_char(t_file *lst, t_opt *option, int *compt);
-int					ft_lst_compt_elem(t_file *lst, t_opt *opt);
+int					ft_lst_compt_dir(t_file *lst, t_opt *opt);
 int					ft_compt_lst(t_file *plst);
 
 t_file				*ft_gotostart(t_file *lst);

@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-int		ft_lst_compt_elem(t_file *lst, t_opt *opt)
+int		ft_lst_compt_dir(t_file *lst, t_opt *opt)
 {
 	int		compt;
 
@@ -20,9 +20,13 @@ int		ft_lst_compt_elem(t_file *lst, t_opt *opt)
 	compt = 0;
 	while (lst)
 	{
-		if (ft_lstishidden(lst->name, *opt) == 0)
+		if (ft_lstisdir(lst, *opt) == 1 || ft_strcmp(lst->name, ".") ||
+			ft_strcmp(lst->name, ".."))
 			compt++;
-		lst = lst->next;
+		if (lst->next)
+			lst = lst->next;
+		else
+			break ;
 	}
 	return (compt);
 }
@@ -32,9 +36,7 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 	char	**arg;
 
 	lst = ft_gotostart(lst);
-	*compt = ft_compt_lst(lst);
 	arg = (char **)malloc(sizeof(char *) * (*compt + 1));
-	arg[*compt] = NULL;
 	*compt = 0;
 	while (lst)
 	{
@@ -42,10 +44,11 @@ char	**ft_lst_to_char(t_file *lst, t_opt *option, int *compt)
 			!ft_lstishidden(lst->name, *option) &&
 			!ft_rmv_dot(lst, option))
 		{
-			arg[*compt] = lst->pathname;
+			arg[*compt] = ft_strdup(lst->pathname);
 			*compt += 1;
 		}
 		lst = lst->next;
 	}
+	arg[*compt] = NULL;
 	return (arg);
 }
