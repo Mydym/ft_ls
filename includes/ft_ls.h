@@ -91,8 +91,6 @@ void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
 		int i);
 void				ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i);
 
-long				ft_intlen(long nombre);
-
 DIR					*ft_opendir(const char *file);
 t_file				*ft_readdir(const char *path, t_opt *opt,
 		void (*psort)(t_file **, t_file *, t_opt *));
@@ -114,7 +112,6 @@ void				ft_lstfileadd(t_file **plst, t_file *new);
 void				ft_lstfileaddend(t_file **plst, t_file *new);
 t_file				*ft_lstfiledelone(t_file **plst);
 void				ft_lstfiledel(t_file **plst);
-void				ft_pchar_del(char **s);
 
 char				**ft_lst_to_char(t_file *lst, t_opt *option, int *compt);
 int					ft_lst_compt_dir(t_file *lst, t_opt *opt);
@@ -140,9 +137,7 @@ int					ft_putfilendl(t_file *file, t_opt *option);
 int					ft_gettime(t_file *plst, t_opt *option);
 void				ft_stocktime(t_file *plst, struct stat m_time,
 		t_opt *option);
-unsigned long long	ft_convertsectonsec(unsigned long long sec);
 
-void				ft_badname(char *name);
 void				ft_error(char *name);
 int					ft_err_opt(char c);
 
