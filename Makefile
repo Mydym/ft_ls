@@ -78,6 +78,7 @@ clean:
 ifneq ("$(wildcard $(LIBDIR)/Makefile)", "")
 	make -C $(LIBDIR) clean
 endif
+	rm -rf $(OBJ)
 
 fclean:
 ifneq ("$(wildcard $(LIBDIR)/Makefile)", "")
