@@ -62,7 +62,7 @@ OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
 all: libft $(NAME)
 
-libft:
+libft: submodule
 	make -C $(LIBDIR)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
@@ -71,12 +71,25 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFLAGS)
 
+submodule:
+ifeq ($(wildcard "$(LIBDIR)/Makefile"),"")
+	git submodule update --init
+endif
+
 clean:
+ifneq ($(wildcard "$(LIBDIR)/Makefile"),"")
 	make -C $(LIBDIR) clean
+else
+	git submodule update --init
+endif
 	rm -rf $(OBJ)
 
 fclean: clean
+ifneq ($(wildcard "$(LIBDIR)/Makefile"),"")
 	make -C $(LIBDIR) fclean
+else
+	git submodule update --init
+endif
 	rm -rf $(NAME)
 
 re: fclean all
