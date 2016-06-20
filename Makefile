@@ -34,11 +34,9 @@ SRCNAME = main.c \
 		  ft_lstreadfile.c \
 		  ft_lstfiledelone.c \
 		  ft_lstfiledel.c \
-		  ft_pchar_del.c \
 		  ft_lstfilenew.c \
 		  ft_lstargsortal.c \
 		  ft_lstargsorttime.c \
-		  ft_convertsectonsec.c \
 		  ft_lstfindtype.c \
 		  ft_printdosname.c \
 		  ft_lstisdir.c \
@@ -47,7 +45,6 @@ SRCNAME = main.c \
 		  ft_recur.c \
 		  ft_ls.c \
 		  ft_error.c \
-		  ft_intlen.c \
 		  ft_getfiledetail.c \
 		  ft_gettime.c \
 		  ft_sizemax.c \
