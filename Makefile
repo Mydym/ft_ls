@@ -58,7 +58,7 @@ SRC = $(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
-.PHONY: all libft clean fclean re
+.PHONY: all libft clean fclean re submodule
 
 all: libft $(NAME)
 
@@ -75,19 +75,15 @@ submodule:
 	git submodule update --init
 
 clean:
-ifneq ($(wildcard "$(LIBDIR)/Makefile"),"")
+ifneq ("$(wildcard $(LIBDIR)/Makefile)", "")
 	make -C $(LIBDIR) clean
-else
-	git submodule update --init
+endif
+
+fclean:
+ifneq ("$(wildcard $(LIBDIR)/Makefile)", "")
+	make -C $(LIBDIR) fclean
 endif
 	rm -rf $(OBJ)
-
-fclean: clean
-ifneq ($(wildcard "$(LIBDIR)/Makefile"),"")
-	make -C $(LIBDIR) fclean
-else
-	git submodule update --init
-endif
 	rm -rf $(NAME)
 
 re: fclean all
