@@ -72,9 +72,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFLAGS)
 
 submodule:
-ifeq ($(wildcard "$(LIBDIR)/Makefile"),"")
 	git submodule update --init
-endif
 
 clean:
 ifneq ($(wildcard "$(LIBDIR)/Makefile"),"")
