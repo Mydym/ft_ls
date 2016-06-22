@@ -104,7 +104,7 @@ int			ft_putfilendl(t_file *file, t_opt *option)
 		ft_gettime(file, option);
 	if (errno != 0)
 	{
-		ft_error(file->name);
+		ft_error(file->name, option);
 		res = 1;
 	}
 	return (res);

@@ -30,7 +30,7 @@ t_file			*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 		else if ((ft_lstisfile(larg[k])))
 			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', ""), opt);
 		else
-			ft_error(larg[k]);
+			ft_error(larg[k], opt);
 	}
 	opt->tour = ((k == i - 1) ? opt->tour + 1 : opt->tour);
 	((elem) ? psort(&new, elem, opt) : 0);
@@ -71,7 +71,7 @@ static void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
 			ft_recurarg__noargv(opt, ft_lst_to_char(lstfile, opt, &x), x, x);
 	}
 	free(path);
-	((!lstfile && errno != 0) ? ft_error(lstdir->name) : 0);
+	((!lstfile && errno != 0) ? ft_error(lstdir->name, opt) : 0);
 	((k - 1 == i - ft_lst_compt_dir(lstdir, opt)) ? ft_lstfiledel(&lstdir) : 0);
 	((ft_lst_compt_dir(lstfile, opt)) ? ft_lstfiledel(&lstfile) : 0);
 }

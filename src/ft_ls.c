@@ -43,6 +43,8 @@ void			ft_ls(int argc, char **arg)
 		ft_recur_argv(&option, &path, 1, 1);
 	if (path)
 		free(path);
+	if (option.opt & F_ERR_EX)
+		exit(1);
 	return ;
 }
 

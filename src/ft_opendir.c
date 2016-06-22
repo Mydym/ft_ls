@@ -16,14 +16,14 @@
 **Fonction pour ouvrir un dossier et renvoyer le pointeur sur DIR correspondant
 */
 
-DIR	*ft_opendir(const char *file)
+DIR	*ft_opendir(const char *file, t_opt *opt)
 {
 	DIR *repo;
 
 	errno = 0;
 	repo = opendir(file);
 	if (errno != 0 && errno != 13)
-		ft_error((char *)file);
+		ft_error((char *)file, opt);
 	if (repo)
 		return (repo);
 	else

@@ -22,9 +22,9 @@ t_file	*ft_readdir(const char *path, t_opt *opt, void (*psort)(t_file **,
 
 	plst = NULL;
 	res = 0;
-	if ((rep = ft_opendir(path)) != NULL)
+	if ((rep = ft_opendir(path, opt)) != NULL)
 	{
-		while ((new = ft_lstreadfile(rep, (char *)path)) != NULL)
+		while ((new = ft_lstreadfile(rep, (char *)path, opt)) != NULL)
 		{
 			plst = ft_gotostart(plst);
 			if (!ft_lstishidden(new->name, *opt) && !ft_rmv_dot(new, opt)

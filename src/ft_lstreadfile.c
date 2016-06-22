@@ -19,7 +19,7 @@
 **par dirp, et le stocker dans un nouvel element de la liste.
 */
 
-t_file	*ft_lstreadfile(DIR *dirp, char *repo)
+t_file	*ft_lstreadfile(DIR *dirp, char *repo, t_opt *opt)
 {
 	t_file			*new;
 	struct dirent	*file;
@@ -42,7 +42,7 @@ t_file	*ft_lstreadfile(DIR *dirp, char *repo)
 	if ((file = readdir(dirp)))
 		new = ft_lstfilenew(file->d_name, '-', path);
 	if (errno != 0)
-		ft_error(path);
+		ft_error(path, opt);
 	free(path);
 	return (new);
 }

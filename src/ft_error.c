@@ -23,7 +23,7 @@ int			ft_err_opt(char c)
 	return (-1);
 }
 
-void		ft_error(char *name)
+void		ft_error(char *name, t_opt *opt)
 {
 	char	*strerr;
 
@@ -37,5 +37,7 @@ void		ft_error(char *name)
 		write(STDERR_FD, strerr, ft_strlen(strerr));
 		write(STDERR_FD, "\n", 1);
 	}
+	if (!(opt->opt & F_ERR_EX))
+		opt->opt |= F_ERR_EX;
 	return ;
 }
