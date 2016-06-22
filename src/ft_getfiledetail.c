@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_addlink(t_file *elem)
+static void	ft_addlink(t_file *elem)
 {
 	char	*buff;
 	char	*temp;
@@ -38,7 +38,7 @@ void	ft_addlink(t_file *elem)
 	}
 }
 
-void	ft_stockfiledetail(t_file *file, struct stat detail)
+static void	ft_stockfiledetail(t_file *file, struct stat detail)
 {
 	struct passwd	*id;
 	struct group	*grp;
@@ -66,7 +66,7 @@ void	ft_stockfiledetail(t_file *file, struct stat detail)
 	return ;
 }
 
-void	ft_getfiledetail(t_file *file)
+void		ft_getfiledetail(t_file *file)
 {
 	struct stat		detail;
 

@@ -12,31 +12,19 @@
 
 #include "ft_ls.h"
 
-void	ft_init(t_opt *arg)
+static void		ft_init(t_opt *arg)
 {
 	arg->opt = 0;
 	arg->tour = -1;
 	return ;
 }
 
-int		ft_check_arg(char **arg, int i, t_opt option)
-{
-	if (arg[i + 1] && ft_strcmp(arg[i + 1], "--") == 0 && option.opt != 0)
-		i++;
-	else if (option.opt == 0 && ft_strcmp(arg[i + 1], "--") == 0)
-		i += 2;
-	else if (option.opt == 0)
-		i++;
-	return (i);
-}
-
-int		ft_option(char **arg, t_opt *new)
+static int		ft_option(char **arg, t_opt *new)
 {
 	int		i[2];
 
-	i[0] = 1;
-	ft_init(new);
-	while (arg[i[0]] && arg[i[0]][0] == '-' && arg[i[0]][1] != '-')
+	i[0] = 0;
+	while (arg[++i[0]] && arg[i[0]][0] == '-' && ft_strcmp(arg[i[0]], "--"))
 	{
 		i[1] = -1;
 		while (arg[i[0]][++i[1]])
@@ -51,10 +39,29 @@ int		ft_option(char **arg, t_opt *new)
 				new->opt |= F_RMAJ;
 			else if (arg[i[0]][i[1]] == 't')
 				new->opt |= F_TMIN;
-			else if (arg[i[0]][i[1]] != '-')
+			else if (arg[i[0]][i[1]] != '-' || i[1] != 0)
 				return (ft_err_opt(arg[i[0]][i[1]]));
+			else if (!arg[i[0]][i[1] + 1])
+				return (i[0]);
 		}
-		i[0]++;
 	}
-	return (ft_check_arg(arg, i[0] - 1, *new));
+	return (i[0]);
+}
+
+char			**ft_split_ar_op(char **arg, t_opt *new)
+{
+	int		ind;
+
+	ft_init(new);
+	ind = ft_option(arg, new);
+	if (ind == -1)
+		exit(EXIT_FAILURE);
+	if (arg[ind] && !ft_strcmp(arg[ind], "--") && arg[ind + 1])
+		return (&arg[ind + 1]);
+	else if (arg[ind] && !ft_strcmp(arg[ind], "--") && !arg[ind + 1])
+		return (NULL);
+	else if (arg[ind])
+		return (&arg[ind]);
+	else
+		return (NULL);
 }

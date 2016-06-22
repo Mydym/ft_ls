@@ -16,7 +16,7 @@
 **Fonction pour creer un nouvel element de type t_file
 */
 
-t_file		*ft_lstfileinit(t_file *new)
+static t_file	*ft_lstfileinit(t_file *new)
 {
 	new->username = NULL;
 	new->groupname = NULL;
@@ -37,7 +37,7 @@ t_file		*ft_lstfileinit(t_file *new)
 	return (new);
 }
 
-int			ft_cut_name(t_file *new, char *file, char *path)
+static int		ft_cut_name(t_file *new, char *file, char *path)
 {
 	char		*tmp;
 
@@ -65,7 +65,7 @@ int			ft_cut_name(t_file *new, char *file, char *path)
 	return (0);
 }
 
-t_file		*ft_lstfilenew(char *filename, char type, char *path)
+t_file			*ft_lstfilenew(char *filename, char type, char *path)
 {
 	t_file		*new;
 

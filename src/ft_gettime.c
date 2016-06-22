@@ -17,7 +17,49 @@
 ** format 'jour/mois/num/heure/annee'
 */
 
-int		ft_gettime(t_file *plst, t_opt *option)
+static void	ft_formtimehour(t_file *plst, struct stat m_time)
+{
+	char	*alltime;
+	char	*shorttime;
+
+	alltime = ctime(&m_time.st_mtime);
+	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 4);
+	alltime = ft_strsub(shorttime, 0, ft_strlen(shorttime) - 9);
+	free(shorttime);
+	plst->formattime = alltime;
+}
+
+static void	ft_formtimeyear(t_file *plst, struct stat m_time)
+{
+	char	*alltime;
+	char	*shorttime;
+	char	*year;
+
+	alltime = ctime(&m_time.st_mtime);
+	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 18);
+	year = ft_strsub(alltime, ft_strlen(alltime) - 6, 5);
+	alltime = ft_strjoin(shorttime, year);
+	free(shorttime);
+	free(year);
+	plst->formattime = alltime;
+}
+
+static void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
+{
+	time_t	local;
+
+	local = 0;
+	time(&local);
+	if (option->opt & F_LMIN)
+	{
+		if (plst->mtime > local - 15778800 && plst->mtime < local + 1)
+			ft_formtimehour(plst, m_time);
+		else
+			ft_formtimeyear(plst, m_time);
+	}
+}
+
+int			ft_gettime(t_file *plst, t_opt *option)
 {
 	struct stat	m_time;
 
@@ -43,46 +85,4 @@ int		ft_gettime(t_file *plst, t_opt *option)
 	if (plst->mtimenano != 0)
 		return (1);
 	return (0);
-}
-
-void	ft_formtimehour(t_file *plst, struct stat m_time)
-{
-	char	*alltime;
-	char	*shorttime;
-
-	alltime = ctime(&m_time.st_mtime);
-	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 4);
-	alltime = ft_strsub(shorttime, 0, ft_strlen(shorttime) - 9);
-	free(shorttime);
-	plst->formattime = alltime;
-}
-
-void	ft_formtimeyear(t_file *plst, struct stat m_time)
-{
-	char	*alltime;
-	char	*shorttime;
-	char	*year;
-
-	alltime = ctime(&m_time.st_mtime);
-	shorttime = ft_strsub(alltime, 4, ft_strlen(alltime) - 18);
-	year = ft_strsub(alltime, ft_strlen(alltime) - 6, 5);
-	alltime = ft_strjoin(shorttime, year);
-	free(shorttime);
-	free(year);
-	plst->formattime = alltime;
-}
-
-void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
-{
-	time_t	local;
-
-	local = 0;
-	time(&local);
-	if (option->opt & F_LMIN)
-	{
-		if (plst->mtime > local - 15778800 && plst->mtime < local + 1)
-			ft_formtimehour(plst, m_time);
-		else
-			ft_formtimeyear(plst, m_time);
-	}
 }

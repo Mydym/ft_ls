@@ -16,7 +16,7 @@
 ** Fonction pour supprimer l'element courant de la liste.
 */
 
-void		ft_lst_file_clear(t_file *elem)
+static void	ft_lst_file_clear(t_file *elem)
 {
 	if (elem)
 	{

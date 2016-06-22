@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-t_file		*ft_recur_argv(t_opt *opt, char **larg, int k, int i)
+static t_file	*ft_recur_argv(t_opt *opt, char **larg, int k, int i)
 {
 	t_file	*recu;
 
@@ -21,47 +21,46 @@ t_file		*ft_recur_argv(t_opt *opt, char **larg, int k, int i)
 	return (recu);
 }
 
-void		ft_ls(int argc, char **arg)
+void			ft_ls(int argc, char **arg)
 {
-	t_opt		option;
-	t_file		*plst;
-	char		*pat;
-	int			opt;
+	t_opt	option;
+	char	*path;
+	int		len;
 
-	pat = ft_strdup(".");
-	plst = NULL;
-	opt = ((argc > 1) ? ft_option(arg, &option) : 0);
-	option.opt = ((argc > 1) ? option.opt : 0);
-	arg = ((argc >= opt + 1) ? ft_alsort_arg(arg) : arg);
-	if (option.opt != 0 && opt != -1)
+	path = NULL;
+	if (argc > 1)
+		arg = ft_split_ar_op(arg, &option);
+	if (argc <= 1 || arg == NULL)
+		path = ft_strdup(".");
+	else
 	{
-		if (++opt > 1 && argc > opt)
-			plst = ft_recur_argv(&option, &arg[opt], argc - opt, argc - opt);
-		else
-			plst = ft_recur_argv(&option, &pat, argc - opt + 1, argc - opt + 1);
+		len = ft_ppchar_nb_str(arg);
+		arg = ft_alsort_arg(arg);
 	}
-	else if (argc > 1 && option.opt == 0 && opt != -1)
-		plst = ft_recur_argv(&option, &arg[opt], argc - opt, argc - opt);
-	else if (opt != -1)
-		plst = ft_recur_argv(&option, &pat, argc, argc);
-	free(pat);
+	if (argc > 1 && arg != NULL)
+		ft_recur_argv(&option, arg, len, len);
+	else
+		ft_recur_argv(&option, &path, 1, 1);
+	if (path)
+		free(path);
+	return ;
 }
 
-t_file		*ft_gotostart(t_file *lst)
+t_file			*ft_gotostart(t_file *lst)
 {
 	while (lst && lst->prev)
 		lst = lst->prev;
 	return (lst);
 }
 
-t_file		*ft_gotoend(t_file *lst)
+t_file			*ft_gotoend(t_file *lst)
 {
 	while (lst && lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-t_file		*ft_gotofileend(t_file *lst)
+t_file			*ft_gotofileend(t_file *lst)
 {
 	while (lst && lst->type == '-')
 	{

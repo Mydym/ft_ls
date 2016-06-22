@@ -87,21 +87,13 @@ void				ft_ls(int argc, char **arg);
 t_file				*ft_recurarg(t_opt *option, char **larg, int k, int i);
 void				ft_recurfile(t_file *lstarg, t_opt *option, int k,
 		int i);
-void				ft_recurfilerev(t_file *lstarg, t_opt *option, t_size max,
-		int i);
-void				ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i);
 
 DIR					*ft_opendir(const char *file);
 t_file				*ft_readdir(const char *path, t_opt *opt,
 		void (*psort)(t_file **, t_file *, t_opt *));
 t_file				*ft_lstreadfile(DIR *dirp, char *repo);
 
-void				ft_lstfilesortal(t_file **plst, t_file *elem,
-		t_opt *option);
 void				ft_lstargsortal(t_file **larg, t_file *elem,
-		t_opt *option);
-void				ft_lstsorttimenano(t_file **larg, t_file *elem);
-void				ft_lstfilesorttime(t_file **plst, t_file *elem,
 		t_opt *option);
 void				ft_lstargsorttime(t_file **larg, t_file *elem,
 		t_opt *option);
@@ -135,8 +127,6 @@ void				ft_permglobal(t_file *file);
 void				ft_getfiledetail(t_file *file);
 int					ft_putfilendl(t_file *file, t_opt *option);
 int					ft_gettime(t_file *plst, t_opt *option);
-void				ft_stocktime(t_file *plst, struct stat m_time,
-		t_opt *option);
 
 void				ft_error(char *name);
 int					ft_err_opt(char c);
@@ -145,10 +135,12 @@ void				ft_printdosname(t_file *elem, t_opt *option);
 void				ft_putdetail(t_file *file, t_opt *option, t_size max);
 void				ft_puttotal(t_file *elem, t_opt option);
 
-int					ft_option(char **arg, t_opt *new);
-void				ft_init(t_opt *arg);
+char				**ft_split_ar_op(char **arg, t_opt *new);
 
 void				ft_maxinit(t_size *max);
 t_size				ft_getmaxsize(t_file *lst, t_size max);
+
+//Libft :
+int					ft_ppchar_nb_str(char **str);
 
 #endif

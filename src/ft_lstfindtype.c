@@ -16,7 +16,7 @@
 **Fonction pour determiner le type de ficher d'un element.
 */
 
-char		ft_testtype(struct stat filetype)
+static char	ft_testtype(struct stat filetype)
 {
 	char		type;
 

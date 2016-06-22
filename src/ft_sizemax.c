@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_maxinit(t_size *max)
+void		ft_maxinit(t_size *max)
 {
 	max->link = 0;
 	max->user = 0;
@@ -22,7 +22,7 @@ void	ft_maxinit(t_size *max)
 	max->min = 0;
 }
 
-void	ft_getmajandmin(t_file *lst, t_size max)
+static void	ft_getmajandmin(t_file *lst, t_size max)
 {
 	if (ft_intlen(lst->maj) > max.maj)
 		max.maj = ft_intlen(lst->maj);
@@ -30,7 +30,7 @@ void	ft_getmajandmin(t_file *lst, t_size max)
 		max.min = ft_intlen(lst->min);
 }
 
-t_size	ft_getmaxsize(t_file *lst, t_size max)
+t_size		ft_getmaxsize(t_file *lst, t_size max)
 {
 	int		user;
 	int		group;

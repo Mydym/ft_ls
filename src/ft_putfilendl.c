@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_putspace(long a, long b, long c)
+static void	ft_putspace(long a, long b, long c)
 {
 	int		i;
 
@@ -33,7 +33,7 @@ void	ft_putspace(long a, long b, long c)
 	}
 }
 
-void	ft_put_majandmin(t_file *file)
+static void	ft_put_majandmin(t_file *file)
 {
 	if (file->type == 'c' || file->type == 'b')
 	{
@@ -50,7 +50,7 @@ void	ft_put_majandmin(t_file *file)
 	}
 }
 
-void	ft_putotherdetail(t_file *file, t_size max)
+static void	ft_putotherdetail(t_file *file, t_size max)
 {
 	if (file->groupname != NULL)
 	{
@@ -71,7 +71,7 @@ void	ft_putotherdetail(t_file *file, t_size max)
 	}
 }
 
-void	ft_putdetail(t_file *file, t_opt *option, t_size max)
+void		ft_putdetail(t_file *file, t_opt *option, t_size max)
 {
 	if (option->opt & F_LMIN)
 	{
@@ -91,7 +91,7 @@ void	ft_putdetail(t_file *file, t_opt *option, t_size max)
 	ft_putendl(file->name);
 }
 
-int		ft_putfilendl(t_file *file, t_opt *option)
+int			ft_putfilendl(t_file *file, t_opt *option)
 {
 	int		res;
 
