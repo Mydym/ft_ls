@@ -25,9 +25,9 @@ t_file			*ft_recurarg(t_opt *opt, char **larg, int k, int i)
 		new = ft_recurarg(opt, larg, k, i);
 	if (k >= 0 && larg && larg[k])
 	{
-		if ((ft_charisdir(larg[k], *opt)))
+		if ((ft_charisdir(larg[k], *opt)) && !(opt->opt & F_DMIN))
 			elem = ft_lstfilenew(larg[k], 'd', "");
-		else if ((ft_lstisfile(larg[k])))
+		else if (ft_lstisfile(larg[k], opt))
 			ft_putfilendl(elem = ft_lstfilenew(larg[k], '-', ""), opt);
 		else
 			ft_error(larg[k], opt);
@@ -82,7 +82,7 @@ static void		ft_recurfilerev(t_file *lstarg, t_opt *opt, t_size max, int i)
 
 	k = i;
 	if (opt->opt & F_LMIN)
-		max = ft_getmaxsize(lstarg, max);
+		max = ft_getmaxsize(lstarg, max, opt);
 	lstarg = ft_gotofileend(lstarg);
 	while (lstarg && lstarg->type == '-' && i > 0)
 	{
@@ -115,7 +115,7 @@ void			ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i)
 	else if (lstarg)
 	{
 		if (k == i)
-			max = ft_getmaxsize(lstarg, max);
+			max = ft_getmaxsize(lstarg, max, opt);
 		if (lstarg->type == '-')
 			ft_putdetail(lstarg, opt, max);
 		else if (lstarg->type == 'd')
@@ -123,4 +123,6 @@ void			ft_recurfile(t_file *lstarg, t_opt *opt, int k, int i)
 		if (lstarg && k > 1 && lstarg->next)
 			ft_recurfile(lstarg->next, opt, k - 1, i);
 	}
+	if ((opt->opt & F_DMIN) && k == 1)
+		ft_lstfiledel(&lstarg);
 }

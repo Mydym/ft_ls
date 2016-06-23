@@ -49,7 +49,7 @@ int		ft_charisdir(char *name, t_opt option);
 int		ft_lstisdir(t_file *elem, t_opt option);
 int		ft_lstishidden(char *name, t_opt opt);
 int		ft_rmv_dot(t_file *file, t_opt *opt);
-int		ft_lstisfile(char *name);
+int		ft_lstisfile(char *name, t_opt *opt);
 
 void	ft_permuser(struct stat detail, t_file *file);
 void	ft_permgroup(struct stat detail, t_file *file);
@@ -69,9 +69,6 @@ void	ft_puttotal(t_file *elem, t_opt option);
 char	**ft_split_ar_op(char **arg, t_opt *new);
 
 void	ft_maxinit(t_size *max);
-t_size	ft_getmaxsize(t_file *lst, t_size max);
-
-//Libft :
-//int		ft_ppchar_nb_str(char **str);
+t_size	ft_getmaxsize(t_file *lst, t_size max, t_opt *opt);
 
 #endif

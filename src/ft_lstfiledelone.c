@@ -22,7 +22,8 @@ static void	ft_lst_file_clear(t_file *elem)
 	{
 		free(elem->path);
 		free(elem->name);
-		free(elem->pathname);
+		if (elem->pathname)
+			free(elem->pathname);
 		if (elem->perm)
 		{
 			free(elem->permus);

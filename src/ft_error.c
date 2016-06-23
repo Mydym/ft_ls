@@ -19,7 +19,7 @@ int			ft_err_opt(char c)
 	write(STDERR_FD, &c, 1);
 	write(STDERR_FD, "\nusage: ", 8);
 	write(STDERR_FD, PROG_NAME, LEN_NAME);
-	write(STDERR_FD, " [-Ralrt] [file ...]\n", 21);
+	write(STDERR_FD, " [-RTadlnrt1] [file ...]\n", 25);
 	return (-1);
 }
 

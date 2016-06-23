@@ -49,8 +49,8 @@ static void	ft_stockfiledetail(t_file *file, struct stat detail)
 		file->username = id->pw_name;
 	if ((grp = getgrgid(detail.st_gid)) && grp->gr_name)
 		file->groupname = grp->gr_name;
-	if (grp->gr_gid)
-		file->groupid = grp->gr_gid;
+	file->groupid = grp->gr_gid;
+	file->userid = id->pw_uid;
 	file->nblink = detail.st_nlink;
 	if (S_ISCHR(detail.st_mode) || S_ISBLK(detail.st_mode))
 	{

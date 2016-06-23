@@ -20,6 +20,8 @@ static t_file	*ft_lstfileinit(t_file *new)
 {
 	new->username = NULL;
 	new->groupname = NULL;
+	new->groupid = 0;
+	new->userid = 0;
 	new->permus = NULL;
 	new->permgp = NULL;
 	new->permoth = NULL;

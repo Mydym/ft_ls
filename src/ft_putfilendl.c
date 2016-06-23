@@ -50,17 +50,22 @@ static void	ft_put_majandmin(t_file *file)
 	}
 }
 
-static void	ft_putotherdetail(t_file *file, t_size max)
+static void	ft_putotherdetail(t_file *file, t_size max, t_opt *opt)
 {
-	if (file->groupname != NULL)
+	if (file->username != NULL && file->groupname != NULL
+		&& !(opt->opt & F_NMIN))
 	{
+		ft_putstr(file->username);
+		ft_putspace(ft_strlen(file->username), max.user + 1, 1);
 		ft_putstr(file->groupname);
 		ft_putspace(ft_strlen(file->groupname), max.group, 1);
 	}
-	else
+	else if (opt->opt & F_NMIN)
 	{
-		ft_putspace(ft_intlen(file->groupid), max.group, 1);
+		ft_putnbr(file->userid);
+		ft_putspace(ft_intlen(file->userid), max.user + 1, 1);
 		ft_putnbr(file->groupid);
+		ft_putspace(ft_intlen(file->groupid), max.group, 1);
 	}
 	if (ft_strstr(file->pathname, "/dev/") != NULL)
 		ft_put_majandmin(file);
@@ -81,9 +86,7 @@ void		ft_putdetail(t_file *file, t_opt *option, t_size max)
 		ft_putspace(ft_intlen(file->nblink), max.link + 1, 1);
 		ft_putnbr(file->nblink);
 		ft_putstr(" ");
-		ft_putstr(file->username);
-		ft_putspace(ft_strlen(file->username), max.user + 1, 1);
-		ft_putotherdetail(file, max);
+		ft_putotherdetail(file, max, option);
 		ft_putstr(" ");
 		ft_putstr(file->formattime);
 		ft_putstr(" ");

@@ -12,12 +12,15 @@
 
 #include "ft_ls.h"
 
-int		ft_lstisfile(char *name)
+int		ft_lstisfile(char *name, t_opt *opt)
 {
 	struct stat		test;
+	int				i;
 
-	if ((lstat(name, &test) == 0) && (!(S_ISDIR(test.st_mode))
+	if (((i = lstat(name, &test)) == 0) && (!(S_ISDIR(test.st_mode))
 		|| ft_strcmp(name, ".") || ft_strcmp(name, "..")))
+		return (1);
+	else if (i == 0 && (opt->opt & F_DMIN))
 		return (1);
 	return (0);
 }

@@ -19,35 +19,54 @@ static void		ft_init(t_opt *arg)
 	return ;
 }
 
+static int		ft_check_op(char c, t_opt *new)
+{
+	if (c == 'a')
+		new->opt |= F_AMIN;
+	else if (c == 'r')
+		new->opt |= F_RMIN;
+	else if (c == 'R')
+		new->opt |= F_RMAJ;
+	else if (c == 't')
+		new->opt |= F_TMIN;
+	else if (c == 'T')
+		new->opt |= F_TMAJ;
+	else if (c == 'd')
+		new->opt |= F_DMIN;
+	else if (c == 'n')
+	{
+		new->opt |= F_NMIN;
+		new->opt |= F_LMIN;
+	}
+	else if (c == 'l')
+		new->opt |= F_LMIN;
+	else if (c == '1')
+		new->opt &= ~F_LMIN;
+	else
+		return (1);
+	return (0);
+}
+
 static int		ft_option(char **arg, t_opt *new)
 {
-	int		i[2];
+	int		i;
+	int		j;
+	int		k;
 
-	i[0] = 0;
-	while (arg[++i[0]] && arg[i[0]][0] == '-' && ft_strcmp(arg[i[0]], "--"))
+	i = 0;
+	while (arg[++i] && arg[i][0] == '-' && ft_strcmp(arg[i], "--"))
 	{
-		i[1] = -1;
-		while (arg[i[0]][++i[1]])
+		j = -1;
+		while (arg[i][++j])
 		{
-			if (arg[i[0]][i[1]] == 'a')
-				new->opt |= F_AMIN;
-			else if (arg[i[0]][i[1]] == 'r')
-				new->opt |= F_RMIN;
-			else if (arg[i[0]][i[1]] == 'R')
-				new->opt |= F_RMAJ;
-			else if (arg[i[0]][i[1]] == 't')
-				new->opt |= F_TMIN;
-			else if (arg[i[0]][i[1]] == 'l')
-				new->opt |= F_LMIN;
-			else if (arg[i[0]][i[1]] == '1')
-				new->opt &= ~F_LMIN;
-			else if (arg[i[0]][i[1]] != '-' || i[1] != 0)
-				return (ft_err_opt(arg[i[0]][i[1]]));
-			else if (!arg[i[0]][i[1] + 1])
-				return (i[0]);
+			k = ft_check_op(arg[i][j], new);
+			if (k == 1 && (arg[i][j] != '-' || j != 0))
+				return (ft_err_opt(arg[i][j]));
+			else if (k == 1 && !arg[i][j + 1])
+				return (i);
 		}
 	}
-	return (i[0]);
+	return (i);
 }
 
 char			**ft_split_ar_op(char **arg, t_opt *new)

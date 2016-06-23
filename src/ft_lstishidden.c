@@ -23,7 +23,7 @@ int		ft_rmv_dot(t_file *file, t_opt *opt)
 
 int		ft_lstishidden(char *name, t_opt opt)
 {
-	if (!(opt.opt & F_AMIN))
+	if (!(opt.opt & F_AMIN) && !(opt.opt & F_DMIN))
 		if (name)
 			if (name[0] == '.')
 				return (1);

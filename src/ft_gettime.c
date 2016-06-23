@@ -44,6 +44,14 @@ static void	ft_formtimeyear(t_file *plst, struct stat m_time)
 	plst->formattime = alltime;
 }
 
+static void	ft_all_time(t_file *plst, struct stat m_time)
+{
+	char	*alltime;
+
+	alltime = ctime(&m_time.st_mtime);
+	plst->formattime = ft_strsub(alltime, 4, ft_strlen(alltime) - 5);
+}
+
 static void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
 {
 	time_t	local;
@@ -52,10 +60,15 @@ static void	ft_stocktime(t_file *plst, struct stat m_time, t_opt *option)
 	time(&local);
 	if (option->opt & F_LMIN)
 	{
-		if (plst->mtime > local - 15778800 && plst->mtime < local + 1)
-			ft_formtimehour(plst, m_time);
+		if (option->opt & F_TMAJ)
+			ft_all_time(plst, m_time);
 		else
-			ft_formtimeyear(plst, m_time);
+		{
+			if (plst->mtime > local - 15778800 && plst->mtime < local + 1)
+				ft_formtimehour(plst, m_time);
+			else
+				ft_formtimeyear(plst, m_time);
+		}
 	}
 }
 

@@ -30,21 +30,35 @@ static void	ft_getmajandmin(t_file *lst, t_size max)
 		max.min = ft_intlen(lst->min);
 }
 
-t_size		ft_getmaxsize(t_file *lst, t_size max)
+static void	ft_get_max_grid(t_file *lst, t_size *max, t_opt *opt)
 {
-	int		user;
-	int		group;
+	int	user;
+	int	group;
 
+	user = -2;
+	group = -2;
+	if (lst->username && lst->groupname && !(opt->opt & F_NMIN))
+	{
+		user = (int)ft_strlen(lst->username);
+		group = (int)ft_strlen(lst->groupname);
+	}
+	else if (opt->opt & F_NMIN)
+	{
+		user = ft_intlen(lst->userid);
+		group = ft_intlen(lst->groupid);
+	}
+	if (user > max->user)
+		max->user = user;
+	if (group > max->group)
+		max->group = group;
+	return ;
+}
+
+t_size		ft_getmaxsize(t_file *lst, t_size max, t_opt *opt)
+{
 	while (lst)
 	{
-		if (lst->username)
-			user = (int)ft_strlen(lst->username);
-		if (lst->groupname)
-			group = (int)ft_strlen(lst->groupname);
-		if (user > max.user)
-			max.user = user;
-		if (group > max.group)
-			max.group = group;
+		ft_get_max_grid(lst, &max, opt);
 		if (ft_intlen(lst->nblink) > max.link)
 			max.link = ft_intlen(lst->nblink);
 		if (ft_intlen(lst->size) > max.taille)

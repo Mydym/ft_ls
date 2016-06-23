@@ -27,6 +27,7 @@ typedef struct		s_file
 	char				*username;
 	char				*groupname;
 	int					groupid;
+	int					userid;
 	int					maj;
 	int					min;
 	unsigned long		size;

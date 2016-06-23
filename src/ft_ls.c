@@ -28,8 +28,8 @@ void			ft_ls(int argc, char **arg)
 	int		len;
 
 	path = NULL;
-	if (argc > 1)
-		arg = ft_split_ar_op(arg, &option);
+	arg = ft_split_ar_op(arg, &option);
+	len = 0;
 	if (argc <= 1 || arg == NULL)
 		path = ft_strdup(".");
 	else
@@ -37,7 +37,7 @@ void			ft_ls(int argc, char **arg)
 		len = ft_ppchar_nb_str(arg);
 		arg = ft_alsort_arg(arg);
 	}
-	if (argc > 1 && arg != NULL)
+	if (len >= 1 && arg != NULL)
 		ft_recur_argv(&option, arg, len, len);
 	else
 		ft_recur_argv(&option, &path, 1, 1);
