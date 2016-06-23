@@ -16,24 +16,26 @@ static void	ft_addlink(t_file *elem)
 {
 	char	*buff;
 	char	*temp;
+	int		i;
 
 	if ((buff = ft_strnew(1000)) != NULL)
 	{
-		if (readlink(elem->name, buff, 1000) != -1)
+		if ((i = readlink(elem->name, buff, 1000)) != -1)
 		{
 			temp = ft_strjoin(elem->name, " -> ");
 			free(elem->name);
 			elem->name = ft_strjoin(temp, buff);
 			free(temp);
 		}
-		else if (readlink(elem->pathname, buff, 1000) != -1)
+		else if ((i = readlink(elem->pathname, buff, 1000)) != -1)
 		{
+			temp = ft_strjoin(elem->name, " -> ");
+			free(elem->name);
+			elem->name = ft_strjoin(temp, buff);
+			free(temp);
+		}
+		if (i != -1)
 			errno = 0;
-			temp = ft_strjoin(elem->name, " -> ");
-			free(elem->name);
-			elem->name = ft_strjoin(temp, buff);
-			free(temp);
-		}
 		free(buff);
 	}
 }

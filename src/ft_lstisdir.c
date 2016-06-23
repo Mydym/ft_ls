@@ -18,22 +18,34 @@
 
 int		ft_charisdir(char *name, t_opt option)
 {
-	struct stat		type;
+	struct stat	type;
+	char		*buff;
 
+	buff = NULL;
 	if ((lstat(name, &type)) == 0)
 	{
 		if (S_ISDIR(type.st_mode))
 			return (1);
 		else if (S_ISLNK(type.st_mode) && (!(option.opt & F_LMIN)))
-			return (1);
+			if ((buff = ft_strnew(1000)))
+				if (readlink(name, buff, 1000) != -1)
+					if (ft_charisdir(buff, option))
+					{
+						free(buff);
+						return (1);
+					}
 	}
+	if (buff)
+		free(buff);
 	return (0);
 }
 
 int		ft_lstisdir(t_file *elem, t_opt option)
 {
-	struct stat		type;
+	struct stat	type;
+	char		*buff;
 
+	buff = NULL;
 	if ((lstat(elem->pathname, &type)) == 0 && !(option.opt & F_RMAJ &&
 		option.opt & F_AMIN && (!ft_strcmp(elem->name, ".") ||
 		!ft_strcmp(elem->name, ".."))))
@@ -41,7 +53,15 @@ int		ft_lstisdir(t_file *elem, t_opt option)
 		if (S_ISDIR(type.st_mode))
 			return (1);
 		else if (S_ISLNK(type.st_mode) && (!(option.opt & F_LMIN)))
-			return (1);
+			if ((buff = ft_strnew(1000)))
+				if (readlink(elem->pathname, buff, 1000) != -1)
+					if (ft_charisdir(buff, option))
+					{
+						free(buff);
+						return (1);
+					}
 	}
+	if (buff)
+		free(buff);
 	return (0);
 }

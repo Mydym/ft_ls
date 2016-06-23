@@ -41,6 +41,7 @@
 # define F_RMIN B(2)
 # define F_TMIN B(3)
 # define F_RMAJ B(4)
+# define F_1NUM B(5)
 # define F_ERR_EX B(30)
 
 #endif

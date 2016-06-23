@@ -31,14 +31,16 @@ static int		ft_option(char **arg, t_opt *new)
 		{
 			if (arg[i[0]][i[1]] == 'a')
 				new->opt |= F_AMIN;
-			else if (arg[i[0]][i[1]] == 'l')
-				new->opt |= F_LMIN;
 			else if (arg[i[0]][i[1]] == 'r')
 				new->opt |= F_RMIN;
 			else if (arg[i[0]][i[1]] == 'R')
 				new->opt |= F_RMAJ;
 			else if (arg[i[0]][i[1]] == 't')
 				new->opt |= F_TMIN;
+			else if (arg[i[0]][i[1]] == 'l')
+				new->opt |= F_LMIN;
+			else if (arg[i[0]][i[1]] == '1')
+				new->opt &= ~F_LMIN;
 			else if (arg[i[0]][i[1]] != '-' || i[1] != 0)
 				return (ft_err_opt(arg[i[0]][i[1]]));
 			else if (!arg[i[0]][i[1] + 1])

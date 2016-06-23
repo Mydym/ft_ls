@@ -73,6 +73,7 @@ int			ft_gettime(t_file *plst, t_opt *option)
 		}
 		else if (lstat(plst->pathname, &m_time) == 0)
 		{
+			errno = 0;
 			plst->mtime = m_time.st_mtimespec.tv_sec;
 			plst->mtimenano = m_time.st_mtimespec.tv_nsec + SEC_TO_NSEC;
 			ft_stocktime(plst, m_time, option);

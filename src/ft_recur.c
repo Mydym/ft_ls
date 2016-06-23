@@ -58,7 +58,7 @@ static void		ft_recurdir(t_file *lstdir, t_opt *opt, int k, int i)
 	psort = ((opt->opt & F_TMIN) ? &ft_lstargsorttime : &ft_lstargsortal);
 	path = ((ft_charisdir(lstdir->pathname, *opt)) ? ft_strdup(lstdir->pathname)
 			: ft_strdup(lstdir->name));
-	if ((i > 1 || (i >= 1 && OPTRMAJ && opt->tour > 0)) && (k != i || OPTRMAJ))
+	if ((k != i || opt->tour > 0))
 		ft_putchar('\n');
 	if (i > 1 || (i >= 1 && OPTRMAJ && opt->tour > 0))
 		ft_printdosname(lstdir, opt);
