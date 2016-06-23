@@ -51,7 +51,6 @@ SRCNAME = main.c \
 		  ft_compt_lst.c \
 		  ft_alsort_arg.c \
 		  ft_lst_to_char.c \
-ft_ppchar_nb_str.c
 
 OBJNAME = $(SRCNAME:.c=.o)
 

@@ -72,6 +72,6 @@ void	ft_maxinit(t_size *max);
 t_size	ft_getmaxsize(t_file *lst, t_size max);
 
 //Libft :
-int		ft_ppchar_nb_str(char **str);
+//int		ft_ppchar_nb_str(char **str);
 
 #endif
