@@ -16,6 +16,26 @@
 **Fonction qui renvoie un booleen : 1 si l'element est un dossier et 0 sinon.
 */
 
+int		ft_find_typelink(char *name)
+{
+	struct stat	type;
+	char		*tmp;
+
+	if ((lstat(name, &type)) == 0)
+	{
+		if (S_ISDIR(type.st_mode))
+			return (1);
+	}
+	else if ((tmp = ft_strjoin("/", name)) && (lstat(tmp, &type)) == 0)
+	{
+		errno = 0;
+		if (S_ISDIR(type.st_mode))
+			return (1);
+		free(tmp);
+	}
+	return (0);
+}
+
 int		ft_charisdir(char *name, t_opt option)
 {
 	struct stat	type;
@@ -27,13 +47,17 @@ int		ft_charisdir(char *name, t_opt option)
 		if (S_ISDIR(type.st_mode))
 			return (1);
 		else if (S_ISLNK(type.st_mode) && (!(option.opt & F_LMIN)))
-			if ((buff = ft_strnew(1000)))
-				if (readlink(name, buff, 1000) != -1)
-					if (ft_charisdir(buff, option))
-					{
-						free(buff);
-						return (1);
-					}
+		{
+			buff = ft_strnew(1000);
+			if (buff && readlink(name, buff, 1000) != -1)
+			{
+				if (ft_find_typelink(buff))
+				{
+					free(buff);
+					return (1);
+				}
+			}
+		}
 	}
 	if (buff)
 		free(buff);

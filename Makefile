@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -I includes/
 LIBFLAGS = -L $(LIBDIR) -lft
 
@@ -23,34 +23,34 @@ LIBDIR = ./libft
 NAME = ft_ls
 
 SRCNAME = main.c \
-		  ft_putfilendl.c \
-		  ft_puttotal.c \
-		  ft_perm.c \
-		  ft_option.c \
-		  ft_opendir.c \
-		  ft_lstfileadd.c \
-		  ft_lstfileaddend.c \
-		  ft_readdir.c \
-		  ft_lstreadfile.c \
-		  ft_lstfiledelone.c \
-		  ft_lstfiledel.c \
-		  ft_lstfilenew.c \
-		  ft_lstargsortal.c \
-		  ft_lstargsorttime.c \
-		  ft_lstfindtype.c \
-		  ft_printdosname.c \
-		  ft_lstisdir.c \
-		  ft_lstisfile.c \
-		  ft_lstishidden.c \
-		  ft_recur.c \
-		  ft_ls.c \
-		  ft_error.c \
-		  ft_getfiledetail.c \
-		  ft_gettime.c \
-		  ft_sizemax.c \
-		  ft_compt_lst.c \
-		  ft_alsort_arg.c \
-		  ft_lst_to_char.c \
+ft_putfilendl.c \
+ft_puttotal.c \
+ft_perm.c \
+ft_option.c \
+ft_opendir.c \
+ft_lstfileadd.c \
+ft_lstfileaddend.c \
+ft_readdir.c \
+ft_lstreadfile.c \
+ft_lstfiledelone.c \
+ft_lstfiledel.c \
+ft_lstfilenew.c \
+ft_lstargsortal.c \
+ft_lstargsorttime.c \
+ft_lstfindtype.c \
+ft_printdosname.c \
+ft_lstisdir.c \
+ft_lstisfile.c \
+ft_lstishidden.c \
+ft_recur.c \
+ft_ls.c \
+ft_error.c \
+ft_getfiledetail.c \
+ft_gettime.c \
+ft_sizemax.c \
+ft_compt_lst.c \
+ft_alsort_arg.c \
+ft_lst_to_char.c
 
 OBJNAME = $(SRCNAME:.c=.o)
 

@@ -96,11 +96,13 @@ void		ft_putdetail(t_file *file, t_opt *option, t_size max)
 
 int			ft_putfilendl(t_file *file, t_opt *option)
 {
-	int		res;
+	int			res;
 
 	res = 0;
 	errno = 0;
-	if (option->opt & F_LMIN && !ft_lstishidden(file->name, *option))
+	if ((option->opt & F_LMIN && !ft_lstishidden(file->name, *option)))
+		ft_getfiledetail(file);
+	else if (!ft_strcmp(file->name, ".") || !ft_strcmp(file->name, ".."))
 		ft_getfiledetail(file);
 	if ((option->opt & F_TMIN || option->opt & F_LMIN) &&
 		!ft_lstishidden(file->name, *option))

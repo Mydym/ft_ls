@@ -29,13 +29,12 @@ static void	ft_addlink(t_file *elem)
 		}
 		else if ((i = readlink(elem->pathname, buff, 1000)) != -1)
 		{
+			errno = 0;
 			temp = ft_strjoin(elem->name, " -> ");
 			free(elem->name);
 			elem->name = ft_strjoin(temp, buff);
 			free(temp);
 		}
-		if (i != -1)
-			errno = 0;
 		free(buff);
 	}
 }
